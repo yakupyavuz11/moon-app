@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Explore = () => {
+const Shuffle = () => {
   return (
     <View>
       <Text>Explore</Text>
@@ -9,6 +9,6 @@ const Explore = () => {
   )
 }
 
-export default Explore
+export default Shuffle
 
 const styles = StyleSheet.create({})

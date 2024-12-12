@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import theme, { COLORS} from '../constants/theme'
 
 const Messages = () => {
   return (
-    <View>
+  <View style={{flex:1, backgroundColor:COLORS.secondary}} >
       <Text>Messages</Text>
     </View>
   )
@@ -11,4 +12,8 @@ const Messages = () => {
 
 export default Messages
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+
+
+
+})
