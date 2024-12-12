@@ -12,16 +12,18 @@ const AppNavigation = () => {
   return (
     <NavigationContainer>
       {" "}
-      {/* NavigationContainer ile sarmalayın */}
       <Stack.Navigator
-        initialRouteName="Intro"
+        initialRouteName="BottomTabNavigator"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="ProfileSetup" component={ProfileSetup} />
-      <Stack.Screen name="ProfileReady" component={ProfileReadyScreen} />
-      <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
+        <Stack.Screen name="ProfileReady" component={ProfileReadyScreen} />
+        <Stack.Screen
+          name="BottomTabNavigator"
+          component={BottomTabNavigator}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

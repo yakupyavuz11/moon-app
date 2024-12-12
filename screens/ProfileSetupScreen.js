@@ -9,32 +9,33 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
+  ScrollView,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { COLORS } from "../constants/theme";
+import { useNavigation } from "@react-navigation/native";
 
 const ProfileSetupScreen = () => {
   const [username, setUsername] = useState("");
   const [about, setAbout] = useState("");
   const [profileImage, setPhotoUrl] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // Loading state
-  const firestore = getFirestore(); // Firestore connection
+  const [isLoading, setIsLoading] = useState(false);
+  const firestore = getFirestore();
+  const navigation = useNavigation();
 
-  // Photo upload handler
   const handlePhotoUpload = async () => {
     setIsLoading(true);
 
     try {
-      // Request media library permissions
       const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (!permissionResult.granted) {
-        Alert.alert("Permission Required", "You need to grant photo library access.");
+        Alert.alert("İzin Gerekli", "Fotoğraf kütüphanesine erişim izni vermelisiniz.");
         setIsLoading(false);
         return;
       }
 
-      // Pick a photo
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
@@ -45,44 +46,41 @@ const ProfileSetupScreen = () => {
         const imageUri = result.assets[0].uri;
         const base64Image = await uriToBase64(imageUri);
         setPhotoUrl(base64Image);
-        Alert.alert("Success", "Photo uploaded successfully!");
+        Alert.alert("Başarılı", "Fotoğraf başarıyla yüklendi!");
       }
     } catch (error) {
-      console.error("Error occurred:", error);
-      Alert.alert("Error", "An error occurred while selecting the photo.");
+      console.error("Hata oluştu:", error);
+      Alert.alert("Hata", "Fotoğraf seçilirken bir hata oluştu.");
     }
 
     setIsLoading(false);
   };
 
-  // Convert URI to Base64 format
   const uriToBase64 = async (uri) => {
     const response = await fetch(uri);
     const blob = await response.blob();
     const reader = new FileReader();
     return new Promise((resolve, reject) => {
       reader.onloadend = () => {
-        resolve(reader.result.split(",")[1]); // Return Base64 string
+        resolve(reader.result.split(",")[1]);
       };
       reader.onerror = reject;
       reader.readAsDataURL(blob);
     });
   };
 
-  // Save data to Firestore
   const handleSaveToFirestore = async () => {
     if (!username || !about || !profileImage) {
-      Alert.alert("Validation Error", "Please fill in all fields.");
+      Alert.alert("Doğrulama Hatası", "Lütfen tüm alanları doldurun.");
       return;
     }
 
     setIsLoading(true);
 
-    // Check if the username already exists
     const userDocRef = doc(firestore, "users", username);
     const userDoc = await getDoc(userDocRef);
     if (userDoc.exists()) {
-      Alert.alert("Username Taken", "This username is already taken.");
+      Alert.alert("Kullanıcı Adı Alındı", "Bu kullanıcı adı zaten alınmış.");
       setIsLoading(false);
       return;
     }
@@ -90,16 +88,18 @@ const ProfileSetupScreen = () => {
     const data = {
       username: username,
       about: about,
-      profileImage: profileImage, // Base64 image data
+      profileImage: profileImage,
     };
 
     try {
-      await setDoc(userDocRef, data); // Save data to Firestore
-      Alert.alert("Success", "Profile saved successfully!");
+      await setDoc(userDocRef, data);
+      Alert.alert("Başarılı", "Profil başarıyla kaydedildi!");
+      navigation.replace("ProfileReady"); // `replace` kullanarak mevcut ekranı değiştirebilirsiniz
     } catch (error) {
-      console.error("Error occurred while saving data:", error);
-      Alert.alert("Error", "An error occurred while saving the data.");
+      console.error("Veri kaydedilirken hata oluştu:", error);
+      Alert.alert("Hata", "Veri kaydedilirken bir hata oluştu.");
     }
+
     setIsLoading(false);
   };
 
@@ -108,51 +108,55 @@ const ProfileSetupScreen = () => {
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <Text style={styles.title}>Create Profile</Text>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Text style={styles.title}>Profil Oluştur</Text>
 
-      {/* Photo Upload */}
-      <View style={styles.avatarContainer}>
-        <TouchableOpacity onPress={handlePhotoUpload} disabled={isLoading}>
-          <View style={styles.avatar}>
-            {profileImage ? (
-              <Image
-                source={{ uri: `data:image/jpeg;base64,${profileImage}` }}
-                style={styles.avatarImage}
-              />
-            ) : (
-              <Text style={styles.placeholderText}>+ Select Image</Text>
-            )}
+        <SafeAreaView>
+          {/* Fotoğraf Yükleme */}
+          <View style={styles.avatarContainer}>
+            <TouchableOpacity onPress={handlePhotoUpload} disabled={isLoading}>
+              <View style={styles.avatar}>
+                {profileImage ? (
+                  <Image
+                    source={{ uri: `data:image/jpeg;base64,${profileImage}` }}
+                    style={styles.avatarImage}
+                  />
+                ) : (
+                  <Text style={styles.placeholderText}>+ Resim Seç</Text>
+                )}
+              </View>
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>
-      </View>
 
-      {/* Username Input */}
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
+          {/* Kullanıcı Adı Girişi */}
+          <TextInput
+            style={styles.input}
+            placeholder="Kullanıcı Adı"
+            value={username}
+            onChangeText={setUsername}
+          />
 
-      {/* About Input */}
-      <TextInput
-        style={styles.aboutinput}
-        placeholder="About"
-        value={about}
-        onChangeText={setAbout}
-        multiline
-      />
+          {/* Hakkında Girişi */}
+          <TextInput
+            style={styles.aboutinput}
+            placeholder="Hakkında"
+            value={about}
+            onChangeText={setAbout}
+            multiline
+          />
 
-      {/* Save Button */}
-      <TouchableOpacity
-        style={[styles.button, isLoading && styles.loadingState]}
-        onPress={handleSaveToFirestore}
-        disabled={isLoading}
-      >
-        <Text style={styles.buttonText}>
-          {isLoading ? "Saving..." : "Save"}
-        </Text>
-      </TouchableOpacity>
+          {/* Kaydet Butonu */}
+          <TouchableOpacity
+            style={[styles.button, isLoading && styles.loadingState]}
+            onPress={handleSaveToFirestore}
+            disabled={isLoading}
+          >
+            <Text style={styles.buttonText}>
+              {isLoading ? "Kaydediliyor..." : "Kaydet"}
+            </Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -164,6 +168,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     backgroundColor: COLORS.primary,
     padding: 20,
+  },
+  scrollContainer: {
+    paddingBottom: 20,
   },
   title: {
     marginTop: 60,
@@ -183,7 +190,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   loadingState: {
-    opacity: 0.5, // Add transparency to show loading state
+    opacity: 0.5,
   },
   avatarImage: { width: 100, height: 100, borderRadius: 50 },
   placeholderText: { fontSize: 36, color: "#fff" },
