@@ -1,3 +1,4 @@
+import useStore from "@/store/useStore";
 import React from "react";
 import {
   View,
@@ -11,6 +12,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const ProfileScreen = () => {
   const safeAreaInsets = useSafeAreaInsets();
+  const { logout } = useStore();
   return (
     <ScrollView
       className="flex-1 bg-purple-100"
@@ -81,6 +83,14 @@ const ProfileScreen = () => {
       >
         <Text className="text-center text-white text-lg font-bold">
           Profili Düzenle
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="bg-red-200 mx-4 mt-6 py-3 rounded-lg"
+        onPress={() => logout()}
+      >
+        <Text className="text-center text-white text-lg font-bold">
+          Çıkıp yap
         </Text>
       </TouchableOpacity>
     </ScrollView>
