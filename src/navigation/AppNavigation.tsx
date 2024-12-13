@@ -1,11 +1,11 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Intro from "../screens/Intro";
-import Signup from "../screens/Signup";
-import ProfileSetup from "../screens/ProfileSetupScreen";
-import ProfileReadyScreen from "../screens/ProfileReadyScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
+import Intro from "@/screens/Intro";
+import Signup from "@/screens/Signup";
+import ProfileReadyScreen from "@/screens/ProfileReadyScreen";
+import ProfileSetupScreen from "@/screens/ProfileSetupScreen";
 const Stack = createStackNavigator();
 
 const AppNavigation = () => {
@@ -17,7 +17,7 @@ const AppNavigation = () => {
       >
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="ProfileSetup" component={ProfileSetup} />
+        <Stack.Screen name="ProfileSetup" component={ProfileSetupScreen} />
         <Stack.Screen name="ProfileReady" component={ProfileReadyScreen} />
         <Stack.Screen
           name="BottomTabNavigator"

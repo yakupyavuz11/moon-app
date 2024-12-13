@@ -5,11 +5,11 @@ export default {
   slug: "moon-chat",
   version: "1.0.0",
   orientation: "portrait",
-  icon: "./assets/icon.png",
+  icon: "./src/assets/icon.png",
   userInterfaceStyle: "light",
   newArchEnabled: true,
   splash: {
-    image: "./assets/splash-icon.png",
+    image: "./src/assets/splash-icon.png",
     resizeMode: "contain",
     backgroundColor: "#ffffff",
   },
@@ -18,12 +18,12 @@ export default {
   },
   android: {
     adaptiveIcon: {
-      foregroundImage: "./assets/adaptive-icon.png",
+      foregroundImage: "./src/assets/adaptive-icon.png",
       backgroundColor: "#ffffff",
     },
   },
   web: {
-    favicon: "./assets/favicon.png",
+    favicon: "./src/assets/favicon.png",
   },
   extra: {    apiKey: process.env.API_KEY,
     authDomain: process.env.AUTH_DOMAIN,
@@ -33,4 +33,5 @@ export default {
     messagingSenderId: process.env.MESSAGING_SENDER_ID,
     appId: process.env.APP_ID,
   },
+  
 };

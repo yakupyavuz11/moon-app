@@ -1,14 +1,14 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import Account from "../screens/Account";
-import Messages from "../screens/Messages";
-import Shuffle from "../screens/Shuffle";
-import Stars from "../screens/Stars";
 import { COLORS } from "../constants/theme";
-import Discovery from "../screens/Discovery";
+import Discovery from "@/screens/Discovery";
+import Messages from "@/screens/Messages";
+import Shuffle from "@/screens/Shuffle";
+import Stars from "@/screens/Stars";
+import ProfileScreen from "@/screens/Profile";
+
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
@@ -60,7 +60,7 @@ const BottomTabNavigator = () => {
       <Tab.Screen name="Messages" component={Messages} />
       <Tab.Screen name="Shuffle" component={Shuffle} />
       <Tab.Screen name="Stars" component={Stars} />
-      <Tab.Screen name="Account" component={Account} />
+      <Tab.Screen name="Account" component={ProfileScreen} />
     </Tab.Navigator>
   );
 };
