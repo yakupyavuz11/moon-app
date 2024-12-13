@@ -11,6 +11,7 @@
   "dependencies": {
     "@microsoft/signalr": "^8.0.7",
     "@microsoft/signalr-protocol-msgpack": "^8.0.7",
+    "@neondatabase/serverless": "^0.10.4",
     "express": "^4.21.2",
     "webrtc": "^1.14.1"
   }
