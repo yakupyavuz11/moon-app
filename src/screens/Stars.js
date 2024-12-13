@@ -6,12 +6,14 @@ const Stars = () => {
     {
       id: 1,
       name: "John Doe",
-      avatar: "https://via.placeholder.com/150",
+      avatar:
+        "https://images.pexels.com/photos/2567435/pexels-photo-2567435.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       id: 2,
       name: "Jane Smith",
-      avatar: "https://via.placeholder.com/150",
+      avatar:
+        "https://images.pexels.com/photos/3458278/pexels-photo-3458278.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
   ];
 
@@ -19,18 +21,18 @@ const Stars = () => {
     {
       id: 1,
       name: "Michael Johnson",
-      avatar: "https://via.placeholder.com/150",
+      avatar: "https://images.pexels.com/photos/4675724/pexels-photo-4675724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       id: 2,
       name: "Emily Davis",
-      avatar: "https://via.placeholder.com/150",
+      avatar:"https://images.pexels.com/photos/4673476/pexels-photo-4673476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
   ];
 
   return (
     <ScrollView className="flex-1 bg-purple-50">
-      <SafeAreaView/>
+      <SafeAreaView />
       <View className="p-4">
         <Text className="text-xl font-bold text-purple-800 mb-4">
           Favori Kullanıcılar

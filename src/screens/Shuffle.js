@@ -7,6 +7,7 @@ import {
   Image,
   StatusBar,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 import RBSheet from "react-native-raw-bottom-sheet"; // Bottom sheet importu
@@ -27,7 +28,133 @@ const users = [
     image:
       "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
-  // Daha fazla kullanıcı...
+  {
+    id: "3",
+    name: "Ayşe",
+    status: "Hayat güzel!",
+    image:
+      "https://images.pexels.com/photos/1108092/pexels-photo-1108092.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "4",
+    name: "Mehmet",
+    status: "Her şey yolunda.",
+    image:
+      "https://images.pexels.com/photos/1190980/pexels-photo-1190980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "5",
+    name: "Fatma",
+    status: "İstanbul'da bir hayat.",
+    image:
+      "https://images.pexels.com/photos/1190980/pexels-photo-1190980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "6",
+    name: "Hakan",
+    status: "Mükemmel bir gün!",
+    image:
+      "https://images.pexels.com/photos/2567435/pexels-photo-2567435.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "7",
+    name: "Zeynep",
+    status: "Güzel bir hafta!",
+    image:
+      "https://images.pexels.com/photos/1190980/pexels-photo-1190980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "8",
+    name: "Ali",
+    status: "Tatil keyfi.",
+    image:
+      "https://images.pexels.com/photos/4673476/pexels-photo-4673476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "9",
+    name: "Ece",
+    status: "Çalışmaya devam.",
+    image:
+      "https://images.pexels.com/photos/4673476/pexels-photo-4673476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "10",
+    name: "Kadir",
+    status: "Yeni projeye başlıyoruz!",
+    image:
+      "https://images.pexels.com/photos/3458278/pexels-photo-3458278.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "11",
+    name: "Cem",
+    status: "Kahvemi içerken yeni bir gün başlıyor.",
+    image:
+      "https://images.pexels.com/photos/1036625/pexels-photo-1036625.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "12",
+    name: "Elif",
+    status: "Başarı bizim işimiz.",
+    image:
+      "https://images.pexels.com/photos/6695855/pexels-photo-6695855.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "13",
+    name: "Barış",
+    status: "Doğayla iç içe bir hayat.",
+    image:
+      "https://images.pexels.com/photos/1170414/pexels-photo-1170414.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "14",
+    name: "Leyla",
+    status: "Yeni başlangıçlar.",
+    image:
+      "https://images.pexels.com/photos/772179/pexels-photo-772179.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "15",
+    name: "Murat",
+    status: "Dünyayı keşfetmeye gidiyorum.",
+    image:
+      "https://images.pexels.com/photos/3070043/pexels-photo-3070043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "16",
+    name: "Büşra",
+    status: "Sanatla ilgileniyorum.",
+    image:
+      "https://images.pexels.com/photos/1218689/pexels-photo-1218689.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "17",
+    name: "Yusuf",
+    status: "Çalışma moduna girdim.",
+    image:
+      "https://images.pexels.com/photos/5202657/pexels-photo-5202657.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "18",
+    name: "Seda",
+    status: "Yeni bir başlangıç!",
+    image:
+      "https://images.pexels.com/photos/4675724/pexels-photo-4675724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "19",
+    name: "Veli",
+    status: "Yolculuğa çıkıyorum.",
+    image:
+      "https://images.pexels.com/photos/1581749/pexels-photo-1581749.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: "20",
+    name: "Özge",
+    status: "Geceyi sabaha kadar çalışarak geçiriyorum.",
+    image:
+      "https://images.pexels.com/photos/4675724/pexels-photo-4675724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  // Bu şekilde devam ederek 100 kişi ekleyebilirsiniz.
 ];
 
 const Shuffle = () => {
@@ -42,6 +169,7 @@ const Shuffle = () => {
   return (
     <View style={styles.container}>
       {/* StatusBar */}
+      <SafeAreaView />
       <StatusBar barStyle="light-content" backgroundColor="#1c1c2e" />
 
       {/* Search Bileşeni */}
@@ -51,6 +179,9 @@ const Shuffle = () => {
           onChangeText={setSearchQuery}
           value={searchQuery}
           style={styles.searchbar}
+          inputStyle={{
+            minHeight: 0 // Add this
+          }}
         />
         <TouchableOpacity
           style={styles.filterButton}
@@ -106,20 +237,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#1c1c2e",
   },
   header: {
-    marginTop: 55,
-    backgroundColor: "#1c1c2e",
-    paddingHorizontal: 25,
+    paddingHorizontal: 5,
     paddingVertical: 10,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
     borderBottomWidth: 1,
     borderBottomColor: "#444",
   },
   searchbar: {
-    flex: 1,
-    height: 40,
-    borderRadius: 30,
+    height:40,
+    width: "90%",
   },
   filterButton: {
     marginLeft: 10,
