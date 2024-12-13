@@ -1,20 +1,35 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Image,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Button from "../components/Button";
-import { useNavigation } from "@react-navigation/native";  // Import useNavigation
+import { useNavigation } from "@react-navigation/native"; // Import useNavigation
 import images from "../constants/images";
 import theme, { COLORS, FONTS, SIZES } from "../constants/theme";
 
 const Intro = () => {
-  const navigation = useNavigation();  // Access navigation here
+  const navigation = useNavigation(); // Access navigation here
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.COLORS.primary }}>
       <StatusBar hidden />
 
       {/* Image Section */}
-      <View style={{ flex: 3, padding: 16, marginTop: 32, justifyContent: 'center', alignItems: 'center' }}>
+      <View
+        style={{
+          flex: 3,
+          padding: 16,
+          marginTop: 32,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Image source={images.onboarding} style={styles.image} />
       </View>
 
@@ -23,13 +38,15 @@ const Intro = () => {
         <Text style={styles.bottomTitle}>Anonim olarak özgürce sohbet et</Text>
         <Button
           title="Başlayalım"
-          onPress={() => navigation.navigate("Signup")}  // Use navigation to go to Signup screen
+          onPress={() => navigation.navigate("Signup")} // Use navigation to go to Signup screen
           style={{ marginTop: 40, marginVertical: 8, width: SIZES.width - 64 }}
         />
         <Text style={styles.bottomSubtitle}>
           Giriş Yaptığında gizlilik sözleşmesini kabul etmiş olursunuz.
         </Text>
-        <View style={{ flexDirection: "row", alignItems: "center", marginTop: 16 }}>
+        <View
+          style={{ flexDirection: "row", alignItems: "center", marginTop: 16 }}
+        >
           <Text style={{ color: COLORS.gray }}>Powered by {""}</Text>
           <Text style={{ ...FONTS.h3, color: COLORS.white }}>Yakup Yavuz</Text>
         </View>
@@ -48,6 +65,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 32,
     alignItems: "center",
     padding: 16,
+    bottom: -40,
   },
 
   bottomTitle: {
@@ -70,7 +88,7 @@ const styles = StyleSheet.create({
 
   image: {
     width: SIZES.width - 64,
-    height: 250, 
-    resizeMode: 'contain', 
+    height: 250,
+    resizeMode: "contain",
   },
 });
