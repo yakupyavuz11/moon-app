@@ -1,15 +1,29 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const ProfileScreen = () => {
+  const safeAreaInsets = useSafeAreaInsets();
   return (
     <ScrollView
       className="flex-1 bg-purple-100"
-      contentContainerStyle={{ paddingBottom: 120 }}
+      contentContainerStyle={{
+        paddingBottom: 120,
+      }}
       showsVerticalScrollIndicator={false}
     >
       {/* Üst Bilgi */}
-      <View className="bg-purple-700 py-12 px-4 rounded-b-3xl">
+      <View
+        className="bg-purple-700 py-12 px-4 rounded-b-3xl"
+        style={{ paddingTop: safeAreaInsets.top }}
+      >
         <Image
           source={{
             uri: "https://via.placeholder.com/100", // Profil resmi URL

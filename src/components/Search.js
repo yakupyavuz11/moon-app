@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { TextInput } from "react-native";
 
 const Search = ({ setSearchQuery }) => {
   const [searchText, setSearchText] = React.useState("");
@@ -13,20 +13,10 @@ const Search = ({ setSearchQuery }) => {
     <TextInput
       onChangeText={handleSearchChange}
       value={searchText}
-      style={styles.searchbar}
+      className="h-10 my-2 rounded-full px-3 bg-gray-200"
       placeholder="Search..."
     />
   );
 };
-
-const styles = StyleSheet.create({
-  searchbar: {
-    height: 40,
-    marginVertical: 8,
-    borderRadius: 30,
-    paddingHorizontal: 10,
-    backgroundColor: "#f0f0f0", 
-  },
-});
 
 export default Search;

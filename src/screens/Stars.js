@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, ScrollView } from "react-native";
+import { View, Text, Image, ScrollView, SafeAreaView } from "react-native";
 
 const Stars = () => {
   const favoriteUsers = [
@@ -30,6 +30,7 @@ const Stars = () => {
 
   return (
     <ScrollView className="flex-1 bg-purple-50">
+      <SafeAreaView/>
       <View className="p-4">
         <Text className="text-xl font-bold text-purple-800 mb-4">
           Favori Kullanıcılar

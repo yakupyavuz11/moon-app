@@ -31,7 +31,7 @@ export default function Discovery() {
           )
         }}
         keyExtractor={(item) => {
-          return item.key
+          return item.id
         }}
       />
       <Navbar />
