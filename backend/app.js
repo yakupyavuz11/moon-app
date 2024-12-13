@@ -2,6 +2,8 @@ require("dotenv").config();
 const http = require("http");
 const { neon } = require("@neondatabase/serverless");
 const url = require("url");
+const jwt = require("jsonwebtoken");
+
 
 const sql = neon(process.env.DATABASE_URL);
 
@@ -22,12 +24,19 @@ const registerHandler = async (req, res) => {
 const loginHandler = async (req, res) => {
   const { username, password } = await parseRequestBody(req);
   const result = await sql`
-    SELECT id, username FROM users
+    SELECT id, username,image,email FROM users
     WHERE username = ${username} AND password = ${password};
   `;
   if (result.length) {
+    const user = result[0];
+    const token = jwt.sign(
+      { id: user.id, username: user.username },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" } // Token 1 saat geçerli olacak
+    );
+
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(result[0]));
+    res.end(JSON.stringify({ token, ...user }));
   } else {
     res.writeHead(401, { "Content-Type": "text/plain" });
     res.end("Invalid credentials");
