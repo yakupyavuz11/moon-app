@@ -13,7 +13,6 @@ const column_width = screen_width / numColumns
 
 export default function Discovery() {
   const { colorScheme } = useColorScheme()
-  console.log("asda",users)
   return (
     <View className='flex-[1] bg-white dark:bg-dark pt-8'>
       <StatusBar style={colorScheme === 'light' ? 'dark' : 'light'} />
