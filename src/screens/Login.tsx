@@ -10,15 +10,41 @@ import {
 import theme from "../constants/theme";
 import useStore from "@/store/useStore";
 
-
 export default function Login({ navigation }) {
   const [email, setEmail] = useState(""); // E-posta state'i
   const [password, setPassword] = useState(""); // Şifre state'i
   const { login } = useStore();
-  // Giriş Yap  butonuna basıldığında çalışan fonksiyon
-  const onHandleLogin = () => {
+
+  // Giriş Yap butonuna basıldığında çalışan fonksiyon
+  const onHandleLogin = async () => {
     if (email !== "" && password !== "") {
-      login();
+      const loginData = {
+        email: email,
+        password: password,
+      };
+
+      try {
+        const response = await fetch("http://185.95.164.220:3000/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(loginData),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          console.log("Login successful");
+          login(result.user); 
+          navigation.navigate("Profile"); 
+        } else {
+          throw new Error(result.message || "Giriş yaparken bir hata oluştu.");
+        }
+      } catch (error) {
+        console.error(error);
+        Alert.alert("Hata", error.message);
+      }
     } else {
       Alert.alert("Hata", "E-posta ve şifre boş bırakılamaz");
     }

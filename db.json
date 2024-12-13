@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Ahmet",
+      "email": "ahmet@example.com",
+      "password": "hashed_password_ahmet",
+      "location": "Istanbul"
+    },
+    {
+      "id": 2,
+      "username": "Elif Demir",
+      "email": "elif@example.com",
+      "password": "hashed_password_elif",
+      "location": "Ankara"
+    }
+  ],
+  "chats": [{ "chat_id": 1, "participants": [1, 2], "messages": [1, 2] }],
+  "messages": [
+    {
+      "id": 1,
+      "chat_id": 1,
+      "from_user_id": 1,
+      "content": "Merhaba Elif!",
+      "timestamp": "2024-12-13T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "chat_id": 1,
+      "from_user_id": 2,
+      "content": "Merhaba Ahmet, nasılsın?",
+      "timestamp": "2024-12-13T10:05:00Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "message": "Yeni bir mesajınız var!",
+      "read": false
+    }
+  ],
+  "anonymous_users": [{ "id": 1, "name": "Anonim Kullanıcı" }]
+}

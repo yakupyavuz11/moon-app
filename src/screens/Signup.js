@@ -8,33 +8,36 @@ import {
   Alert,
 } from "react-native";
 import theme from "../constants/theme";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebase";
 
 export default function Signup({ navigation }) {
-  const [email, setEmail] = useState(""); // E-posta state'i
-  const [password, setPassword] = useState(""); // Şifre state'i
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState(""); 
 
-  // Kayıt ol butonuna basıldığında çalışan fonksiyon
   const onHandleSignup = () => {
     if (email !== "" && password !== "") {
-      createUserWithEmailAndPassword(auth, email, password) // Firebase ile yeni kullanıcı oluşturuluyor
-        .then(() => {
-          console.log("Kayıt Başarılı");
-          Alert.alert("Başarılı", "Hesabınız başarıyla oluşturuldu!");
-          navigation.navigate("ProfileSetup"); // Kayıt sonrası giriş sayfasına yönlendirme
-        })
-        .catch((err) => {
-          let errorMessage = "Bir hata oluştu. Lütfen tekrar deneyin.";
-          if (err.code === "auth/email-already-in-use") {
-            errorMessage = "Bu e-posta adresi zaten kullanılıyor.";
-          } else if (err.code === "auth/invalid-email") {
-            errorMessage = "Geçersiz e-posta adresi.";
-          } else if (err.code === "auth/weak-password") {
-            errorMessage =
-              "Şifreniz çok zayıf. Lütfen daha güçlü bir şifre girin.";
+      fetch("http://185.95.164.220:3000/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            console.log("Kayıt Başarılı");
+            Alert.alert("Başarılı", "Hesabınız başarıyla oluşturuldu!");
+            navigation.navigate("ProfileSetup"); // KAYIT SONRASI YONLENDIRME
+          } else {
+            Alert.alert("Kayıt Hatası", data.message || "Bir hata oluştu.");
           }
-          Alert.alert("Kayıt Hatası", errorMessage);
+        })
+        .catch((error) => {
+          console.error(error);
+          Alert.alert("Kayıt Hatası", "Bir hata oluştu. Lütfen tekrar deneyin.");
         });
     } else {
       Alert.alert("Hata", "E-posta ve şifre boş bırakılamaz");
