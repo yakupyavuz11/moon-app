@@ -1,26 +1,20 @@
 import React from "react";
-import {
-  ImageBackground,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Image,
-} from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Button from "../components/Button";
-import { useNavigation } from "@react-navigation/native"; // Import useNavigation
+import { useNavigation } from "@react-navigation/native"; // useNavigation hook'u
+
 import images from "../constants/images";
 import theme, { COLORS, FONTS, SIZES } from "../constants/theme";
 
 const Intro = () => {
-  const navigation = useNavigation(); // Access navigation here
+  const navigation = useNavigation(); // Navigation'ı kullan
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.COLORS.primary }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.COLORS.white }}>
       <StatusBar hidden />
 
-      {/* Image Section */}
+      {/* Görsel Bölümü */}
       <View
         style={{
           flex: 3,
@@ -33,22 +27,32 @@ const Intro = () => {
         <Image source={images.onboarding} style={styles.image} />
       </View>
 
-      {/* Bottom Container for Buttons and Text */}
       <View style={styles.bottomContainer}>
-        <Text style={styles.bottomTitle}>Anonim olarak özgürce sohbet et</Text>
+        <Text style={styles.bottomTitle}>
+          {"No One Knows, Connect with Anyone!"}
+        </Text>
         <Button
-          title="Başlayalım"
-          onPress={() => navigation.navigate("Signup")} // Use navigation to go to Signup screen
-          style={{ marginTop: 40, marginVertical: 8, width: SIZES.width - 64 }}
+          title={"Started"}
+          onPress={() => navigation.navigate("Signup")}
+          style={{
+            backgroundColor: COLORS.black,
+            marginTop: 40,
+            marginVertical: 8,
+            width: SIZES.width - 64,
+          }}
         />
         <Text style={styles.bottomSubtitle}>
-          Giriş Yaptığında gizlilik sözleşmesini kabul etmiş olursunuz.
+          {"By continuing, you agree to our privacy policy."}
         </Text>
         <View
           style={{ flexDirection: "row", alignItems: "center", marginTop: 16 }}
         >
-          <Text style={{ color: COLORS.gray }}>Powered by {""}</Text>
-          <Text style={{ ...FONTS.h3, color: COLORS.white }}>Yakup Yavuz</Text>
+          <Text style={{ ...FONTS.h4, color: COLORS.gray }}>
+            {"Powered by"}{" "}
+          </Text>
+          <Text style={{ ...FONTS.h3, color: COLORS.white }}>
+            {"Moon LLC"}{" "}
+          </Text>
         </View>
       </View>
     </SafeAreaView>
@@ -60,7 +64,7 @@ export default Intro;
 const styles = StyleSheet.create({
   bottomContainer: {
     flex: 4,
-    backgroundColor: COLORS.secondary,
+    backgroundColor: COLORS.primary,
     borderTopLeftRadius: 32,
     borderTopRightRadius: 32,
     alignItems: "center",
@@ -71,7 +75,7 @@ const styles = StyleSheet.create({
   bottomTitle: {
     marginTop: 40,
     color: COLORS.white,
-    fontSize: 32,
+    fontSize: 24,
     margin: 16,
     fontWeight: "600",
     textAlign: "center",

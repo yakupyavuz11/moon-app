@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import theme from "../constants/theme";
+import theme, { COLORS } from "../constants/theme";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { Button } from "react-native-paper";
 
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState(""); // E-posta state'i
@@ -43,7 +44,7 @@ export default function Signup({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Kayıt Ol</Text>
+      <Text style={styles.title}>Sign up</Text>
       <TextInput
         style={styles.input}
         placeholder="E-posta"
@@ -53,18 +54,21 @@ export default function Signup({ navigation }) {
       />
       <TextInput
         style={styles.input}
-        placeholder="Şifre"
+        placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={onHandleSignup}>
-        <Text style={{ color: "#fff", fontSize: 18 }}> Kayıt Ol</Text>
-      </TouchableOpacity>
+  <TouchableOpacity onPress={() => navigation.navigate("Forget")}>
+          <Text style={styles.ForgetPassword}>Forget Password </Text>
+        </TouchableOpacity>
+      <Button style={styles.button} onPress={onHandleSignup}>
+        <Text style={{ color: COLORS.white, fontSize: 18 }}> Sign up</Text>
+      </Button>
       <View style={styles.loginContainer}>
-        <Text style={styles.signupText}>Zaten hesabınız var mı? </Text>
+        <Text style={styles.signupText}>Already have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.signupLink}>Giriş Yap</Text>
+          <Text style={styles.signupLink}>Login </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -110,9 +114,18 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
   },
+  ForgetPassword: {
+    color: "#fff",
+    fontSize: 12,
+    textAlign: "right",
+    marginBottom: 10,
+  },
+
+
   signupLink: {
     color: "#fff",
-    fontWeight: "500",
     fontSize: 16,
+
+    textDecorationLine: "underline",
   },
 });

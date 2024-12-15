@@ -9,7 +9,7 @@ const Button = (props) => {  // Accept props here
       onPress={props.onPress}  // Use the onPress passed from props
     >
       <Text
-        style={{ ...FONTS.body2, fontFamily: "medium", color: COLORS.black }}
+        style={{ ...FONTS.h2, color: COLORS.white }}
       >
         {props.title} 
       </Text>

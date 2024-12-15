@@ -26,7 +26,7 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Giriş Yap</Text>
+      <Text style={styles.title}>Login</Text>
       <TextInput
         style={styles.input}
         placeholder="E-posta"
@@ -36,18 +36,18 @@ export default function Login({ navigation }) {
       />
       <TextInput
         style={styles.input}
-        placeholder="Şifre"
+        placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
       <TouchableOpacity style={styles.button} onPress={onHandleLogin}>
-        <Text style={{ color: "#fff", fontSize: 18 }}>Giriş Yap</Text>
+        <Text style={{ color: "#fff", fontSize: 18 }}>Login</Text>
       </TouchableOpacity>
       <View style={styles.loginContainer}>
-        <Text style={styles.signupText}>Zaten hesabınız var mı? </Text>
+        <Text style={styles.signupText}>Don't have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
-          <Text style={styles.signupLink}>Kayıt Ol</Text>
+          <Text style={styles.signupLink}>Sign Up</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   signupLink: {
+    textDecorationLine: "underline",
     color: "#fff",
     fontWeight: "500",
     fontSize: 16,

@@ -11,18 +11,19 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { Picker } from '@react-native-picker/picker';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { COLORS } from '../constants/theme';
+import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';  // Back arrow icon
 
-const ProfileSetupScreen = () => {
+const EditProfile = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [username, setUsername] = useState('');
-  const [gender, setGender] = useState('');
   const [about, setAbout] = useState('');
-  const [birthDate, setBirthDate] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const navigation = useNavigation();
 
   const pickImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -43,15 +44,8 @@ const ProfileSetupScreen = () => {
     }
   };
 
-  const onDateChange = (event, selectedDate) => {
-    setShowDatePicker(Platform.OS === 'ios');
-    if (selectedDate) {
-      setBirthDate(selectedDate);
-    }
-  };
-
   const handleSubmit = () => {
-    if (!username || !gender || !about) {
+    if (!username || !about) {
       Alert.alert('Error', 'Please fill in all fields.');
     } else {
       Alert.alert('Success', 'Your profile has been saved!');
@@ -60,6 +54,15 @@ const ProfileSetupScreen = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.primary} /> {/* Status Bar */} 
+      
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color="white" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Edit Profile</Text>
+      </View>
+
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
@@ -82,31 +85,6 @@ const ProfileSetupScreen = () => {
             onChangeText={setUsername}
           />
 
-          <Text style={styles.label}>Gender</Text>
-          <Picker
-            selectedValue={gender}
-            onValueChange={(itemValue) => setGender(itemValue)}
-            style={styles.picker}
-          >
-            <Picker.Item label="Select" value="" />
-            <Picker.Item label="Male" value="male" />
-            <Picker.Item label="Female" value="female" />
-            <Picker.Item label="Other" value="other" />
-          </Picker>
-
-          <Text style={styles.label}>Birth Date</Text>
-          <TouchableOpacity onPress={() => setShowDatePicker(true)} style={styles.dateButton}>
-            <Text style={styles.dateText}>{birthDate.toLocaleDateString()}</Text>
-          </TouchableOpacity>
-          {showDatePicker && (
-            <DateTimePicker
-              value={birthDate}
-              mode="date"
-              display="default"
-              onChange={onDateChange}
-            />
-          )}
-
           <TextInput
             placeholder="About Yourself"
             style={[styles.input, styles.textArea]}
@@ -127,17 +105,32 @@ const ProfileSetupScreen = () => {
 
 const styles = StyleSheet.create({
   safeArea: {
-    marginTop: 2,
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
+  header: {
+    marginTop:22
+  
+    ,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15,
+    backgroundColor: COLORS.primary,
+  },
+  headerTitle: {
+    fontSize: 20,
+    color: '#FFF',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    flex: 1,
+  },
   container: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 10,
   },
   scrollView: {
-    margin: 5,
-    padding: 22,
+    padding: 20,
   },
   image: {
     width: 150,
@@ -167,7 +160,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: COLORS.primary,
     borderRadius: 8,
     padding: 10,
     marginBottom: 15,
@@ -177,31 +170,8 @@ const styles = StyleSheet.create({
   textArea: {
     height: 100,
   },
-  label: {
-    marginBottom: 5,
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: '#333',
-  },
-  picker: {
-    marginBottom: 15,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-  },
-  dateButton: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    marginBottom: 15,
-    backgroundColor: '#fff',
-  },
-  dateText: {
-    fontSize: 16,
-    color: '#333',
-  },
   button: {
-    backgroundColor: '#000000',
+    backgroundColor: '#000',
     paddingVertical: 20,
     paddingHorizontal: 100,
     borderRadius: 80,
@@ -210,7 +180,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 3, // Adds shadow for Android
+    elevation: 3,
   },
   buttonText: {
     fontSize: 16,
@@ -219,5 +189,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileSetupScreen;
- 
+export default EditProfile;

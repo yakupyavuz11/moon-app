@@ -14,6 +14,7 @@ const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
+      initialRouteName="Discovery" 
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
@@ -32,16 +33,14 @@ const BottomTabNavigator = () => {
         tabBarIcon: ({ focused }) => {
           let iconName;
 
-          if (route.name === "Messages") {
-            iconName = "chatbubbles";
+          if (route.name === "Discovery") {
+            iconName = "compass";
           } else if (route.name === "Account") {
             iconName = "person";
-          } else if (route.name === "Shuffle") {
-            iconName = "shuffle";
           } else if (route.name === "Stars") {
             iconName = "star";
-          }else if (route.name === "Discovery") {
-            iconName = "compass";
+          } else if (route.name === "Messages") {
+            iconName = "chatbubbles";
           }
 
           return (
@@ -56,9 +55,9 @@ const BottomTabNavigator = () => {
         },
       })}
     >
-      <Tab.Screen name="Discovery" component={Discovery} />
       <Tab.Screen name="Messages" component={Messages} />
-      <Tab.Screen name="Shuffle" component={Shuffle} />
+      <Tab.Screen name="Discovery" component={Discovery} />
+      {/* <Tab.Screen name="Shuffle" component={Shuffle} /> */}
       <Tab.Screen name="Stars" component={Stars} />
       <Tab.Screen name="Account" component={ProfileScreen} />
     </Tab.Navigator>

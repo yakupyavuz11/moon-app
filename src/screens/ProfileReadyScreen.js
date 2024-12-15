@@ -6,36 +6,34 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native"; // Navigasyonu ekliyoruz.
+import { useNavigation } from "@react-navigation/native"; // Adding navigation.
 import theme, { COLORS } from "../constants/theme";
 
 const ProfileReadyScreen = () => {
-  const navigation = useNavigation(); // useNavigation hook'u ile navigasyon erişimi.
+  const navigation = useNavigation(); // Using useNavigation hook for navigation access.
 
   const handleAccept = () => {
-    navigation.replace("BottomTabNavigator"); // Navigasyon işlemine yönlendirme.
+    navigation.replace("BottomTabNavigator"); // Navigating to BottomTabNavigator.
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sohbetten Önce</Text>
+      <Text style={styles.title}>Before the Chat</Text>
       <Text style={styles.text}>
-        Hoşgeldin! Her ne kadar anonim olsanda kullanıcılarımıza gönderdiğin
-        mesajlardan sorumlu olduğunu hatırlatmak isteriz.
+        Welcome! Even though you remain anonymous, we would like to remind you
+        that you are responsible for the messages you send to other users.
       </Text>
       <Text style={styles.text}>
-        Burada ırk, milliyet, etnik köken, cinsiyet, cinsiyet kimliği veya
-        cinsel tercihi ne olursa olsun herkesle nezaket ve saygıyla sohbet
-        etmelisin.
+        Here, you should chat with kindness and respect, regardless of race,
+        nationality, ethnicity, gender, gender identity, or sexual preference.
       </Text>
       <Text style={styles.text}>
-        Anonim Chat uygulamasına kayıt olduğunda{" "}
-        <Text style={styles.link}>Kullanım Şartlarımızı</Text> ve{" "}
-        <Text style={styles.link}>Gizlilik Politikamızı</Text> kabul etmiş
-        olursun.
+        By registering for the Anonymous Chat app, you accept our{" "}
+        <Text style={styles.link}>Terms of Use</Text> and{" "}
+        <Text style={styles.link}>Privacy Policy</Text>.
       </Text>
       <TouchableOpacity style={styles.button} onPress={handleAccept}>
-        <Text style={styles.buttonText}>Kabul Et</Text>
+        <Text style={styles.buttonText}>Accept</Text>
       </TouchableOpacity>
     </View>
   );

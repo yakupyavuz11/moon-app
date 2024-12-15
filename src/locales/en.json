@@ -1,0 +1,15 @@
+{
+  "introTitle": "Welcome to Our App!",
+  "startButton": "Get Started",
+  "privacyDisclaimer": "By continuing, you agree to our privacy policy.",
+  "poweredBy": "Powered by",
+  "companyName": "Our Company",
+  "signupTitle": "Sign Up",
+  "signupButton": "Sign Up",
+  "loginTitle": "Login",
+  "loginButton": "Login",
+  "forgotPasswordTitle": "Forgot Password?",
+  "forgotPasswordButton": "Reset Password",
+  "alreadyHaveAccount": "Already have an account?"
+
+}
