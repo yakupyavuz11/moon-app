@@ -28,18 +28,17 @@ export default function ChangePassword() {
       <View style={styles.form}>
         <TextInput
           style={styles.input}
-          placeholder="E-posta"
+          placeholder="Old Password"
           placeholderTextColor="#888"
         />
         <TextInput
           style={styles.input}
-          placeholder="Password"
+          placeholder="NewPassword"
           placeholderTextColor="#888"
           secureTextEntry={true}
         />
         <Text style={styles.infoText}>
-          You can change your email by entering your current password.
-        </Text>
+        You can change your password by entering your current password.        </Text>
       </View>
     </View>
   );

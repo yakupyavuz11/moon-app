@@ -8,14 +8,12 @@ import ProfileReadyScreen from "@/screens/ProfileReadyScreen";
 import ProfileSetupScreen from "@/screens/ProfileSetupScreen";
 import Chat from "@/screens/ChatScreen";
 import UserProfile from "@/screens/UserProfile";
-import ForgetPassword from "@/screens/ForgetPassword";
 import Settings from "@/screens/Settings";
 import EditProfile from "@/screens/EditProfile";
 import ChangeEmail from "@/screens/ChangeEmail";
 import ChangePassword from "@/screens/ChangePassword";
-import DeleteAccount from "@/screens/DeleteAccount";
 import Language from "@/screens/Language";
-import FreezeAccount from "@/screens/FreezeAccount";
+import ForgetPasswordScreen from "@/screens/ForgetPassword";
 const Stack = createStackNavigator();
 
 const AppNavigation = () => {
@@ -30,7 +28,8 @@ const AppNavigation = () => {
         <Stack.Screen name="ProfileSetup" component={ProfileSetupScreen} />
         <Stack.Screen name="ProfileReady" component={ProfileReadyScreen} />
         <Stack.Screen name="Chat" component={Chat} />
-        <Stack.Screen name="Forget" component={ForgetPassword} />
+        <Stack.Screen name="Forget" component={ForgetPasswordScreen} />
+
         <Stack.Screen name="UserProfile" component={UserProfile} />
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="EditProfile" component={EditProfile} />

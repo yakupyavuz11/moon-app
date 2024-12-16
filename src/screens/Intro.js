@@ -2,13 +2,15 @@ import React from "react";
 import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Button from "../components/Button";
-import { useNavigation } from "@react-navigation/native"; // useNavigation hook'u
-
+import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next"; // i18next'i import et
 import images from "../constants/images";
 import theme, { COLORS, FONTS, SIZES } from "../constants/theme";
+import "../i18n"; // i18n.js dosyasını import et
 
 const Intro = () => {
   const navigation = useNavigation(); // Navigation'ı kullan
+  const { t } = useTranslation(); // useTranslation hook'u ile t fonksiyonunu al
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.COLORS.white }}>
@@ -29,10 +31,10 @@ const Intro = () => {
 
       <View style={styles.bottomContainer}>
         <Text style={styles.bottomTitle}>
-          {"No One Knows, Connect with Anyone!"}
+          {t("intro_title")} {/* Çeviriyi buradan çağır */}
         </Text>
         <Button
-          title={"Started"}
+          title={t("introTitle")}
           onPress={() => navigation.navigate("Signup")}
           style={{
             backgroundColor: COLORS.black,

@@ -59,16 +59,13 @@ export default function Signup({ navigation }) {
         onChangeText={setPassword}
         secureTextEntry
       />
-  <TouchableOpacity onPress={() => navigation.navigate("Forget")}>
-          <Text style={styles.ForgetPassword}>Forget Password </Text>
-        </TouchableOpacity>
       <Button style={styles.button} onPress={onHandleSignup}>
-        <Text style={{ color: COLORS.white, fontSize: 18 }}> Sign up</Text>
+        <Text style={{ color: COLORS.white, fontSize: 18 }}> Sign Up</Text>
       </Button>
       <View style={styles.loginContainer}>
         <Text style={styles.signupText}>Already have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.signupLink}>Login </Text>
+          <Text style={styles.signupLink}>Login</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -114,13 +111,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
   },
-  ForgetPassword: {
-    color: "#fff",
-    fontSize: 12,
-    textAlign: "right",
-    marginBottom: 10,
-  },
-
 
   signupLink: {
     color: "#fff",

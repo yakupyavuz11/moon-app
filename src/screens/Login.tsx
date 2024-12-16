@@ -10,7 +10,6 @@ import {
 import theme from "../constants/theme";
 import useStore from "@/store/useStore";
 
-
 export default function Login({ navigation }) {
   const [email, setEmail] = useState(""); // E-posta state'i
   const [password, setPassword] = useState(""); // Şifre state'i
@@ -41,6 +40,9 @@ export default function Login({ navigation }) {
         onChangeText={setPassword}
         secureTextEntry
       />
+      <TouchableOpacity onPress={() => navigation.navigate("Forget")}>
+        <Text style={styles.ForgetPassword}>Forget Password </Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={onHandleLogin}>
         <Text style={{ color: "#fff", fontSize: 18 }}>Login</Text>
       </TouchableOpacity>
@@ -98,5 +100,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "500",
     fontSize: 16,
+  },
+  ForgetPassword: {
+    color: "#fff",
+    fontSize: 12,
+    textAlign: "right",
+    marginBottom: 10,
   },
 });
