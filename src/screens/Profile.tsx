@@ -1,13 +1,22 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; 
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native"; // useNavigation hook'u
-import theme, {COLORS} from "../constants/theme";
+import theme, { COLORS } from "../constants/theme";
+import { StatusBar } from "expo-status-bar";
 export default function Account() {
   const navigation = useNavigation(); // Hook'u kullanıyoruz
 
   return (
     <ScrollView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#6A5AE0" />
       {/* Settings Button */}
       <TouchableOpacity
         style={styles.settingsButton}
@@ -31,14 +40,22 @@ export default function Account() {
 
       <View style={styles.aboutSection}>
         <Text style={styles.sectionTitle}>About</Text>
-        <Text style={styles.aboutText}>Software, Technology, Entrepreneurship Enthusiast.</Text>
+        <Text style={styles.aboutText}>
+          Software, Technology, Entrepreneurship Enthusiast.
+        </Text>
       </View>
 
       <TouchableOpacity style={styles.linkButton}>
         <Text style={styles.linkButtonText}>Share Profile</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.linkButton}>
-        <Text onPress={() => navigation.navigate("EditProfile")} style={styles.linkButtonText}> Edit Profile</Text>
+      <TouchableOpacity style={styles.linkButton2}>
+        <Text
+          onPress={() => navigation.navigate("EditProfile")}
+          style={styles.linkButtonText}
+        >
+          {" "}
+          Edit Profile
+        </Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -57,13 +74,16 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     alignItems: "center",
+    justifyContent: "center", // Dikey ortalama
     marginTop: 30,
   },
+  
   profileImage: {
     width: 400,
     height: 300,
     borderWidth: 2,
-    borderColor: COLORS.black,
+    borderColor: "#444",
+    alignSelf: "center", 
   },
   name: {
     color: COLORS.black,
@@ -72,7 +92,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   aboutSection: {
-    marginTop: 30,
+    marginTop: 5,
     paddingHorizontal: 20,
   },
   sectionTitle: {
@@ -106,8 +126,23 @@ const styles = StyleSheet.create({
     marginLeft: 100,
     backgroundColor: COLORS.primary,
   },
+  linkButton2: {
+    width: 200,
+    height: 50,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    marginLeft: 100,
+    backgroundColor: COLORS.primary,
+  },
   linkButtonText: {
     color: "#fff",
     fontSize: 16,
+  },
+  statusBar: {
+    backgroundColor: COLORS.primary,
+    margin: 0,
+    padding: 0,
   },
 });

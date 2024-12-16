@@ -45,7 +45,7 @@ export default function Discovery() {
       <SafeAreaView style={styles.safeArea}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={{ color: "#f7f7f7", fontSize: 24, fontWeight: "bold" }}>
+          <Text style={{ color: "#f7f7f7", fontSize: 24, fontWeight: "bold", marginTop: 24}}>
             Discovery
           </Text>
         </View>

@@ -13,6 +13,9 @@ import Settings from "@/screens/Settings";
 import EditProfile from "@/screens/EditProfile";
 import ChangeEmail from "@/screens/ChangeEmail";
 import ChangePassword from "@/screens/ChangePassword";
+import DeleteAccount from "@/screens/DeleteAccount";
+import Language from "@/screens/Language";
+import FreezeAccount from "@/screens/FreezeAccount";
 const Stack = createStackNavigator();
 
 const AppNavigation = () => {
@@ -22,18 +25,24 @@ const AppNavigation = () => {
         initialRouteName="BottomTabNavigator"
         screenOptions={{ headerShown: false }}
       >
-  <Stack.Screen name="Intro" component={Intro} />
-  <Stack.Screen name="Signup" component={Signup} />
-  <Stack.Screen name="ProfileSetup" component={ProfileSetupScreen} />
-  <Stack.Screen name="ProfileReady" component={ProfileReadyScreen} />
-  <Stack.Screen name="Chat" component={Chat} />
-  <Stack.Screen name="Forget" component={ForgetPassword} />
-  <Stack.Screen name="UserProfile" component={UserProfile} />
-  <Stack.Screen name="Settings" component={Settings} />
-  <Stack.Screen name="EditProfile" component={EditProfile} /> 
-  <Stack.Screen name="ChangeEmail" component={ChangeEmail} />
-  <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
-  <Stack.Screen name="ChangePassword" component={ChangePassword} />
+        <Stack.Screen name="Intro" component={Intro} />
+        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="ProfileSetup" component={ProfileSetupScreen} />
+        <Stack.Screen name="ProfileReady" component={ProfileReadyScreen} />
+        <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="Forget" component={ForgetPassword} />
+        <Stack.Screen name="UserProfile" component={UserProfile} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="EditProfile" component={EditProfile} />
+        <Stack.Screen name="ChangeEmail" component={ChangeEmail} />
+        <Stack.Screen
+          name="BottomTabNavigator"
+          component={BottomTabNavigator}
+        />
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
+        <Stack.Screen name="DeleteAccount" component={DeleteAccount} />
+        <Stack.Screen name="FreezeAccount" component={FreezeAccount} />
+        <Stack.Screen name="Language" component={Language} />
       </Stack.Navigator>
     </NavigationContainer>
   );

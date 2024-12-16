@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   formFooterText: {
-marginBottom: 100,
+marginBottom: 100 ,
     fontSize: 14,
     fontWeight: "500",
     color: "#6A5BC2",

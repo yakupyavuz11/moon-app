@@ -19,16 +19,13 @@ const Settings = () => {
   const [notifications, setNotifications] = useState(true);
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
-        <Ionicons name="arrow-back" size={24} color="white" />
+        <Ionicons  onPress={() => navigation.goBack()} name="arrow-back" size={24} color="white" />
         <Text style={styles.headerTitle}>Settings</Text>
         <Ionicons name="moon" size={24} color="white" />
       </View>
 
-      {/* Settings List */}
       <ScrollView contentContainerStyle={styles.content}>
-        {/* Toggle Options */}
         <View style={styles.settingItem}>
           <Text style={styles.text}>Last Seen</Text>
           <Switch
@@ -60,7 +57,7 @@ const Settings = () => {
 
         {/* Static Options */}
         <TouchableOpacity
-          onPress={() => navigation.navigate("ChangeEmail")}
+          onPress={() => navigation.navigate("Language")}
           style={styles.settingItem}
         >
           <Text style={styles.text}>Language</Text>
@@ -83,14 +80,14 @@ const Settings = () => {
           <Ionicons name="chevron-forward" size={20} color="#888" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("ChangeEmail")}
+          onPress={() => navigation.navigate("DeleteAccount")}
           style={styles.settingItem}
         >
           <Text style={styles.text}>Delete Account</Text>
           <Ionicons name="chevron-forward" size={20} color="#888" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("ChangeEmail")}
+          onPress={() => navigation.navigate("FreezeAccount")}
           style={styles.settingItem}
         >
           <Text style={styles.text}>Freeze Account</Text>
@@ -119,7 +116,7 @@ const Settings = () => {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: COLORS.white },
   header: {
-    marginTop: 30,
+    marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",

@@ -101,14 +101,18 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     alignItems: "center",
+    justifyContent: "center", // Dikey ortalama
     marginTop: 30,
   },
+  
   profileImage: {
     width: 400,
     height: 300,
     borderWidth: 2,
     borderColor: "#444",
+    alignSelf: "center", 
   },
+  
   name: {
     color: COLORS.black,
     fontSize: 24,
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   aboutSection: {
-    marginTop: 30,
+    marginTop: 5,
     paddingHorizontal: 20,
   },
   sectionTitle: {
