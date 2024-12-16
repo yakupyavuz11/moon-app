@@ -40,8 +40,6 @@ const AppNavigation = () => {
           component={BottomTabNavigator}
         />
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
-        <Stack.Screen name="DeleteAccount" component={DeleteAccount} />
-        <Stack.Screen name="FreezeAccount" component={FreezeAccount} />
         <Stack.Screen name="Language" component={Language} />
       </Stack.Navigator>
     </NavigationContainer>

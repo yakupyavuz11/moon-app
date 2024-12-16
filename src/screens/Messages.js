@@ -76,14 +76,23 @@ const Messages = () => {
   const renderContacts = () => (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       {activeContacts.map((contact) => (
-        <View key={contact.id} style={styles.contactContainer}>
+        <TouchableOpacity
+          key={contact.id}
+          style={styles.contactContainer}
+          onPress={() =>
+            navigation.navigate("UserProfile", {
+              name: contact.name,
+              image: contact.image,
+            })
+          }
+        >
           <Image source={{ uri: contact.image }} style={styles.contactImage} />
           <Text style={styles.contactName}>{contact.name}</Text>
-        </View>
+        </TouchableOpacity>
       ))}
     </ScrollView>
   );
-
+  
   const renderMessages = ({ item }) => (
     <TouchableOpacity
       style={styles.messageContainer}

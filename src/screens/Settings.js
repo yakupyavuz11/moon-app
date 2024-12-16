@@ -6,12 +6,48 @@ import {
   Switch,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/theme";
 import { useNavigation } from "@react-navigation/native";
-
 const Settings = () => {
+  const deleteAlert = () => {
+    Alert.alert(
+      "Delete Account",
+      "Are you sure you want to delete your account?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => console.log("OK Pressed"),
+        },
+      ]
+    );
+  };
+
+  const freezemyaccount = () => {
+    Alert.alert(
+      "Freeze Account",
+      "Are you sure you want to freeze your account?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => console.log("OK Pressed"),
+        },
+      ]
+    );
+  };
+
   const navigation = useNavigation(); // Hook, komponentin içinde tanımlandı.
   const [lastSeen, setLastSeen] = useState(true);
   const [discoveryVisibility, setDiscoveryVisibility] = useState(true);
@@ -20,7 +56,12 @@ const Settings = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Ionicons  onPress={() => navigation.goBack()} name="arrow-back" size={24} color="white" />
+        <Ionicons
+          onPress={() => navigation.goBack()}
+          name="arrow-back"
+          size={24}
+          color="white"
+        />
         <Text style={styles.headerTitle}>Settings</Text>
         <Ionicons name="moon" size={24} color="white" />
       </View>
@@ -80,14 +121,14 @@ const Settings = () => {
           <Ionicons name="chevron-forward" size={20} color="#888" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("DeleteAccount")}
+          onPress={() => deleteAlert()}
           style={styles.settingItem}
         >
           <Text style={styles.text}>Delete Account</Text>
           <Ionicons name="chevron-forward" size={20} color="#888" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("FreezeAccount")}
+          onPress={() => freezemyaccount()}
           style={styles.settingItem}
         >
           <Text style={styles.text}>Freeze Account</Text>

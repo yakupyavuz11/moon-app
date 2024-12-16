@@ -1,22 +1,14 @@
 import React, { useState } from "react";
-import {
-  GiftedChat,
-  Bubble
-} from "react-native-gifted-chat";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet
-} from "react-native";
+import { GiftedChat, Bubble } from "react-native-gifted-chat";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 
 const ChatScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const { name = "User", image = "https://placekitten.com/140/140" } = route.params || {};
+  const { name = "User", image = "https://placekitten.com/140/140" } =
+    route.params || {};
 
   const [messages, setMessages] = useState([
     {
@@ -63,13 +55,27 @@ const ChatScreen = () => {
   return (
     <View style={styles.container}>
       {/* Profil Bar */}
-      <View style={styles.profileBar}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backText}>←</Text>
-        </TouchableOpacity>
-        <Image source={{ uri: image }} style={styles.profileImage} />
-        <Text style={styles.profileName}>{name}</Text>
-      </View>
+      // Profil Bar Bölümü
+<View style={styles.profileBar}>
+  <TouchableOpacity
+    onPress={() => navigation.goBack()}
+    style={styles.backButton}
+  >
+    <Text style={styles.backText}>←</Text>
+  </TouchableOpacity>
+
+  {/* Profil Resmi Tıklanabilir Hale Getirildi */}
+  <TouchableOpacity
+    onPress={() => navigation.navigate("UserProfile")} // UserProfile sayfasına yönlendirme
+    style={{ flexDirection: "row", alignItems: "center" }}
+  >
+    <Image
+      source={{ uri: image }}
+      style={styles.profileImage}
+    />
+    <Text style={styles.profileName}>{name}</Text>
+  </TouchableOpacity>
+</View>
 
       {/* Chat Component */}
       <View style={{ flex: 1 }}>
