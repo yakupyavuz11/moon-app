@@ -34,7 +34,7 @@ const Intro = () => {
           {t("intro_title")} {/* Çeviriyi buradan çağır */}
         </Text>
         <Button
-          title={t("introTitle")}
+          title={t("start_button")}
           onPress={() => navigation.navigate("Signup")}
           style={{
             backgroundColor: COLORS.black,
@@ -44,16 +44,16 @@ const Intro = () => {
           }}
         />
         <Text style={styles.bottomSubtitle}>
-          {"By continuing, you agree to our privacy policy."}
+          {t("privacy_disclaimer")}
         </Text>
         <View
           style={{ flexDirection: "row", alignItems: "center", marginTop: 16 }}
         >
           <Text style={{ ...FONTS.h4, color: COLORS.gray }}>
-            {"Powered by"}{" "}
+            {t  ("powered_by") } 
           </Text>
           <Text style={{ ...FONTS.h3, color: COLORS.white }}>
-            {"Moon LLC"}{" "}
+            {" Moon LLC"}{" "}
           </Text>
         </View>
       </View>

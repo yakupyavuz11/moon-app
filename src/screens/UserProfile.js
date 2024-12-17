@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import {
   View,
   Text,
@@ -7,72 +7,93 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Import Ionicons for the back arrow
-import { useNavigation } from "@react-navigation/native"; // Import useNavigation for navigation
-import BottomSheet from "@gorhom/bottom-sheet"; // BottomSheet library
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { COLORS } from "@/constants/theme";
 
 export default function UserProfile() {
-  const navigation = useNavigation(); // Access navigation hook
-  const bottomSheetRef = useRef(null); // BottomSheet reference
-
+  const navigation = useNavigation();
+  const bottomSheetRef = useRef(null);
+  
+  const snapPoints = ["25%", "50%", "100%"]; // BottomSheet boyutları
+  
   const handleGoBack = () => {
-    navigation.goBack(); // Go back to the previous screen
+    navigation.goBack();
   };
 
   const handleOpenBottomSheet = () => {
-    if (bottomSheetRef.current) {
-      bottomSheetRef.current.expand(); // Open the bottom sheet
-    }
+    console.log("BottomSheet Ref:", bottomSheetRef.current); // Log ekle
+    bottomSheetRef.current?.expand(); // Aç bottom sheet
   };
+  
+
+  const renderBackdrop = useCallback(
+    (props) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+      />
+    ),
+    []
+  );
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       {/* Back Button */}
       <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
         <Ionicons name="arrow-back" size={30} color="#fff" />
       </TouchableOpacity>
 
-      {/* Profile Section */}
-      <View style={styles.profileContainer}>
-        <Image
-          source={{
-            uri: "https://images.pexels.com/photos/29748690/pexels-photo-29748690/free-photo-of-kendine-guvenen-gulumsemeyle-poz-veren-zarif-kadin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-          }}
-          style={styles.profileImage}
-        />
-        <View style={styles.profileInfoContainer}>
-          <Text style={styles.name}>mavigokyuzu221</Text>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Chat")}
-            style={[styles.circleButton, { backgroundColor: COLORS.primary }]}
-          >
-            <Text style={styles.buttonText}>💬</Text>
-          </TouchableOpacity>
+      <ScrollView>
+        {/* Profile Section */}
+        <View style={styles.profileContainer}>
+          <Image
+            source={{
+              uri: "https://images.pexels.com/photos/29748690/pexels-photo-29748690/free-photo-of-kendine-guvenen-gulumsemeyle-poz-veren-zarif-kadin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            }}
+            style={styles.profileImage}
+          />
+          <View style={styles.profileInfoContainer}>
+            <Text style={styles.name}>mavigokyuzu221</Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Chat")}
+              style={[styles.circleButton, { backgroundColor: COLORS.primary }]}
+            >
+              <Text style={styles.buttonText}>💬</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
 
-      {/* About Section */}
-      <View style={styles.aboutSection}>
-        <Text style={styles.sectionTitle}>About</Text>
-        <Text style={styles.aboutText}>
-          Software, Technology, Entrepreneurship Enthusiast.{"\n"}
-        </Text>
-      </View>
+        {/* About Section */}
+        <View style={styles.aboutSection}>
+          <Text style={styles.sectionTitle}>About</Text>
+          <Text style={styles.aboutText}>
+            Software, Technology, Entrepreneurship Enthusiast.{"\n"}
+          </Text>
+        </View>
 
-      {/* BottomSheet Trigger */}
-      <TouchableOpacity
-        style={styles.moreButton}
-        onPress={handleOpenBottomSheet}
-      >
-        <Text style={styles.moreButtonText}>...</Text>
-      </TouchableOpacity>
+        {/* BottomSheet Trigger */}
+        <TouchableOpacity
+  style={styles.moreButton}
+  onPress={handleOpenBottomSheet}
+  activeOpacity={0.7} // Dokunma efektini gör
+  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} // Dokunma alanını genişlet
+>
+<Ionicons style={styles.moreButtonText} name="ellipsis-vertical" size={30} color="#fff" />
+</TouchableOpacity>
+
+      </ScrollView>
 
       {/* BottomSheet */}
       <BottomSheet
         ref={bottomSheetRef}
-        index={-1} // Initially collapsed
-        snapPoints={["25%", "50%", "100%"]}
+        index={-1}
+        snapPoints={snapPoints}
+        backdropComponent={renderBackdrop}
+        enablePanDownToClose={true} // Kapatmak için aşağı kaydırmayı etkinleştir
+        backgroundStyle={styles.bottomSheetBackground}
       >
         <View style={styles.bottomSheetContent}>
           <Text style={styles.bottomSheetText}>Options:</Text>
@@ -84,7 +105,7 @@ export default function UserProfile() {
           </TouchableOpacity>
         </View>
       </BottomSheet>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -101,18 +122,15 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     alignItems: "center",
-    justifyContent: "center", // Dikey ortalama
     marginTop: 30,
   },
-  
   profileImage: {
     width: 400,
     height: 300,
     borderWidth: 2,
     borderColor: "#444",
-    alignSelf: "center", 
+    alignSelf: "center",
   },
-  
   name: {
     color: COLORS.black,
     fontSize: 24,
@@ -166,11 +184,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   bottomSheetBackground: {
-    backgroundColor: "#222", // Customize bottom sheet background color
+    backgroundColor: "#333", // BottomSheet rengi
   },
   bottomSheetContent: {
     padding: 20,
-    backgroundColor: "#222",
+    backgroundColor: "#333",
   },
   bottomSheetText: {
     color: "#fff",
@@ -179,7 +197,7 @@ const styles = StyleSheet.create({
   },
   optionButton: {
     padding: 10,
-    backgroundColor: "#333",
+    backgroundColor: "#444",
     marginBottom: 10,
     borderRadius: 5,
   },
