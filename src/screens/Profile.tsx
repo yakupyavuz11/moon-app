@@ -35,6 +35,12 @@ export default function Account() {
         />
         <View style={styles.profileInfoContainer}>
           <Text style={styles.name}>mavigokyuzu221</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("EditProfile")}
+            style={[styles.circleButton, { backgroundColor: COLORS.primary }]}
+          >
+            <Ionicons name="pencil" size={24} color="#fff" />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -47,15 +53,6 @@ export default function Account() {
 
       <TouchableOpacity style={styles.linkButton}>
         <Text style={styles.linkButtonText}>Share Profile</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.linkButton2}>
-        <Text
-          onPress={() => navigation.navigate("EditProfile")}
-          style={styles.linkButtonText}
-        >
-          {" "}
-          Edit Profile
-        </Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -77,19 +74,28 @@ const styles = StyleSheet.create({
     justifyContent: "center", // Dikey ortalama
     marginTop: 30,
   },
-  
+
   profileImage: {
     width: 400,
     height: 300,
     borderWidth: 2,
     borderColor: "#444",
-    alignSelf: "center", 
+    alignSelf: "center",
   },
   name: {
     color: COLORS.black,
     fontSize: 24,
     fontWeight: "bold",
     marginTop: 10,
+  },
+
+  circleButton: {
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: "auto",
   },
   aboutSection: {
     marginTop: 5,

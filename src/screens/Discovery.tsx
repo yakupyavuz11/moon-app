@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: -50,
+    marginTop: -30,
     backgroundColor: "#6A5AE0",
     paddingVertical: 50,
     paddingHorizontal: 30,
