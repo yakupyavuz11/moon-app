@@ -15,6 +15,14 @@
       "name": "Muhammed",
       "email": "muhammed@example.com",
       "image": "https://example.com/avatar2.jpg"
+    },
+    {
+      "id": "9f63",
+      "username": "mehmet789",
+      "password": "securepass",
+      "name": "Mehmet",
+      "email": "mehmet@example.com",
+      "image": "https://example.com/avatar3.jpg"
     }
   ],
   "messages": [

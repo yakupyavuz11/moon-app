@@ -20,7 +20,7 @@ export default function Login({ navigation }) {
   const { t } = useTranslation();
 
   // Giriş Yap  butonuna basıldığında çalışan fonksiyon
-  const onHandleLogin = async() => {
+ /* const onHandleLogin = async() => {
     if (email !== "" && password !== "") {
 
       login();
@@ -28,6 +28,35 @@ export default function Login({ navigation }) {
       Alert.alert("Hata", "E-posta ve şifre boş bırakılamaz");
     }
   };
+*/
+
+
+const onHandleLogin = async () => {
+  if (email !== "" && password !== "") {
+    try {
+      const response = await fetch(`http://localhost:3000/users?email=${email}&password=${password}`);
+      
+      if (response.ok) {
+        const users = await response.json();
+
+        if (users.length > 0) {
+          login(); // Store içindeki login işlemini çağır
+          Alert.alert("Başarılı", "Giriş başarılı!");
+          navigation.navigate("BottomTabNavigator"); // Giriş sonrası yönlendirme
+        } else {
+          Alert.alert("Hata", "Geçersiz e-posta veya şifre.");
+        }
+      } else {
+        Alert.alert("Hata", "Sunucuyla bağlantı kurulamadı.");
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      Alert.alert("Hata", "Bir hata oluştu. Lütfen tekrar deneyin.");
+    }
+  } else {
+    Alert.alert("Hata", "E-posta ve şifre boş bırakılamaz.");
+  }
+};
 
   return (
     <View style={styles.container}>

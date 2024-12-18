@@ -16,30 +16,27 @@ export default function Signup({ navigation }) {
   const [username, setUsername] = useState(""); // Kullanıcı adı state'i
   const { t } = useTranslation();
   const onHandleSignup = async () => {
-    if (email !== "" && password !== "" && username !== "" && name !== "") {
+    if (email !== "" && password !== "" && username !== "") {
       try {
-        const response = await fetch(
-          "http://localhost:3000/api/auth/register",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: name,
-              email: email,
-              username: username,
-              password: password,
-              image: "",
-            }),
-          }
-        );
-
+        const response = await fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: username, // Kullanıcı adı name olarak kullanılıyor
+            email: email,
+            username: username,
+            password: password,
+            image: "", // Varsayılan boş bırakılmış
+          }),
+        });
+  
         if (response.ok) {
           const result = await response.json();
           console.log("Kayıt Başarılı:", result);
           Alert.alert("Başarılı", "Hesabınız başarıyla oluşturuldu!");
-          navigation.navigate("ProfileSetup"); // Sonraki ekran
+          navigation.navigate("ProfileSetup"); // Bir sonraki ekrana yönlendirme
         } else {
           const errorMessage = await response.text();
           console.log("Kayıt Hatası:", errorMessage);
@@ -53,7 +50,7 @@ export default function Signup({ navigation }) {
       Alert.alert("Hata", "Tüm alanları doldurmanız gerekiyor.");
     }
   };
-
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}> {t("signup_title")}</Text>
