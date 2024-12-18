@@ -1,67 +1,76 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image, ScrollView } from "react-native";
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  FlatList,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  StatusBar, // Import StatusBar
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { COLORS } from "@/constants/theme";
+
+const data = {
+  contacts: [
+    {
+      id: "1",
+      name: "Phillip",
+      image:
+        "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      id: "2",
+      name: "Alfredo",
+      image:
+        "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      id: "3",
+      name: "Jaylon",
+      image:
+        "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      id: "4",
+      name: "Tatiana",
+      image:
+        "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      id: "5",
+      name: "Terry",
+      image:
+        "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+  ],
+  messages: [
+    {
+      id: "1",
+      name: "Phillip Franci",
+      message: "Hey, it's been a while since we've...",
+      time: "10:00 am",
+      image:
+        "https://images.pexels.com/photos/29741645/pexels-photo-29741645/free-photo-of-seffaf-siyah-elbiseli-kadinin-zarif-portresi.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      id: "2",
+      name: "Alfredo Saris",
+      message: "Hello, Good Morning Bro!",
+      time: "08:00 am",
+      image:
+        "https://images.pexels.com/photos/29741645/pexels-photo-29741645/free-photo-of-seffaf-siyah-elbiseli-kadinin-zarif-portresi.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+  ],
+};
 
 const Messages = () => {
-  const [chats, setChats] = useState([]);
-  const [contacts, setContacts] = useState([]);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    // Fetch the chats and contacts from the server
-    const fetchChats = async () => {
-      try {
-        const response = await fetch("/api/chats/list");
-        if (response.ok) {
-          const data = await response.json();
-          setChats(data); // Set the fetched chats into state
-        } else {
-          console.error("Failed to fetch chats");
-        }
-      } catch (error) {
-        console.error("Error fetching chats:", error);
-      }
-    };
-
-    // Fetch contacts (replace with your actual API if necessary)
-    const fetchContacts = async () => {
-      const data = [
-        {
-          id: "1",
-          name: "Phillip",
-          image: "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        },
-        {
-          id: "2",
-          name: "Alfredo",
-          image: "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        },
-        {
-          id: "3",
-          name: "Jaylon",
-          image: "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        },
-        {
-          id: "4",
-          name: "Tatiana",
-          image: "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        },
-        {
-          id: "5",
-          name: "Terry",
-          image: "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        },
-      ];
-      setContacts(data);
-    };
-
-    fetchChats();
-    fetchContacts();
-  }, []);
-
-  // Find active users by matching contact names with messages
-  const activeContacts = contacts.filter((contact) =>
-    chats.some((chat) => chat.name.includes(contact.name))
+  const activeContacts = data.contacts.filter((contact) =>
+    data.messages.some((message) => message.name.includes(contact.name))
   );
 
   const renderContacts = () => (
@@ -83,11 +92,15 @@ const Messages = () => {
       ))}
     </ScrollView>
   );
-
+  
   const renderMessages = ({ item }) => (
     <TouchableOpacity
       style={styles.messageContainer}
-      onPress={() => navigation.navigate("Chat", { name: item.name })}
+      onPress={() =>
+        navigation.navigate("Chat", {
+          name: item.name,
+        })
+      }
     >
       <Image source={{ uri: item.image }} style={styles.messageImage} />
       <View style={styles.messageContent}>
@@ -99,45 +112,43 @@ const Messages = () => {
   );
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#f7f7f7" }}>
-      <Text style={styles.header}>Messages</Text>
+    <View className="flex-[1] bg-[#F7F7F7] pt-8">
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.header}>
+          <Text style={{ color: "#f7f7f7", fontSize: 24, fontWeight: "bold" }}>
+            Messages
+          </Text>
+          <Text style={styles.title}>Active Users</Text>
+          {renderContacts()}
+        </View>
 
-      {/* Active Users Section */}
-      <View style={styles.activeUsersSection}>
-        <Text style={styles.title}>Active Users</Text>
-        {renderContacts()}
-      </View>
-
-      {/* Chat Messages Section */}
-      <FlatList
-        data={chats}
-        keyExtractor={(item) => item.id}
-        renderItem={renderMessages}
-        contentContainerStyle={styles.listContainer}
-      />
+        <FlatList
+          data={data.messages}
+          keyExtractor={(item) => item.id}
+          renderItem={renderMessages}
+          contentContainerStyle={styles.listContainer}
+        />
+      </SafeAreaView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginTop: 20,
-    marginBottom: 10,
-    textAlign: "center",
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#f7f7f7",
   },
-  activeUsersSection: {
-    marginTop: 20,
-    paddingHorizontal: 15,
+  header: {
+    backgroundColor: "#6A5AE0",
+    padding: 25,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
   title: {
+    marginTop: 18,
     fontSize: 16,
-    fontWeight: "bold",
+    color: "#f7f7f7",
     marginBottom: 10,
-  },
-  listContainer: {
-    paddingHorizontal: 15,
   },
   contactContainer: {
     alignItems: "center",
@@ -151,8 +162,13 @@ const styles = StyleSheet.create({
     borderColor: "#00D984",
   },
   contactName: {
-    color: "#555",
+    color: "#fff",
     marginTop: 5,
+    fontSize:16
+  },
+  listContainer: {
+    marginTop: 20,
+    paddingHorizontal: 15,
   },
   messageContainer: {
     flexDirection: "row",
@@ -160,9 +176,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   messageImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
   },
   messageContent: {
     flex: 1,
@@ -170,6 +186,7 @@ const styles = StyleSheet.create({
   },
   messageName: {
     fontWeight: "bold",
+    fontSize:16
   },
   messageText: {
     color: "#555",

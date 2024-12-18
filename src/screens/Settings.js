@@ -52,10 +52,9 @@ const Settings = () => {
   const logoutHandler = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/auth/logout", {
-        method: "POST", 
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
-
         },
       });
 
@@ -79,109 +78,121 @@ const Settings = () => {
   const [readReceipts, setReadReceipts] = useState(true);
   const [notifications, setNotifications] = useState(true);
   return (
-    <SafeAreaView  style={styles.container}>
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Ionicons
-          onPress={() => navigation.goBack()}
-          name="arrow-back"
-          size={24}
-          color="white"
-        />
-        <Text style={styles.headerTitle}>Settings</Text>
-        <Ionicons name="moon" size={24} color="white" />
-      </View>
-
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.settingItem}>
-          <Text style={styles.text}>Last Seen</Text>
-          <Switch
-            value={lastSeen}
-            onValueChange={() => setLastSeen(!lastSeen)}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Ionicons
+            onPress={() => navigation.goBack()}
+            name="arrow-back"
+            size={24}
+            color="white"
           />
-        </View>
-        <View style={styles.settingItem}>
-          <Text style={styles.text}>Show My Profile in Discovery</Text>
-          <Switch
-            value={discoveryVisibility}
-            onValueChange={() => setDiscoveryVisibility(!discoveryVisibility)}
-          />
-        </View>
-        <View style={styles.settingItem}>
-          <Text style={styles.text}>Read Receipts</Text>
-          <Switch
-            value={readReceipts}
-            onValueChange={() => setReadReceipts(!readReceipts)}
-          />
-        </View>
-        <View style={styles.settingItem}>
-          <Text style={styles.text}>Notifications</Text>
-          <Switch
-            value={notifications}
-            onValueChange={() => setNotifications(!notifications)}
-          />
+          <Text style={styles.headerTitle}>Settings</Text>
+          <Ionicons name="moon" size={24} color="white" />
         </View>
 
-        {/* Static Options */}
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Language")}
-          style={styles.settingItem}
-        >
-          <Text style={styles.text}>Language</Text>
-          <Ionicons name="chevron-forward" size={20} color="#888" />
-        </TouchableOpacity>
+        <ScrollView contentContainerStyle={styles.content}>
+          <View style={styles.settingItem}>
+            <Text style={styles.text}>Last Seen</Text>
+            <Switch
+              value={lastSeen}
+              onValueChange={() => setLastSeen(!lastSeen)}
+            />
+          </View>
+          <View style={styles.settingItem}>
+            <Text style={styles.text}>Show My Profile in Discovery</Text>
+            <Switch
+              value={discoveryVisibility}
+              onValueChange={() => setDiscoveryVisibility(!discoveryVisibility)}
+            />
+          </View>
+          <View style={styles.settingItem}>
+            <Text style={styles.text}>Read Receipts</Text>
+            <Switch
+              value={readReceipts}
+              onValueChange={() => setReadReceipts(!readReceipts)}
+            />
+          </View>
+          <View style={styles.settingItem}>
+            <Text style={styles.text}>Notifications</Text>
+            <Switch
+              value={notifications}
+              onValueChange={() => setNotifications(!notifications)}
+            />
+          </View>
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate("ChangePassword")}
-          style={styles.settingItem}
-        >
-          <Text style={styles.text}>Change Password</Text>
-          <Ionicons name="chevron-forward" size={20} color="#888" />
-        </TouchableOpacity>
+          {/* Static Options */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Language")}
+            style={styles.settingItem}
+          >
+            <Text style={styles.text}>Language</Text>
+            <Ionicons name="chevron-forward" size={20} color="#888" />
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate("ChangeEmail")}
-          style={styles.settingItem}
-        >
-          <Text style={styles.text}>Change Email</Text>
-          <Ionicons name="chevron-forward" size={20} color="#888" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => deleteAlert()}
-          style={styles.settingItem}
-        >
-          <Text style={styles.text}>Delete Account</Text>
-          <Ionicons name="chevron-forward" size={20} color="#888" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => freezemyaccount()}
-          style={styles.settingItem}
-        >
-          <Text style={styles.text}>Freeze Account</Text>
-          <Ionicons name="chevron-forward" size={20} color="#888" />
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ChangePassword")}
+            style={styles.settingItem}
+          >
+            <Text style={styles.text}>Change Password</Text>
+            <Ionicons name="chevron-forward" size={20} color="#888" />
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate("ChangeEmail")}
-          style={styles.settingItem}
-        >
-          <Text style={styles.text}>Help</Text>
-          <Ionicons name="chevron-forward" size={20} color="#888" />
-        </TouchableOpacity>
-        {/* Logout */}
-        <View style={styles.footer}>
-            <TouchableOpacity onPress={logoutHandler} style={styles.footerButton}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ChangeEmail")}
+            style={styles.settingItem}
+          >
+            <Text style={styles.text}>Change Email</Text>
+            <Ionicons name="chevron-forward" size={20} color="#888" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => deleteAlert()}
+            style={styles.settingItem}
+          >
+            <Text style={styles.text}>Delete Account</Text>
+            <Ionicons name="chevron-forward" size={20} color="#888" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => freezemyaccount()}
+            style={styles.settingItem}
+          >
+            <Text style={styles.text}>Freeze Account</Text>
+            <Ionicons name="chevron-forward" size={20} color="#888" />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ChangeEmail")}
+            style={styles.settingItem}
+          >
+            <Text style={styles.text}>Help</Text>
+            <Ionicons name="chevron-forward" size={20} color="#888" />
+          </TouchableOpacity>
+          {/* Logout */}
+          <View style={styles.footer}>
+            <TouchableOpacity
+              onPress={logoutHandler}
+              style={styles.footerButton}
+            >
               <Text style={styles.logoutText}>Logout</Text>
             </TouchableOpacity>
             <Text style={styles.version}>Version: 1.0.0</Text>
           </View>
-      </ScrollView>
-    </View>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+
+
+
+    flex:1
+
+
+
+  },
   header: {
     backgroundColor: COLORS.primary,
     color: COLORS.white,

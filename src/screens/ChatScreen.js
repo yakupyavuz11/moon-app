@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   profileBar: {
-    marginTop: 20,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#6A5AE0",

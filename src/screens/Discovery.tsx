@@ -156,7 +156,7 @@ export default function Discovery() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#6A5AE0",
+    backgroundColor: "F7F7F7",
   },
 
   safeArea: {
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: -30,
+    marginTop:-25,
     backgroundColor: "#6A5AE0",
     paddingVertical: 50,
     paddingHorizontal: 30,

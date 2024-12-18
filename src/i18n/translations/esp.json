@@ -86,6 +86,8 @@
           "save_button_text": "Guardar",
           "old_password_placeholder": "Contraseña antigua",
           "new_password_placeholder": "Nueva contraseña",
-          "info_text_password_change": "Puedes cambiar tu contraseña ingresando tu contraseña actual."
+          "info_text_password_change": "Puedes cambiar tu contraseña ingresando tu contraseña actual.",
+          "dont_have_an_account": "Don't have an account?"
+
         }
         

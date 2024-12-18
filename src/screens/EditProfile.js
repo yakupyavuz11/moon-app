@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -12,23 +12,27 @@ import {
   ScrollView,
   SafeAreaView,
   StatusBar,
-} from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import { COLORS } from '../constants/theme';
-import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';  // Back arrow icon
+} from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import { COLORS } from "../constants/theme";
+import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons"; // Back arrow icon
 
 const EditProfile = () => {
   const [profileImage, setProfileImage] = useState(null);
-  const [username, setUsername] = useState('');
-  const [about, setAbout] = useState('');
+  const [username, setUsername] = useState("");
+  const [about, setAbout] = useState("");
 
   const navigation = useNavigation();
 
   const pickImage = async () => {
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permissionResult.granted === false) {
-      Alert.alert('Permission Denied', 'You need to grant permission to upload a photo.');
+      Alert.alert(
+        "Permission Denied",
+        "You need to grant permission to upload a photo."
+      );
       return;
     }
 
@@ -46,25 +50,24 @@ const EditProfile = () => {
 
   const handleSubmit = () => {
     if (!username || !about) {
-      Alert.alert('Error', 'Please fill in all fields.');
+      Alert.alert("Error", "Please fill in all fields.");
     } else {
-      Alert.alert('Success', 'Your profile has been saved!');
+      Alert.alert("Success", "Your profile has been saved!");
     }
   };
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor={COLORS.primary} /> {/* Status Bar */} 
-      
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.primary} />{" "}
+      {/* Status Bar */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Edit Profile</Text>
       </View>
-
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
       >
         <ScrollView contentContainerStyle={styles.scrollView}>
@@ -106,23 +109,20 @@ const EditProfile = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f7f7f7",
   },
   header: {
-    marginTop:22
-  
-    ,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: 15,
     backgroundColor: COLORS.primary,
   },
   headerTitle: {
     fontSize: 20,
-    color: '#FFF',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "#FFF",
+    fontWeight: "bold",
+    textAlign: "center",
     flex: 1,
   },
   container: {
@@ -136,27 +136,27 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 75,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginBottom: 20,
     borderWidth: 3,
-    borderColor: '#4CAF50',
+    borderColor: "#4CAF50",
   },
   imagePlaceholder: {
     width: 150,
     height: 150,
     borderRadius: 75,
-    backgroundColor: '#ddd',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
+    backgroundColor: "#ddd",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
     marginBottom: 20,
     borderWidth: 3,
-    borderColor: '#6A5AE0',
+    borderColor: "#6A5AE0",
   },
   imageText: {
     fontSize: 14,
-    fontWeight: 'bold',
-    color: '#6A5AE0',
+    fontWeight: "bold",
+    color: "#6A5AE0",
   },
   input: {
     borderWidth: 1,
@@ -165,27 +165,27 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 15,
     fontSize: 16,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   textArea: {
     height: 100,
   },
   button: {
-    backgroundColor: '#000',
+    backgroundColor: "#000",
     paddingVertical: 20,
     paddingHorizontal: 100,
     borderRadius: 80,
     marginTop: 15,
     marginBottom: 10,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
     elevation: 3,
   },
   buttonText: {
     fontSize: 16,
-    color: '#fff',
-    fontWeight: 'bold',
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
 

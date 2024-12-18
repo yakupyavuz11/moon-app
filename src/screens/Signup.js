@@ -9,29 +9,31 @@ import {
 } from "react-native";
 import theme, { COLORS } from "../constants/theme";
 import { Button } from "react-native-paper";
-
+import "../i18n";
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState(""); // E-posta state'i
   const [password, setPassword] = useState(""); // Şifre state'i
   const [username, setUsername] = useState(""); // Kullanıcı adı state'i
-  const [name, setName] = useState(""); // İsim state'i
-
+  const { t } = useTranslation();
   const onHandleSignup = async () => {
     if (email !== "" && password !== "" && username !== "" && name !== "") {
       try {
-        const response = await fetch("http://localhost:3000/api/auth/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            username: username,
-            password: password,
-            image: "", 
-          }),
-        });
+        const response = await fetch(
+          "http://localhost:3000/api/auth/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: name,
+              email: email,
+              username: username,
+              password: password,
+              image: "",
+            }),
+          }
+        );
 
         if (response.ok) {
           const result = await response.json();
@@ -54,40 +56,37 @@ export default function Signup({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign up</Text>
+      <Text style={styles.title}> {t("signup_title")}</Text>
       <TextInput
         style={styles.input}
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
+        placeholder={t("user_name")}
         value={username}
         onChangeText={setUsername}
       />
       <TextInput
         style={styles.input}
-        placeholder="E-posta"
+        placeholder={t("email")}
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
       />
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        placeholder={t("password")}
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
       <Button style={styles.button} onPress={onHandleSignup}>
-        <Text style={{ color: COLORS.white, fontSize: 18 }}> Sign Up</Text>
+        <Text style={{ color: COLORS.white, fontSize: 18 }}>
+          {" "}
+          {t("sign_up")}
+        </Text>
       </Button>
       <View style={styles.loginContainer}>
-        <Text style={styles.signupText}>Already have an account? </Text>
+        <Text style={styles.signupText}>{t("already_have_account")}</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.signupLink}>Login</Text>
+          <Text style={styles.signupLink}>{t(login_title)}</Text>
         </TouchableOpacity>
       </View>
     </View>

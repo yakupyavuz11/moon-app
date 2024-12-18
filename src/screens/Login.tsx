@@ -10,12 +10,15 @@ import {
 import theme from "../constants/theme";
 import useStore from "@/store/useStore";
 import { API } from "@/http";
-
+import "../i18n";
+import { useTranslation } from "react-i18next";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState(""); // E-posta state'i
   const [password, setPassword] = useState(""); // Şifre state'i
   const { login } = useStore();
+  const { t } = useTranslation();
+
   // Giriş Yap  butonuna basıldığında çalışan fonksiyon
   const onHandleLogin = async() => {
     if (email !== "" && password !== "") {
@@ -31,28 +34,28 @@ export default function Login({ navigation }) {
       <Text style={styles.title}>Login</Text>
       <TextInput
         style={styles.input}
-        placeholder="E-posta"
+        placeholder={t("email")}
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
       />
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        placeholder={t("password")}
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
       <TouchableOpacity onPress={() => navigation.navigate("Forget")}>
-        <Text style={styles.ForgetPassword}>Forget Password </Text>
+        <Text style={styles.ForgetPassword}>{t("forgot_password_title")} </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={onHandleLogin}>
-        <Text style={{ color: "#fff", fontSize: 18 }}>Login</Text>
+        <Text style={{ color: "#fff", fontSize: 18 }}>{t("login_button")}</Text>
       </TouchableOpacity>
       <View style={styles.loginContainer}>
-        <Text style={styles.signupText}>Don't have an account? </Text>
+        <Text style={styles.signupText}>{t("dont_have_an_account")} </Text>
         <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
-          <Text style={styles.signupLink}>Sign Up</Text>
+          <Text style={styles.signupLink}>{t("signup_title")}</Text>
         </TouchableOpacity>
       </View>
     </View>
