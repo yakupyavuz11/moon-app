@@ -16,7 +16,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const ProfileSetupScreen = () => {
+const ProfileSetupScreen = ({navigation}) => {
   const [profileImage, setProfileImage] = useState(null);
   const [username, setUsername] = useState('');
   const [gender, setGender] = useState('');
@@ -50,13 +50,42 @@ const ProfileSetupScreen = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!username || !gender || !about) {
       Alert.alert('Error', 'Please fill in all fields.');
-    } else {
-      Alert.alert('Success', 'Your profile has been saved!');
+      return;
+    }
+  
+    const profileData = {
+      username,
+      password: "defaultPassword123", // Backend'inizin beklediği bir şifre eklemeniz gerekiyor.
+      name: username, // İsim alanını username ile eşleştiriyoruz.
+      email: `${username}@example.com`, // Örnek bir e-posta adresi oluşturuluyor.
+      image: profileImage || "", // Eğer bir resim seçilmediyse boş gönderiyoruz.
+    };
+  
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(profileData),
+      });
+  
+      if (response.ok) {
+        const responseData = await response.json();
+        Alert.alert('Success', `Your profile has been saved! ID: ${responseData.id}`);
+        navigation.navigate('ProfileReady');
+      } else {
+        Alert.alert('Error', 'Failed to register. Please try again.');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while registering.');
+      console.error(error);
     }
   };
+  
 
   return (
     <SafeAreaView style={styles.safeArea}>

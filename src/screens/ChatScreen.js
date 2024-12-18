@@ -1,33 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { COLORS } from "@/constants/theme";
+import axios from "axios"; // API'ye istek göndermek için axios
 
 const ChatScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const { name = "User", image = "https://placekitten.com/140/140" } =
-    route.params || {};
+  const [messages, setMessages] = useState([]);
 
-  const [messages, setMessages] = useState([
-    {
-      _id: 1,
-      text: `Merhaba! ${name} ile nasıl yardımcı olabilirim?`,
-      createdAt: new Date(),
-      user: {
-        _id: 2,
-        name: "Destek Botu",
-        avatar:
-          "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      },
-    },
-  ]);
+  const { name = "User", image = "https://placekitten.com/140/140" } = route.params || {};
+
+  // Mesajları API'den çek
+  const fetchMessages = async () => {
+    try {
+      const response = await axios.get('/api/messages'); // Mesajları çekmek için API isteği
+      const messagesFromAPI = response.data;
+
+      // Mesajları GiftedChat formatına dönüştür
+      const formattedMessages = messagesFromAPI.map(msg => ({
+        _id: msg.id,
+        text: msg.message,
+        createdAt: new Date(msg.created_at),
+        user: {
+          _id: msg.sender_id,
+          name: msg.sender_name,
+          avatar: "https://placekitten.com/140/140", // Fotoğraf URL'sini uygun şekilde ekleyebilirsiniz
+        },
+      }));
+
+      setMessages(formattedMessages); // Mesajları state'e aktar
+    } catch (error) {
+      console.error('Mesajları çekerken hata oluştu:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMessages(); // Mesajları çek
+  }, []);
 
   const onSend = (newMessages = []) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, newMessages)
-    );
+    setMessages((previousMessages) => GiftedChat.append(previousMessages, newMessages));
   };
 
   const renderBubble = (props) => (
@@ -53,53 +79,49 @@ const ChatScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
-      {/* Profil Bar */}
-      // Profil Bar Bölümü
-<View style={styles.profileBar}>
-  <TouchableOpacity
-    onPress={() => navigation.goBack()}
-    style={styles.backButton}
-  >
-    <Text style={styles.backText}>←</Text>
-  </TouchableOpacity>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <View style={styles.container}>
+            {/* Profil Bar */}
+            <View style={styles.profileBar}>
+              <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+                <Text style={styles.backText}>←</Text>
+              </TouchableOpacity>
 
-  {/* Profil Resmi Tıklanabilir Hale Getirildi */}
-  <TouchableOpacity
-    onPress={() => navigation.navigate("UserProfile")} // UserProfile sayfasına yönlendirme
-    style={{ flexDirection: "row", alignItems: "center" }}
-  >
-    <Image
-      source={{ uri: image }}
-      style={styles.profileImage}
-    />
-    <Text style={styles.profileName}>{name}</Text>
-  </TouchableOpacity>
-</View>
+              {/* Profil Resmi Tıklanabilir Hale Getirildi */}
+              <TouchableOpacity onPress={() => navigation.navigate("UserProfile")} style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={{ uri: image }} style={styles.profileImage} />
+                <Text style={styles.profileName}>{name}</Text>
+              </TouchableOpacity>
+            </View>
 
-      {/* Chat Component */}
-      <View style={{ flex: 1 }}>
-        <GiftedChat
-          messages={messages}
-          onSend={(messages) => onSend(messages)}
-          user={{ _id: 1 }}
-          placeholder="Mesaj yaz..."
-          renderBubble={renderBubble}
-          textInputStyle={styles.textInput}
-          messagesContainerStyle={styles.messagesContainer}
-        />
-      </View>
-    </View>
+            {/* Chat Component */}
+            <View style={{ flex: 1 }}>
+              <GiftedChat
+                messages={messages}
+                onSend={(messages) => onSend(messages)}
+                user={{ _id: 1 }}
+                placeholder="Mesaj yaz..."
+                renderBubble={renderBubble}
+                textInputStyle={styles.textInput}
+                messagesContainerStyle={styles.messagesContainer}
+              />
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#6A5AE0",
+    backgroundColor: COLORS.white,
   },
   profileBar: {
-    marginTop: 40,
+    marginTop: 20,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#6A5AE0",

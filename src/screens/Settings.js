@@ -11,6 +11,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/theme";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 const Settings = () => {
   const deleteAlert = () => {
     Alert.alert(
@@ -48,12 +49,37 @@ const Settings = () => {
     );
   };
 
+  const logoutHandler = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/auth/logout", {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+
+        },
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        Alert.alert("Success", "You have logged out successfully");
+        // Optionally, navigate to the login or home screen
+        navigation.navigate("Login");
+      } else {
+        Alert.alert("Error", data.message || "Logout failed");
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Error", "Something went wrong. Please try again.");
+    }
+  };
+
   const navigation = useNavigation(); // Hook, komponentin içinde tanımlandı.
   const [lastSeen, setLastSeen] = useState(true);
   const [discoveryVisibility, setDiscoveryVisibility] = useState(true);
   const [readReceipts, setReadReceipts] = useState(true);
   const [notifications, setNotifications] = useState(true);
   return (
+    <SafeAreaView  style={styles.container}>
     <View style={styles.container}>
       <View style={styles.header}>
         <Ionicons
@@ -144,25 +170,25 @@ const Settings = () => {
         </TouchableOpacity>
         {/* Logout */}
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.footerButton}>
-            <Text style={styles.logoutText}>Logout</Text>
-          </TouchableOpacity>
-          <Text style={styles.version}>Version: 1.0.0</Text>
-        </View>
+            <TouchableOpacity onPress={logoutHandler} style={styles.footerButton}>
+              <Text style={styles.logoutText}>Logout</Text>
+            </TouchableOpacity>
+            <Text style={styles.version}>Version: 1.0.0</Text>
+          </View>
       </ScrollView>
     </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.white },
   header: {
-    marginTop: 20,
+    backgroundColor: COLORS.primary,
+    color: COLORS.white,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     padding: 15,
-    backgroundColor: COLORS.primary,
   },
   headerTitle: { fontSize: 20, color: "#FFF", fontWeight: "bold" },
   content: { padding: 10 },

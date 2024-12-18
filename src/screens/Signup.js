@@ -8,43 +8,65 @@ import {
   Alert,
 } from "react-native";
 import theme, { COLORS } from "../constants/theme";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebase";
 import { Button } from "react-native-paper";
 
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState(""); // E-posta state'i
   const [password, setPassword] = useState(""); // Şifre state'i
+  const [username, setUsername] = useState(""); // Kullanıcı adı state'i
+  const [name, setName] = useState(""); // İsim state'i
 
-  // Kayıt ol butonuna basıldığında çalışan fonksiyon
-  const onHandleSignup = () => {
-    if (email !== "" && password !== "") {
-      createUserWithEmailAndPassword(auth, email, password) // Firebase ile yeni kullanıcı oluşturuluyor
-        .then(() => {
-          console.log("Kayıt Başarılı");
-          Alert.alert("Başarılı", "Hesabınız başarıyla oluşturuldu!");
-          navigation.navigate("ProfileSetup"); // Kayıt sonrası giriş sayfasına yönlendirme
-        })
-        .catch((err) => {
-          let errorMessage = "Bir hata oluştu. Lütfen tekrar deneyin.";
-          if (err.code === "auth/email-already-in-use") {
-            errorMessage = "Bu e-posta adresi zaten kullanılıyor.";
-          } else if (err.code === "auth/invalid-email") {
-            errorMessage = "Geçersiz e-posta adresi.";
-          } else if (err.code === "auth/weak-password") {
-            errorMessage =
-              "Şifreniz çok zayıf. Lütfen daha güçlü bir şifre girin.";
-          }
-          Alert.alert("Kayıt Hatası", errorMessage);
+  const onHandleSignup = async () => {
+    if (email !== "" && password !== "" && username !== "" && name !== "") {
+      try {
+        const response = await fetch("http://localhost:3000/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            username: username,
+            password: password,
+            image: "", 
+          }),
         });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Kayıt Başarılı:", result);
+          Alert.alert("Başarılı", "Hesabınız başarıyla oluşturuldu!");
+          navigation.navigate("ProfileSetup"); // Sonraki ekran
+        } else {
+          const errorMessage = await response.text();
+          console.log("Kayıt Hatası:", errorMessage);
+          Alert.alert("Hata", errorMessage || "Bir şeyler yanlış gitti.");
+        }
+      } catch (error) {
+        console.error("Request Error:", error);
+        Alert.alert("Hata", "Sunucuya bağlanılamadı. Lütfen tekrar deneyin.");
+      }
     } else {
-      Alert.alert("Hata", "E-posta ve şifre boş bırakılamaz");
+      Alert.alert("Hata", "Tüm alanları doldurmanız gerekiyor.");
     }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign up</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Name"
+        value={name}
+        onChangeText={setName}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+      />
       <TextInput
         style={styles.input}
         placeholder="E-posta"
@@ -111,11 +133,9 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
   },
-
   signupLink: {
     color: "#fff",
     fontSize: 16,
-
     textDecorationLine: "underline",
   },
 });

@@ -1,5 +1,4 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Intro from "@/screens/Intro";
 import Signup from "@/screens/Signup";
@@ -10,7 +9,6 @@ const Stack = createStackNavigator();
 
 const AuthNavigator = () => {
   return (
-    <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Intro"
         screenOptions={{ headerShown: false }}
@@ -21,7 +19,6 @@ const AuthNavigator = () => {
         <Stack.Screen name="ProfileSetup" component={ProfileSetupScreen} />
         <Stack.Screen name="ProfileReady" component={ProfileReadyScreen} />
       </Stack.Navigator>
-    </NavigationContainer>
   );
 };
 

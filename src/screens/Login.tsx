@@ -9,14 +9,17 @@ import {
 } from "react-native";
 import theme from "../constants/theme";
 import useStore from "@/store/useStore";
+import { API } from "@/http";
+
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState(""); // E-posta state'i
   const [password, setPassword] = useState(""); // Şifre state'i
   const { login } = useStore();
   // Giriş Yap  butonuna basıldığında çalışan fonksiyon
-  const onHandleLogin = () => {
+  const onHandleLogin = async() => {
     if (email !== "" && password !== "") {
+
       login();
     } else {
       Alert.alert("Hata", "E-posta ve şifre boş bırakılamaz");

@@ -6,14 +6,16 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native"; // Adding navigation.
 import theme, { COLORS } from "../constants/theme";
+import { CommonActions, useNavigation } from '@react-navigation/native';
 
 const ProfileReadyScreen = () => {
-  const navigation = useNavigation(); // Using useNavigation hook for navigation access.
+  const navigation = useNavigation();
 
-  const handleAccept = () => {
-    navigation.replace("BottomTabNavigator"); // Navigating to BottomTabNavigator.
+  console.info(navigation.getState());
+  
+  const handleAccept = () => {    
+    navigation.replace('AppStack'); 
   };
 
   return (
