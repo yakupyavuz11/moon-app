@@ -13,9 +13,9 @@ import "../i18n";
 import { useTranslation } from "react-i18next"; // i18next'i import et
 
 export default function Signup({ navigation }) {
-  const [email, setEmail] = useState(""); // E-posta state'i
-  const [password, setPassword] = useState(""); // Şifre state'i
-  const [username, setUsername] = useState(""); // Kullanıcı adı state'i
+  const [email, setEmail] = useState("test@gmail.com"); // E-posta state'i
+  const [password, setPassword] = useState("test123"); // Şifre state'i
+  const [username, setUsername] = useState("test"); // Kullanıcı adı state'i
   const { t } = useTranslation();
   const onHandleSignup = async () => {
     if (email !== "" && password !== "" && username !== "") {
@@ -27,13 +27,13 @@ export default function Signup({ navigation }) {
           },
           body: JSON.stringify({
             name: username, // Kullanıcı adı name olarak kullanılıyor
-            email: email,
-            username: username,
-            password: password,
-            image: "", // Varsayılan boş bırakılmış
+            email,
+            username,
+            password,
+            image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", // Varsayılan boş bırakılmış
           }),
         });
-  
+
         if (response.ok) {
           const result = await response.json();
           console.log("Kayıt Başarılı:", result);

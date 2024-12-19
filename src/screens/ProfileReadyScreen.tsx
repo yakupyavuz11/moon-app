@@ -15,7 +15,7 @@ const ProfileReadyScreen = () => {
   console.info(navigation.getState());
   
   const handleAccept = () => {    
-    navigation.replace('AppStack'); 
+    navigation.replace('Login'); 
   };
 
   return (
