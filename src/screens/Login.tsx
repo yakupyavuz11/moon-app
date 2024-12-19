@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import theme from "../constants/theme";
 import useStore from "@/store/useStore";
-import { API } from "@/http";
 import "../i18n";
 import { useTranslation } from "react-i18next";
 
