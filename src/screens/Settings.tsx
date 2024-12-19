@@ -56,7 +56,8 @@ const Settings = () => {
     try {
 
       logout();
-      const response = await fetch("http://localhost:3000/api/auth/logout", {
+      return;
+      const response = await fetch("http://localhost:3000/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

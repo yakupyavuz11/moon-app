@@ -41,7 +41,7 @@ export default function Login({ navigation }) {
           
           if (users.length > 0) {
             login(users[0]); // Store içindeki login işlemini çağır
-            Alert.alert("Başarılı", "Giriş başarılı!");
+            //Alert.alert("Başarılı", "Giriş başarılı!");
           } else {
             Alert.alert("Hata", "Geçersiz e-posta veya şifre.");
           }
