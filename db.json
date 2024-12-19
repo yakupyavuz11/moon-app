@@ -25,6 +25,14 @@
       "image": "https://example.com/avatar3.jpg"
     },
     {
+      "id": "0",
+      "username": "admin",
+      "password": "admin",
+      "name": "Mehmet",
+      "email": "admin@gmail.com",
+      "image": "https://example.com/avatar3.jpg"
+    },
+    {
       "id": "750b",
       "name": "Adds add",
       "email": "Aasdasagma.",

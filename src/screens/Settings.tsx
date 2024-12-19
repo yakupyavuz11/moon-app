@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  SafeAreaView,
   StyleSheet,
   Text,
   View,
@@ -11,8 +12,10 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/theme";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import useStore from "@/store/useStore";
+
 const Settings = () => {
+  const { logout } = useStore();
   const deleteAlert = () => {
     Alert.alert(
       "Delete Account",
@@ -51,6 +54,8 @@ const Settings = () => {
 
   const logoutHandler = async () => {
     try {
+
+      logout();
       const response = await fetch("http://localhost:3000/api/auth/logout", {
         method: "POST",
         headers: {
