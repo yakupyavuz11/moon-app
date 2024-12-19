@@ -27,7 +27,7 @@ const ChatScreen = () => {
   // Mesajları API'den çek
   const fetchMessages = async () => {
     try {
-      const response = await axios.get('/api/messages'); // Mesajları çekmek için API isteği
+      const response = await axios.get('http://localhost:3000/messages'); // Mesajları çekmek için API isteği
       const messagesFromAPI = response.data;
 
       // Mesajları GiftedChat formatına dönüştür
