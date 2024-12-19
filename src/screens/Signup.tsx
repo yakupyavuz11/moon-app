@@ -10,6 +10,8 @@ import {
 import theme, { COLORS } from "../constants/theme";
 import { Button } from "react-native-paper";
 import "../i18n";
+import { useTranslation } from "react-i18next"; // i18next'i import et
+
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState(""); // E-posta state'i
   const [password, setPassword] = useState(""); // Şifre state'i
@@ -76,14 +78,13 @@ export default function Signup({ navigation }) {
       />
       <Button style={styles.button} onPress={onHandleSignup}>
         <Text style={{ color: COLORS.white, fontSize: 18 }}>
-          {" "}
-          {t("sign_up")}
+          {t("signup_button")}
         </Text>
       </Button>
       <View style={styles.loginContainer}>
         <Text style={styles.signupText}>{t("already_have_account")}</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.signupLink}>{t(login_title)}</Text>
+          <Text style={styles.signupLink}>{t("login_title")}</Text>
         </TouchableOpacity>
       </View>
     </View>
