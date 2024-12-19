@@ -14,8 +14,8 @@ import "../i18n";
 import { useTranslation } from "react-i18next";
 
 export default function Login({ navigation }) {
-  const [email, setEmail] = useState(""); // E-posta state'i
-  const [password, setPassword] = useState(""); // Şifre state'i
+  const [email, setEmail] = useState("admin@gmail.com"); // E-posta state'i
+  const [password, setPassword] = useState("admin"); // Şifre state'i
   const { login } = useStore();
   const { t } = useTranslation();
 
@@ -43,7 +43,6 @@ export default function Login({ navigation }) {
           if (users.length > 0) {
             login(users[0]); // Store içindeki login işlemini çağır
             Alert.alert("Başarılı", "Giriş başarılı!");
-            navigation.navigate("BottomTabNavigator"); // Giriş sonrası yönlendirme
           } else {
             Alert.alert("Hata", "Geçersiz e-posta veya şifre.");
           }
