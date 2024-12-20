@@ -11,6 +11,7 @@ import theme, { COLORS } from "../constants/theme";
 import { Button } from "react-native-paper";
 import "../i18n";
 import { useTranslation } from "react-i18next"; // i18next'i import et
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState("test@gmail.com"); // E-posta state'i
@@ -30,7 +31,8 @@ export default function Signup({ navigation }) {
             email,
             username,
             password,
-            image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", // Varsayılan boş bırakılmış
+            image:
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", // Varsayılan boş bırakılmış
           }),
         });
 
@@ -52,9 +54,9 @@ export default function Signup({ navigation }) {
       Alert.alert("Hata", "Tüm alanları doldurmanız gerekiyor.");
     }
   };
-  
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}> {t("signup_title")}</Text>
       <TextInput
         style={styles.input}
@@ -87,18 +89,19 @@ export default function Signup({ navigation }) {
           <Text style={styles.signupLink}>{t("login_title")}</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     padding: 20,
     backgroundColor: theme.COLORS.primary,
+
   },
   title: {
+    marginTop: 100,
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",

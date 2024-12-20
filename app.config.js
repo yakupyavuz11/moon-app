@@ -1,8 +1,8 @@
 import "dotenv/config";
 
 export default {
-  name: "Moon Chat",
-  slug: "moon-chat",
+  name: "purpy",
+  slug: "purpy",
   version: "1.0.0",
   orientation: "portrait",
   icon: "./src/assets/icon.png",
@@ -11,7 +11,7 @@ export default {
   splash: {
     image: "./src/assets/splash-icon.png",
     resizeMode: "contain",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#6b53ff",
   },
   ios: {
     supportsTablet: true,

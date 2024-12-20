@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "moon-app",
-    "slug": "moon-app",
+    "name": "purpy",
+    "slug": "purpy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/app_icon.png",
@@ -10,15 +10,15 @@
     "splash": {
       "image": "./src/assets/app_icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#6b53ff"
+      "backgroundColor": "#6A5AE0"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/app-icon.png",
-        "backgroundColor": "#6b53ff"
+        "foregroundImage": "./src/assets/app_icon.png",
+        "backgroundColor": "#6A5AE0"
       }
     },
     "web": {
