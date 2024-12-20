@@ -7,35 +7,31 @@ import {
   StatusBar,
 } from "react-native";
 import theme, { COLORS } from "../constants/theme";
-import { CommonActions, useNavigation } from '@react-navigation/native';
-
+import { CommonActions, useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
+import "../i18n";
 const ProfileReadyScreen = () => {
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   console.info(navigation.getState());
-  
-  const handleAccept = () => {    
-    navigation.replace('Login'); 
+
+  const handleAccept = () => {
+    navigation.replace("Login");
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Before the Chat</Text>
+      <Text style={styles.text}>{t("welcome_text")}</Text>
+      <Text style={styles.text}>{t("welcome_text_2")}</Text>
       <Text style={styles.text}>
-        Welcome! Even though you remain anonymous, we would like to remind you
-        that you are responsible for the messages you send to other users.
-      </Text>
-      <Text style={styles.text}>
-        Here, you should chat with kindness and respect, regardless of race,
-        nationality, ethnicity, gender, gender identity, or sexual preference.
-      </Text>
-      <Text style={styles.text}>
-        By registering for the Anonymous Chat app, you accept our{" "}
-        <Text style={styles.link}>Terms of Use</Text> and{" "}
-        <Text style={styles.link}>Privacy Policy</Text>.
+        {t("welcome_text_3")}
+        <Text style={styles.link}>{t("terms_and_conditions")}</Text> and{" "}
+        <Text style={styles.link}>{t("privacy_policy")}</Text>.
       </Text>
       <TouchableOpacity style={styles.button} onPress={handleAccept}>
-        <Text style={styles.buttonText}>Accept</Text>
+        <Text style={styles.buttonText}>{t("accept")}</Text>
       </TouchableOpacity>
     </View>
   );

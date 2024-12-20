@@ -12,10 +12,10 @@ import {
 import { Searchbar } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Modalize } from "react-native-modalize";
-
 import Product from "@/components/Product";
 import users from "@/data/users";
-
+import { useTranslation } from "react-i18next";
+import "../i18n";
 const numColumns = 2;
 const screen_width = Dimensions.get("window").width;
 const column_width = screen_width / numColumns;
@@ -26,7 +26,7 @@ export default function Discovery() {
   const [selectedGender, setSelectedGender] = useState("Tümü"); // Cinsiyet seçimi
   const bottomSheetRef = useRef(null); // Filtreleme butonu için ref
   const genderSheetRef = useRef(null); // Cinsiyet seçim modalı için ref
-
+  const t = useTranslation();
   const onOpenBottomSheet = () => {
     bottomSheetRef.current?.open();
   };
@@ -45,7 +45,14 @@ export default function Discovery() {
       <SafeAreaView style={styles.safeArea}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={{ color: "#f7f7f7", fontSize: 24, fontWeight: "bold", marginTop: 24}}>
+          <Text
+            style={{
+              color: "#f7f7f7",
+              fontSize: 24,
+              fontWeight: "bold",
+              marginTop: 24,
+            }}
+          >
             Discovery
           </Text>
         </View>
@@ -166,7 +173,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop:-25,
+    marginTop: -25,
     backgroundColor: "#6A5AE0",
     paddingVertical: 50,
     paddingHorizontal: 30,

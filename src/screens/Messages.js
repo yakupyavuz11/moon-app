@@ -12,7 +12,8 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "@/constants/theme";
-
+import { useTranslation } from "react-i18next";
+import "../i18n";
 const data = {
   contacts: [
     {
@@ -68,7 +69,7 @@ const data = {
 
 const Messages = () => {
   const navigation = useNavigation();
-
+  const t = useTranslation();
   const activeContacts = data.contacts.filter((contact) =>
     data.messages.some((message) => message.name.includes(contact.name))
   );
@@ -92,7 +93,7 @@ const Messages = () => {
       ))}
     </ScrollView>
   );
-  
+
   const renderMessages = ({ item }) => (
     <TouchableOpacity
       style={styles.messageContainer}
@@ -116,9 +117,9 @@ const Messages = () => {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.header}>
           <Text style={{ color: "#f7f7f7", fontSize: 24, fontWeight: "bold" }}>
-            Messages
+            {t("messages")}
           </Text>
-          <Text style={styles.title}>Active Users</Text>
+          <Text style={styles.title}>{t("active_users")}</Text>
           {renderContacts()}
         </View>
 
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
   contactName: {
     color: "#fff",
     marginTop: 5,
-    fontSize:16
+    fontSize: 16,
   },
   listContainer: {
     marginTop: 20,
@@ -186,7 +187,7 @@ const styles = StyleSheet.create({
   },
   messageName: {
     fontWeight: "bold",
-    fontSize:16
+    fontSize: 16,
   },
   messageText: {
     color: "#555",

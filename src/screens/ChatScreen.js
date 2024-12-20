@@ -15,6 +15,7 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "@/constants/theme";
 import axios from "axios"; // API'ye istek göndermek için axios
+import { Ionicons } from "@expo/vector-icons";
 
 const ChatScreen = () => {
   const route = useRoute();
@@ -22,16 +23,17 @@ const ChatScreen = () => {
 
   const [messages, setMessages] = useState([]);
 
-  const { name = "User", image = "https://placekitten.com/140/140" } = route.params || {};
+  const { name = "User", image = "https://placekitten.com/140/140" } =
+    route.params || {};
 
   // Mesajları API'den çek
   const fetchMessages = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/messages'); // Mesajları çekmek için API isteği
+      const response = await axios.get("http://localhost:3000/messages"); // Mesajları çekmek için API isteği
       const messagesFromAPI = response.data;
 
       // Mesajları GiftedChat formatına dönüştür
-      const formattedMessages = messagesFromAPI.map(msg => ({
+      const formattedMessages = messagesFromAPI.map((msg) => ({
         _id: msg.id,
         text: msg.message,
         createdAt: new Date(msg.created_at),
@@ -44,7 +46,7 @@ const ChatScreen = () => {
 
       setMessages(formattedMessages); // Mesajları state'e aktar
     } catch (error) {
-      console.error('Mesajları çekerken hata oluştu:', error);
+      console.error("Mesajları çekerken hata oluştu:", error);
     }
   };
 
@@ -53,7 +55,9 @@ const ChatScreen = () => {
   }, []);
 
   const onSend = (newMessages = []) => {
-    setMessages((previousMessages) => GiftedChat.append(previousMessages, newMessages));
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, newMessages)
+    );
   };
 
   const renderBubble = (props) => (
@@ -80,17 +84,26 @@ const ChatScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+      >
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.container}>
             {/* Profil Bar */}
             <View style={styles.profileBar}>
-              <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-                <Text style={styles.backText}>←</Text>
+              <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                style={styles.backButton}
+              >
+                <Ionicons name="arrow-back" size={24} color="#fff" />
               </TouchableOpacity>
 
               {/* Profil Resmi Tıklanabilir Hale Getirildi */}
-              <TouchableOpacity onPress={() => navigation.navigate("UserProfile")} style={{ flexDirection: "row", alignItems: "center" }}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("UserProfile")}
+                style={{ flexDirection: "row", alignItems: "center" }}
+              >
                 <Image source={{ uri: image }} style={styles.profileImage} />
                 <Text style={styles.profileName}>{name}</Text>
               </TouchableOpacity>
@@ -102,7 +115,7 @@ const ChatScreen = () => {
                 messages={messages}
                 onSend={(messages) => onSend(messages)}
                 user={{ _id: 1 }}
-                placeholder="Mesaj yaz..."
+                placeholder={t("message_writer")}
                 renderBubble={renderBubble}
                 textInputStyle={styles.textInput}
                 messagesContainerStyle={styles.messagesContainer}
