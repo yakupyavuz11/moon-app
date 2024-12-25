@@ -15,17 +15,18 @@ import axios from "axios";
 
 import { COLORS } from "@/constants/theme";
 
-export default function UserProfile() {
+const UserProfile = ({ route }) => {
   const navigation = useNavigation();
   const bottomSheetRef = useRef(null);
   const [userData, setUserData] = useState(null); // Kullanıcı verileri
   const [loading, setLoading] = useState(true); // Yüklenme durumu
+  const { userId } = route.params; // Parametreyi al
 
   // API'den kullanıcı bilgilerini çekme
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("https://api.example.com/user/1"); // API endpoint
+        const response = await axios.get(`https://api.example.com/user/${userId}`); // API endpoint
         setUserData(response.data);
         setLoading(false);
       } catch (error) {
@@ -35,7 +36,7 @@ export default function UserProfile() {
     };
 
     fetchUserData();
-  }, []);
+  }, [userId]);
 
   const handleSheetChanges = useCallback((index) => {
     console.log("handleSheetChanges", index);
@@ -152,7 +153,7 @@ export default function UserProfile() {
       </BottomSheet>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -266,3 +267,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+export default UserProfile;

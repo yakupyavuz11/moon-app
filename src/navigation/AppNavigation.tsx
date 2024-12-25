@@ -6,12 +6,12 @@ import Signup from "@/screens/Signup";
 import ProfileReadyScreen from "@/screens/ProfileReadyScreen";
 import ProfileSetupScreen from "@/screens/ProfileSetupScreen";
 import Chat from "@/screens/ChatScreen";
-import UserProfile from "@/screens/UserProfile";
 import Settings from "@/screens/Settings";
 import EditProfile from "@/screens/EditProfile";
 import ChangeEmail from "@/screens/ChangeEmail";
 import ChangePassword from "@/screens/ChangePassword";
 import Language from "@/screens/Language";
+import UserProfile from "@/screens/UserProfile";
 import ForgetPasswordScreen from "@/screens/ForgetPassword";
 const Stack = createStackNavigator();
 
