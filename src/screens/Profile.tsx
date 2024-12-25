@@ -12,10 +12,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import theme, { COLORS } from "../constants/theme";
 import { StatusBar } from "expo-status-bar";
-
+import { useTranslation } from "react-i18next";
+import "../i18n";
 export default function Account() {
   const navigation = useNavigation(); // Hook'u kullanıyoruz
-
+  const { t } = useTranslation(); 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -48,9 +49,8 @@ export default function Account() {
           </View>
         </View>
 
-        {/* About Section */}
         <View style={styles.aboutSection}>
-          <Text style={styles.sectionTitle}>About</Text>
+          <Text style={styles.sectionTitle}>{t('about')}</Text>
           <Text style={styles.aboutText}>
             Software, Technology, Entrepreneurship Enthusiast.
           </Text>

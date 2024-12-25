@@ -8,26 +8,33 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/theme";
 import { useNavigation } from "@react-navigation/native";
 import useStore from "@/store/useStore";
+import { useTranslation } from "react-i18next"; // Removed import of t from props
+import "../i18n";
+
+const { width, height } = Dimensions.get("window");
 
 const Settings = () => {
   const { logout } = useStore();
+  const { t } = useTranslation(); // Correctly use useTranslation hook
+
   const deleteAlert = () => {
     Alert.alert(
-      "Delete Account",
-      "Are you sure you want to delete your account?",
+      t("delete_account_alert_title"), // Dynamically use text from JSON
+      t("delete_account_alert_message"),
       [
         {
-          text: "Cancel",
+          text: t("delete_account_alert_cancel"),
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
         {
-          text: "OK",
+          text: t("delete_account_alert_ok"),
           onPress: () => console.log("OK Pressed"),
         },
       ]
@@ -36,16 +43,16 @@ const Settings = () => {
 
   const freezemyaccount = () => {
     Alert.alert(
-      "Freeze Account",
-      "Are you sure you want to freeze your account?",
+      t("freeze_account_alert_title"),
+      t("freeze_account_alert_message"),
       [
         {
-          text: "Cancel",
+          text: t("freeze_account_alert_cancel"),
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
         {
-          text: "OK",
+          text: t("freeze_account_alert_ok"),
           onPress: () => console.log("OK Pressed"),
         },
       ]
@@ -54,7 +61,6 @@ const Settings = () => {
 
   const logoutHandler = async () => {
     try {
-
       logout();
       return;
       const response = await fetch("http://localhost:3000/logout", {
@@ -66,23 +72,23 @@ const Settings = () => {
 
       const data = await response.json();
       if (response.ok) {
-        Alert.alert("Success", "You have logged out successfully");
-        // Optionally, navigate to the login or home screen
+        Alert.alert(t("success_title"), t("success_message"));
         navigation.navigate("Login");
       } else {
-        Alert.alert("Error", data.message || "Logout failed");
+        Alert.alert(t("error_title"), data.message || t("error_message"));
       }
     } catch (error) {
       console.error(error);
-      Alert.alert("Error", "Something went wrong. Please try again.");
+      Alert.alert(t("error_title"), t("error_message"));
     }
   };
 
-  const navigation = useNavigation(); // Hook, komponentin içinde tanımlandı.
+  const navigation = useNavigation();
   const [lastSeen, setLastSeen] = useState(true);
   const [discoveryVisibility, setDiscoveryVisibility] = useState(true);
   const [readReceipts, setReadReceipts] = useState(true);
   const [notifications, setNotifications] = useState(true);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -93,34 +99,34 @@ const Settings = () => {
             size={24}
             color="white"
           />
-          <Text style={styles.headerTitle}>Settings</Text>
+          <Text style={styles.headerTitle}>{t("settings_title")}</Text>
           <Ionicons name="moon" size={24} color="white" />
         </View>
 
         <ScrollView contentContainerStyle={styles.content}>
           <View style={styles.settingItem}>
-            <Text style={styles.text}>Last Seen</Text>
+            <Text style={styles.text}>{t("last_seen")}</Text>
             <Switch
               value={lastSeen}
               onValueChange={() => setLastSeen(!lastSeen)}
             />
           </View>
           <View style={styles.settingItem}>
-            <Text style={styles.text}>Show My Profile in Discovery</Text>
+            <Text style={styles.text}>{t("show_profile_in_discovery")}</Text>
             <Switch
               value={discoveryVisibility}
               onValueChange={() => setDiscoveryVisibility(!discoveryVisibility)}
             />
           </View>
           <View style={styles.settingItem}>
-            <Text style={styles.text}>Read Receipts</Text>
+            <Text style={styles.text}>{t("read_receipts")}</Text>
             <Switch
               value={readReceipts}
               onValueChange={() => setReadReceipts(!readReceipts)}
             />
           </View>
           <View style={styles.settingItem}>
-            <Text style={styles.text}>Notifications</Text>
+            <Text style={styles.text}>{t("notifications")}</Text>
             <Switch
               value={notifications}
               onValueChange={() => setNotifications(!notifications)}
@@ -132,7 +138,7 @@ const Settings = () => {
             onPress={() => navigation.navigate("Language")}
             style={styles.settingItem}
           >
-            <Text style={styles.text}>Language</Text>
+            <Text style={styles.text}>{t("language")}</Text>
             <Ionicons name="chevron-forward" size={20} color="#888" />
           </TouchableOpacity>
 
@@ -140,7 +146,7 @@ const Settings = () => {
             onPress={() => navigation.navigate("ChangePassword")}
             style={styles.settingItem}
           >
-            <Text style={styles.text}>Change Password</Text>
+            <Text style={styles.text}>{t("change_password")}</Text>
             <Ionicons name="chevron-forward" size={20} color="#888" />
           </TouchableOpacity>
 
@@ -148,21 +154,21 @@ const Settings = () => {
             onPress={() => navigation.navigate("ChangeEmail")}
             style={styles.settingItem}
           >
-            <Text style={styles.text}>Change Email</Text>
+            <Text style={styles.text}>{t("change_email")}</Text>
             <Ionicons name="chevron-forward" size={20} color="#888" />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => deleteAlert()}
             style={styles.settingItem}
           >
-            <Text style={styles.text}>Delete Account</Text>
+            <Text style={styles.text}>{t("delete_account")}</Text>
             <Ionicons name="chevron-forward" size={20} color="#888" />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => freezemyaccount()}
             style={styles.settingItem}
           >
-            <Text style={styles.text}>Freeze Account</Text>
+            <Text style={styles.text}>{t("freeze_account")}</Text>
             <Ionicons name="chevron-forward" size={20} color="#888" />
           </TouchableOpacity>
 
@@ -170,18 +176,19 @@ const Settings = () => {
             onPress={() => navigation.navigate("ChangeEmail")}
             style={styles.settingItem}
           >
-            <Text style={styles.text}>Help</Text>
+            <Text style={styles.text}>{t("help")}</Text>
             <Ionicons name="chevron-forward" size={20} color="#888" />
           </TouchableOpacity>
+
           {/* Logout */}
           <View style={styles.footer}>
             <TouchableOpacity
               onPress={logoutHandler}
               style={styles.footerButton}
             >
-              <Text style={styles.logoutText}>Logout</Text>
+              <Text style={styles.logoutText}>{t("logout")}</Text>
             </TouchableOpacity>
-            <Text style={styles.version}>Version: 1.0.0</Text>
+            <Text style={styles.version}>{t("version")}</Text>
           </View>
         </ScrollView>
       </View>
@@ -191,13 +198,7 @@ const Settings = () => {
 
 const styles = StyleSheet.create({
   container: {
-
-
-
-    flex:1
-
-
-
+    flex: 1,
   },
   header: {
     backgroundColor: COLORS.primary,
@@ -205,31 +206,50 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 15,
+    padding: width * 0.05,
   },
-  headerTitle: { fontSize: 20, color: "#FFF", fontWeight: "bold" },
-  content: { padding: 10 },
+  headerTitle: {
+    fontSize: width * 0.05,
+    color: "#FFF",
+    fontWeight: "bold",
+  },
+  content: {
+    padding: width * 0.05,
+  },
   settingItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 15,
+    paddingVertical: height * 0.02,
     borderBottomWidth: 0.5,
     borderBottomColor: "#333",
   },
-  text: { color: COLORS.black, fontSize: 16 },
-  footer: { marginTop: 20, alignItems: "center" },
+  text: {
+    color: COLORS.black,
+    fontSize: width * 0.04,
+  },
+  footer: {
+    marginTop: height * 0.05,
+    alignItems: "center",
+  },
   footerButton: {
-    width: 150,
-    marginVertical: 20,
+    marginTop: -30,
+    width: width * 0.4,
+    marginVertical: height * 0.02,
     backgroundColor: COLORS.primary,
-    padding: 10,
+    padding: height * 0.015,
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
   },
-  logoutText: { color: COLORS.white, fontSize: 16 },
-  version: { color: "#777", fontSize: 14 },
+  logoutText: {
+    color: COLORS.white,
+    fontSize: width * 0.05,
+  },
+  version: {
+    color: "#777",
+    fontSize: width * 0.04,
+  },
 });
 
 export default Settings;

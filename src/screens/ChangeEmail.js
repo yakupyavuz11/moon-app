@@ -7,9 +7,11 @@ import {
   StyleSheet,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native"; // Navigation Hook'u ekleniyor.
+import { useTranslation } from "react-i18next"; // i18n Hook'u ekleniyor.
 
 export default function ChangeEmail() {
   const navigation = useNavigation(); // Navigation Hook'u kullanılıyor.
+  const { t } = useTranslation(); // i18n Hook'u kullanılıyor.
 
   return (
     <View style={styles.container}>
@@ -18,9 +20,9 @@ export default function ChangeEmail() {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.backText}>{"<"}</Text>
         </TouchableOpacity>
-        <Text style={styles.title}>Change Email</Text>
+        <Text style={styles.title}>{t("change_email_title")}</Text>
         <TouchableOpacity>
-          <Text style={styles.saveText}>Save</Text>
+          <Text style={styles.saveText}>{t("save")}</Text>
         </TouchableOpacity>
       </View>
 
@@ -28,17 +30,17 @@ export default function ChangeEmail() {
       <View style={styles.form}>
         <TextInput
           style={styles.input}
-          placeholder="E-posta"
+          placeholder={t("email_placeholder")} // Placeholder for email
           placeholderTextColor="#888"
         />
         <TextInput
           style={styles.input}
-          placeholder="Password"
+          placeholder={t("password_placeholder")} // Placeholder for password
           placeholderTextColor="#888"
           secureTextEntry={true}
         />
         <Text style={styles.infoText}>
-          You can change your email by entering your current password.
+          {t("change_email_info")} {/* Information text */}
         </Text>
       </View>
     </View>
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   header: {
-          backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.primary,
     color: COLORS.white,
     flexDirection: "row",
     justifyContent: "space-between",

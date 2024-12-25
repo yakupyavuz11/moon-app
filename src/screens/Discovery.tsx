@@ -46,7 +46,7 @@ const Discovery = () => {
         </View>
         <View style={styles.header}>
           <Searchbar
-            placeholder={t("search")} // "Search" metni JSON'dan alınır
+            placeholder={t("search")} 
             onChangeText={setSearchQuery}
             value={searchQuery}
             style={styles.searchbar}

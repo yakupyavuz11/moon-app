@@ -87,5 +87,13 @@
   "old_password_placeholder": "पुराना पासवर्ड",
   "new_password_placeholder": "नया पासवर्ड",
   "info_text_password_change": "आप अपना पासवर्ड अपने वर्तमान पासवर्ड को दर्ज करके बदल सकते हैं।",
-  "dont_have_an_account": "Don't have an account?"
+  "dont_have_an_account": "क्या आपके पास खाता नहीं है?",
+  "permission_denied_title": "अनुमति अस्वीकृत",
+  "permission_denied_message": "फोटो अपलोड करने के लिए आपको अनुमति देनी होगी।",
+  "error_title": "त्रुटि",
+  "error_message": "कृपया सभी फ़ील्ड भरें।",
+  "success_title": "सफलता",
+  "success_message": "आपका प्रोफ़ाइल सफलतापूर्वक सहेजा गया!",
+  "edit_profile_title": "प्रोफ़ाइल संपादित करें",
+  "username_placeholder": "उपयोगकर्ता नाम"
 }

@@ -87,7 +87,13 @@
   "old_password_placeholder": "Altes Passwort",
   "new_password_placeholder": "Neues Passwort",
   "info_text_password_change": "Du kannst dein Passwort ändern, indem du dein aktuelles Passwort eingibst.",
-  "dont_have_an_account": "Don't have an account?"
-
-
+  "dont_have_an_account": "Sie haben noch kein Konto?",
+  "permission_denied_title": "Zugriff verweigert",
+  "permission_denied_message": "Sie müssen die Berechtigung erteilen, um ein Foto hochzuladen.",
+  "error_title": "Fehler",
+  "error_message": "Bitte füllen Sie alle Felder aus.",
+  "success_title": "Erfolg",
+  "success_message": "Ihr Profil wurde erfolgreich gespeichert!",
+  "edit_profile_title": "Profil bearbeiten",
+  "username_placeholder": "Benutzername"
 }

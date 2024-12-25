@@ -1,21 +1,17 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Alert,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { StyleSheet, Text, View, Alert, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons"; // Vector Icon için
+import { useTranslation } from "react-i18next"; // Import i18next hook for translations
 
 const Language = ({ navigation }) => {
+  const { t, i18n } = useTranslation(); // Use translation hook and i18n instance
   const [language, setLanguage] = useState("Türkçe");
 
   const handleLanguageChange = (lang) => {
     setLanguage(lang);
-    Alert.alert(`${lang} seçildi`);
+    i18n.changeLanguage(lang.toLowerCase()); 
+    Alert.alert(`${lang} seçildi`); 
   };
 
   return (
@@ -25,16 +21,14 @@ const Language = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Dil Seçimi</Text>
+        <Text style={styles.headerTitle}>{t('language')}</Text> {/* Dynamic title */}
       </View>
 
       {/* Dil Seçimi Ekranı */}
       <View style={styles.container}>
-        <Text style={{ fontWeight: "bold" }}>Dil Seçimi</Text>
-        <Text style={{ marginBottom: 10 }}>
-          Seçtiğiniz dili başarıyla değiştirin.
-        </Text>
-        <Text style={{ marginBottom: 20 }}>Şu anki dil: {language}</Text>
+        <Text style={{ fontWeight: "bold" }}>{t('language')}</Text> {/* Dynamic text */}
+        <Text style={{ marginBottom: 10 }}>{t('select_language')}</Text> {/* Dynamic text */}
+        <Text style={{ marginBottom: 20 }}>{t('current_language')} {language}</Text>
         <View style={styles.buttonContainer}>
           <View style={styles.buttonWrapper}>
             <TouchableOpacity onPress={() => handleLanguageChange("Türkçe")}>
@@ -129,15 +123,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#f7f7f7",
   },
   buttonContainer: {
-    flexDirection: "row", // Yatay düzen
-    flexWrap: "wrap", // Ekranı taşan öğeleri bir alt satıra yerleştirir
-    justifyContent: "center", // Yatayda ortalar
-    alignItems: "center", // Dikeyde ortalar
-    width: "80%", // Konteyner genişliği
+    flexDirection: "row", 
+    flexWrap: "wrap", 
+    justifyContent: "center",
+    alignItems: "center", 
+    width: "80%",
   },
   buttonWrapper: {
-    margin: 10, // Butonların etrafındaki boşluk
-    alignItems: "center", // Metni ve görselleri ortalar
+    margin: 10, 
+    alignItems: "center", 
   },
   flag: {
     width: 60,

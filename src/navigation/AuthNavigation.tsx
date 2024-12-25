@@ -7,6 +7,7 @@ import ProfileSetupScreen from "@/screens/ProfileSetupScreen";
 import Login from "@/screens/Login";
 import BottomTabNavigator from "./BottomTabNavigator";
 import ForgetPasswordScreen from "@/screens/ForgetPassword";
+import Settings from "@/screens/Settings";
 const Stack = createStackNavigator();
 
 const AuthNavigator = () => {
@@ -22,6 +23,8 @@ const AuthNavigator = () => {
       <Stack.Screen name="ProfileSetup" component={ProfileSetupScreen} />
       <Stack.Screen name="ProfileReady" component={ProfileReadyScreen} />
       <Stack.Screen name="Forget" component={ForgetPasswordScreen} />
+    <Stack.Screen name="Settings" component={Settings} />
+   
     </Stack.Navigator>
   );
 };

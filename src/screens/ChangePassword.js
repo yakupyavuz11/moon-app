@@ -7,9 +7,11 @@ import {
   StyleSheet,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native"; // Navigation Hook'u ekleniyor.
+import { useTranslation } from "react-i18next"; // i18n Hook'u ekleniyor.
 
 export default function ChangePassword() {
   const navigation = useNavigation(); // Navigation Hook'u kullanılıyor.
+  const { t } = useTranslation(); // i18n Hook'u kullanılıyor.
 
   return (
     <View style={styles.container}>
@@ -18,9 +20,9 @@ export default function ChangePassword() {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.backText}>{"<"}</Text>
         </TouchableOpacity>
-        <Text style={styles.title}>Change Password</Text>
+        <Text style={styles.title}>{t("change_password_title")}</Text> {/* Dynamically translated title */}
         <TouchableOpacity>
-          <Text style={styles.saveText}>Save</Text>
+          <Text style={styles.saveText}>{t("save")}</Text> {/* Dynamically translated save text */}
         </TouchableOpacity>
       </View>
 
@@ -28,17 +30,18 @@ export default function ChangePassword() {
       <View style={styles.form}>
         <TextInput
           style={styles.input}
-          placeholder="Old Password"
+          placeholder={t("old_password_placeholder")}  
           placeholderTextColor="#888"
         />
         <TextInput
           style={styles.input}
-          placeholder="NewPassword"
+          placeholder={t("new_password_placeholder")} 
           placeholderTextColor="#888"
           secureTextEntry={true}
         />
         <Text style={styles.infoText}>
-        You can change your password by entering your current password.        </Text>
+          {t("change_password_info")} 
+        </Text>
       </View>
     </View>
   );
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   header: {
-          backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.primary,
     color: COLORS.white,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   input: {
-    backgroundColor:"#b4acf2",
+    backgroundColor: "#b4acf2",
     color: COLORS.white,
     borderRadius: 8,
     padding: 10,

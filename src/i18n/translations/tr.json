@@ -87,5 +87,14 @@
   "old_password_placeholder": "Eski Şifre",
   "new_password_placeholder": "Yeni Şifre",
   "info_text_password_change": "Şu anki şifrenizi girerek şifrenizi değiştirebilirsiniz.",
-  "dont_have_an_account": "Don't have an account?"
+  "dont_have_an_account": "Hesabınız Yok mu?",
+  "permission_denied_title": "İzin Reddedildi",
+  "permission_denied_message": "Fotoğraf yüklemek için izin vermelisiniz.",
+  "error_title": "Hata",
+  "error_message": "Lütfen tüm alanları doldurun.",
+  "success_title": "Başarı",
+  "success_message": "Profiliniz başarıyla kaydedildi!",
+  "edit_profile_title": "Profili Düzenle",
+  "username_placeholder": "Kullanıcı Adı",
+  "about_placeholder": "Kendiniz Hakkında"
 }

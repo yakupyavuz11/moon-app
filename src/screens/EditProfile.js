@@ -16,9 +16,11 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { COLORS } from "../constants/theme";
 import { useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons"; // Back arrow icon
+import { Ionicons } from "@expo/vector-icons"; 
+import { useTranslation } from "react-i18next"; 
 
 const EditProfile = () => {
+  const { t } = useTranslation(); 
   const [profileImage, setProfileImage] = useState(null);
   const [username, setUsername] = useState("");
   const [about, setAbout] = useState("");
@@ -30,8 +32,8 @@ const EditProfile = () => {
       await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permissionResult.granted === false) {
       Alert.alert(
-        "Permission Denied",
-        "You need to grant permission to upload a photo."
+        t("permission_denied_title"),
+        t("permission_denied_message")
       );
       return;
     }
@@ -50,21 +52,20 @@ const EditProfile = () => {
 
   const handleSubmit = () => {
     if (!username || !about) {
-      Alert.alert("Error", "Please fill in all fields.");
+      Alert.alert(t("error_title"), t("error_message"));
     } else {
-      Alert.alert("Success", "Your profile has been saved!");
+      Alert.alert(t("success_title"), t("success_message"));
     }
   };
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor={COLORS.primary} />{" "}
-      {/* Status Bar */}
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.primary} />
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Edit Profile</Text>
+        <Text style={styles.headerTitle}>{t("edit_profile_title")}</Text>
       </View>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -76,20 +77,20 @@ const EditProfile = () => {
               <Image source={{ uri: profileImage }} style={styles.image} />
             ) : (
               <View style={styles.imagePlaceholder}>
-                <Text style={styles.imageText}>Upload Photo</Text>
+                <Text style={styles.imageText}>{t("upload_photo")}</Text>
               </View>
             )}
           </TouchableOpacity>
 
           <TextInput
-            placeholder="Username"
+            placeholder={t("username_placeholder")}
             style={styles.input}
             value={username}
             onChangeText={setUsername}
           />
 
           <TextInput
-            placeholder="About Yourself"
+            placeholder={t("about_placeholder")}
             style={[styles.input, styles.textArea]}
             multiline
             numberOfLines={4}
@@ -98,7 +99,7 @@ const EditProfile = () => {
           />
 
           <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>Save</Text>
+            <Text style={styles.buttonText}>{t("save_button_text")}</Text>
           </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
