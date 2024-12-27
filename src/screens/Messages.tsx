@@ -69,7 +69,7 @@ const data = {
 
 const Messages = () => {
   const navigation = useNavigation();
-  const t = useTranslation();
+  const { t } = useTranslation();
   const activeContacts = data.contacts.filter((contact) =>
     data.messages.some((message) => message.name.includes(contact.name))
   );

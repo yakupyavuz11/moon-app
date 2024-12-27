@@ -25,7 +25,8 @@ export default {
   web: {
     favicon: "./src/assets/favicon.png",
   },
-  extra: {    apiKey: process.env.API_KEY,
+  extra: {
+    apiKey: process.env.API_KEY,
     authDomain: process.env.AUTH_DOMAIN,
     databaseURL: process.env.DATABASE_URL,
     projectId: process.env.PROJECT_ID,
@@ -33,5 +34,4 @@ export default {
     messagingSenderId: process.env.MESSAGING_SENDER_ID,
     appId: process.env.APP_ID,
   },
-  
 };

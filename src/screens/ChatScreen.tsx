@@ -16,10 +16,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "@/constants/theme";
 import axios from "axios"; // API'ye istek göndermek için axios
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 const ChatScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   const [messages, setMessages] = useState([]);
 
