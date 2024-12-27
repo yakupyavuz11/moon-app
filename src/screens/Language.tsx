@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"; // Import i18next hook for trans
 
 const Language = ({ navigation }) => {
   const { t, i18n } = useTranslation(); // Use translation hook and i18n instance
-  const [language, setLanguage] = useState("Türkçe");
+  const [language, setLanguage] = useState("tr");
 
   const handleLanguageChange = (lang) => {
     setLanguage(lang);
@@ -31,7 +31,7 @@ const Language = ({ navigation }) => {
         <Text style={{ marginBottom: 20 }}>{t('current_language')} {language}</Text>
         <View style={styles.buttonContainer}>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity onPress={() => handleLanguageChange("Türkçe")}>
+            <TouchableOpacity onPress={() => handleLanguageChange("tr")}>
               <Image
                 source={require("../assets/images/turkey.png")}
                 style={styles.flag}
@@ -39,7 +39,7 @@ const Language = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity onPress={() => handleLanguageChange("English")}>
+            <TouchableOpacity onPress={() => handleLanguageChange("en")}>
               <Image
                 source={require("../assets/images/amerika.png")}
                 style={styles.flag}
@@ -47,7 +47,7 @@ const Language = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity onPress={() => handleLanguageChange("Français")}>
+            <TouchableOpacity onPress={() => handleLanguageChange("fr")}>
               <Image
                 source={require("../assets/images/fransa.png")}
                 style={styles.flag}
@@ -55,7 +55,7 @@ const Language = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity onPress={() => handleLanguageChange("Español")}>
+            <TouchableOpacity onPress={() => handleLanguageChange("esp")}>
               <Image
                 source={require("../assets/images/ispanya.png")}
                 style={styles.flag}
@@ -63,7 +63,7 @@ const Language = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity onPress={() => handleLanguageChange("العربية")}>
+            <TouchableOpacity onPress={() => handleLanguageChange("ar")}>
               <Image
                 source={require("../assets/images/arabistan.png")}
                 style={styles.flag}
@@ -71,7 +71,7 @@ const Language = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity onPress={() => handleLanguageChange("Hindi")}>
+            <TouchableOpacity onPress={() => handleLanguageChange("hi")}>
               <Image
                 source={require("../assets/images/hindistan.png")}
                 style={styles.flag}
@@ -79,7 +79,7 @@ const Language = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity onPress={() => handleLanguageChange("中文")}>
+            <TouchableOpacity onPress={() => handleLanguageChange("zh")}>
               <Image
                 source={require("../assets/images/cin.png")}
                 style={styles.flag}
@@ -87,7 +87,7 @@ const Language = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity onPress={() => handleLanguageChange("Deutsch")}>
+            <TouchableOpacity onPress={() => handleLanguageChange("de")}>
               <Image
                 source={require("../assets/images/almanya.png")}
                 style={styles.flag}
