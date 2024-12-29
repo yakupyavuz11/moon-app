@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons"; // Vector Icon için
 import { useTranslation } from "react-i18next"; // Import i18next hook for translations
+import { COLORS } from "@/constants/theme";
 
 const Language = ({ navigation }) => {
   const { t, i18n } = useTranslation(); // Use translation hook and i18n instance
@@ -19,7 +20,7 @@ const Language = ({ navigation }) => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="arrow-back" size={24} color="#000" />
+          <Icon name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>{t('language')}</Text> {/* Dynamic title */}
       </View>
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ddd",
   },
   headerTitle: {
+    color:COLORS.white,
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 10,

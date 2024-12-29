@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
   },
   logoutText: {
     color: COLORS.white,
-    fontSize: width * 0.05,
+    fontSize: 14  ,
   },
   version: {
     color: "#777",

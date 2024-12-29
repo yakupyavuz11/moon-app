@@ -19,7 +19,7 @@ export default function Login({ navigation }) {
   const { t } = useTranslation();
 
   // Giriş Yap  butonuna basıldığında çalışan fonksiyon
-  /* const onHandleLogin = async() => {
+  const onHandleLogin = async() => {
     if (email !== "" && password !== "") {
 
       login();
@@ -27,9 +27,9 @@ export default function Login({ navigation }) {
       Alert.alert("Hata", "E-posta ve şifre boş bırakılamaz");
     }
   };
-*/
 
-  const onHandleLogin = async () => {
+
+  /*const onHandleLogin = async () => {
     if (email !== "" && password !== "") {
       try {
         const response = await fetch(
@@ -38,7 +38,7 @@ export default function Login({ navigation }) {
 
         if (response.ok) {
           const users = await response.json();
-          
+
           if (users.length > 0) {
             login(users[0]); // Store içindeki login işlemini çağır
             //Alert.alert("Başarılı", "Giriş başarılı!");
@@ -56,7 +56,7 @@ export default function Login({ navigation }) {
       Alert.alert("Hata", "E-posta ve şifre boş bırakılamaz.");
     }
   };
-
+*/
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
@@ -86,6 +86,7 @@ export default function Login({ navigation }) {
         <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
           <Text style={styles.signupLink}>{t("signup_title")}</Text>
         </TouchableOpacity>
+     
       </View>
     </View>
   );
@@ -119,6 +120,15 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     justifyContent: "center",
     alignItems: "center",
+  },
+  button2: {
+    borderRadius: 32,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 140,
+    backgroundColor: theme.COLORS.black,
+
+    height: 50,
   },
   loginContainer: {
     flexDirection: "row",

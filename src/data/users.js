@@ -1,21 +1,21 @@
 const users = [
   {
     id: "1",
-    name: "Yakup",
+    name: "Anastasia",
     status: "Selam kaptan!",
     image:
       "https://images.pexels.com/photos/7421636/pexels-photo-7421636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "2",
-    name: "Osman",
+    name: "Sophia ",
     status: "20 yaş İstanbul.",
     image:
       "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "3",
-    name: "Zeynep",
+    name: "Isabella",
     status: "Kitap okurum, kahve içerim.",
     image:
       "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
