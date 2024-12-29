@@ -1,12 +1,12 @@
 module.exports = function (api) {
-  api.cache(true); // Bu, babel cache'inin etkinleştirilmesi için
+  api.cache(true);
   return {
     presets: [
-      ["babel-preset-expo", { jsxImportSource: "nativewind" }],  // Expo'yu ve nativewind'i kullanma
-      "nativewind/babel", // nativewind için Babel preset'i
+      ["babel-preset-expo", { jsxImportSource: "nativewind" }], 
+      "nativewind/babel", 
     ],
     plugins: [
-      "react-native-reanimated/plugin", // React Native Reanimated plugin
+      "react-native-reanimated/plugin",
       "@babel/plugin-proposal-export-namespace-from", // Babel plugin'i
     ],
   };
