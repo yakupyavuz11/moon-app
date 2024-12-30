@@ -8,12 +8,14 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
-  StatusBar, // Import StatusBar
+  StatusBar,
+  Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "@/constants/theme";
 import { useTranslation } from "react-i18next";
 import "../i18n";
+
 const data = {
   contacts: [
     {
@@ -26,7 +28,7 @@ const data = {
       id: "2",
       name: "Alfredo",
       image:
-        "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/29958104/pexels-photo-29958104/free-photo-of-kahverengi-deri-ceketli-kizil-sacli-zarif-kadin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       id: "3",
@@ -62,7 +64,7 @@ const data = {
       message: "Hello, Good Morning Bro!",
       time: "08:00 am",
       image:
-        "https://images.pexels.com/photos/29741645/pexels-photo-29741645/free-photo-of-seffaf-siyah-elbiseli-kadinin-zarif-portresi.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/29958104/pexels-photo-29958104/free-photo-of-kahverengi-deri-ceketli-kizil-sacli-zarif-kadin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
   ],
 };
@@ -70,6 +72,7 @@ const data = {
 const Messages = () => {
   const navigation = useNavigation();
   const { t } = useTranslation();
+
   const activeContacts = data.contacts.filter((contact) =>
     data.messages.some((message) => message.name.includes(contact.name))
   );
@@ -113,12 +116,15 @@ const Messages = () => {
   );
 
   return (
-    <View className="flex-[1] bg-[#F7F7F7] pt-8">
+    <View style={styles.container}>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={COLORS.primary}
+        translucent={true}
+      />
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.header}>
-          <Text style={{ color: "#f7f7f7", fontSize: 24, fontWeight: "bold" }}>
-            {t("messages")}
-          </Text>
+          <Text style={styles.headerText}>{t("messages")}</Text>
           <Text style={styles.title}>{t("active_users")}</Text>
           {renderContacts()}
         </View>
@@ -135,20 +141,30 @@ const Messages = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F7F7F7",
+  },
   safeArea: {
     flex: 1,
-    backgroundColor: "#f7f7f7",
   },
   header: {
-    backgroundColor: "#6A5AE0",
-    padding: 25,
+    backgroundColor: COLORS.primary,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 60,
+    paddingBottom: 20,
+    paddingHorizontal: 20,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
+  },
+  headerText: {
+    color: COLORS.white,
+    fontSize: 24,
+    fontWeight: "bold",
   },
   title: {
     marginTop: 18,
     fontSize: 16,
-    color: "#f7f7f7",
+    color: COLORS.white,
     marginBottom: 10,
   },
   contactContainer: {
@@ -165,7 +181,7 @@ const styles = StyleSheet.create({
   contactName: {
     color: "#fff",
     marginTop: 5,
-    fontSize: 16,
+    fontSize: 14,
   },
   listContainer: {
     marginTop: 20,

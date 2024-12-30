@@ -1,141 +1,141 @@
 const users = [
   {
     id: "1",
-    name: "Anastasia",
-    status: "Selam kaptan!",
+    name: "Emily",
+    status: "Hello Captain!",
     image:
       "https://images.pexels.com/photos/7421636/pexels-photo-7421636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "2",
-    name: "Sophia ",
-    status: "20 yaş İstanbul.",
+    name: "Sophia",
+    status: "20 years old, Istanbul.",
     image:
       "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "3",
     name: "Isabella",
-    status: "Kitap okurum, kahve içerim.",
+    status: "I read books and drink coffee.",
     image:
       "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "4",
-    name: "Emre",
-    status: "Hayal et, başar.",
+    name: "Michael",
+    status: "Dream it, achieve it.",
     image:
       "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "5",
-    name: "Selin",
-    status: "Link ya da ses lütfen!",
+    name: "Chloe",
+    status: "Send a link or a voice!",
     image:
       "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "6",
-    name: "Ahmet",
-    status: "Kendine inan.",
+    name: "James",
+    status: "Believe in yourself.",
     image:
       "https://images.pexels.com/photos/61120/pexels-photo-61120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "7",
-    name: "Merve",
-    status: "Macera dolu bir hayat.",
+    name: "Ava",
+    status: "A life full of adventure.",
     image:
       "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "8",
-    name: "Efe",
-    status: "Sanat, ruhun en saf halidir.",
+    name: "Ethan",
+    status: "Art is the purest form of the soul.",
     image:
       "https://images.pexels.com/photos/925743/pexels-photo-925743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "9",
-    name: "Büşra",
-    status: "Doğayı seviyorum.",
+    name: "Sophia",
+    status: "I love nature.",
     image:
       "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "10",
-    name: "Kerem",
-    status: "Sonsuz bir öğrenme yolculuğu.",
+    name: "Ryan",
+    status: "An endless journey of learning.",
     image:
       "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "11",
-    name: "Ali",
-    status: "Kodlamayı seviyorum.",
+    name: "Daniel",
+    status: "I love coding.",
     image:
       "https://images.pexels.com/photos/4328501/pexels-photo-4328501.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "12",
-    name: "Fatma",
-    status: "Yemek tarifleri benim işim.",
+    name: "Olivia",
+    status: "Cooking recipes are my thing.",
     image:
       "https://images.pexels.com/photos/1703376/pexels-photo-1703376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "13",
-    name: "Cem",
-    status: "Hayat bir serüvendir.",
+    name: "Liam",
+    status: "Life is an adventure.",
     image:
       "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "14",
-    name: "Ayşe",
-    status: "Motivasyon günün başlangıcıdır.",
+    name: "Amelia",
+    status: "Motivation is the start of the day.",
     image:
       "https://images.pexels.com/photos/1832323/pexels-photo-1832323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "15",
-    name: "Hakan",
-    status: "Sadelik güzelliktir.",
+    name: "Jack",
+    status: "Simplicity is beauty.",
     image:
       "https://images.pexels.com/photos/7421636/pexels-photo-7421636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "16",
-    name: "Elif",
-    status: "Kitaplarla dolu bir dünya.",
+    name: "Ella",
+    status: "A world full of books.",
     image:
       "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "17",
-    name: "Mehmet",
-    status: "Sporla sağlık.",
+    name: "Noah",
+    status: "Health through sports.",
     image:
       "https://images.pexels.com/photos/925743/pexels-photo-925743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "18",
-    name: "Sinem",
-    status: "Sanat ve estetik.",
+    name: "Grace",
+    status: "Art and aesthetics.",
     image:
       "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "19",
-    name: "Hasan",
-    status: "Felsefe ve düşünce.",
+    name: "Henry",
+    status: "Philosophy and thought.",
     image:
       "https://images.pexels.com/photos/1703376/pexels-photo-1703376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "20",
-    name: "Ezgi",
-    status: "Klasik müzik tutkusu.",
+    name: "Charlotte",
+    status: "A passion for classical music.",
     image:
       "https://images.pexels.com/photos/1832323/pexels-photo-1832323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },

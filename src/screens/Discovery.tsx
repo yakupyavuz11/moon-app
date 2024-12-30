@@ -8,6 +8,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -18,11 +19,13 @@ import "../i18n";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../navigation/types";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { COLORS } from "@/constants/theme";
+
 const Discovery = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { t } = useTranslation();
   const navigation =
-    useNavigation<StackNavigationProp<RootStackParamList, "Discovery">>(); // `useNavigation` hook'unu component içerisinde kullan
+    useNavigation<StackNavigationProp<RootStackParamList, "Discovery">>();
 
   const numColumns = 2;
   const screen_width = Dimensions.get("window").width;
@@ -30,33 +33,23 @@ const Discovery = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="light" backgroundColor="#6A5AE0" />
       <SafeAreaView style={styles.safeArea}>
         {/* Header */}
-        <View style={styles.header}>
-          <Text
-            style={{
-              color: "#f7f7f7",
-              fontSize: 24,
-              fontWeight: "bold",
-              marginTop: 24,
-            }}
-          >
-            {t("discovery")}
-          </Text>
-        </View>
-        <View style={styles.header}>
-          <Searchbar
-            placeholder={t("search")} 
-            onChangeText={setSearchQuery}
-            value={searchQuery}
-            style={styles.searchbar}
-            inputStyle={{
-              minHeight: 0,
-            }}
-          />
-          <TouchableOpacity style={styles.filterButton}>
-            <MaterialIcons name="filter-list" size={24} color="white" />
-          </TouchableOpacity>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerTitle}>{t("discovery")}</Text>
+          <View style={styles.searchContainer}>
+            <Searchbar
+              placeholder={t("search")}
+              onChangeText={setSearchQuery}
+              value={searchQuery}
+              style={styles.searchbar}
+              inputStyle={{ minHeight: 0 }}
+            />
+            <TouchableOpacity style={styles.filterButton}>
+              <MaterialIcons name="filter-list" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
         </View>
 
         {/* FlatList */}
@@ -69,7 +62,7 @@ const Discovery = () => {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("UserProfile", { userId: item.id })
-              } // Doğru kullanım
+              }
             >
               <Product
                 image={item.image}
@@ -83,8 +76,6 @@ const Discovery = () => {
           contentContainerStyle={styles.flatListContent}
         />
       </SafeAreaView>
-
-      <StatusBar style="light" />
     </View>
   );
 };
@@ -92,37 +83,43 @@ const Discovery = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "F7F7F7",
+    backgroundColor: COLORS.white,
   },
-
   safeArea: {
     flex: 1,
-    backgroundColor: "#f7f7f7",
+    backgroundColor: COLORS.white,
   },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: -25,
-    backgroundColor: "#6A5AE0",
-    paddingVertical: 50,
-    paddingHorizontal: 30,
+  headerContainer: {
+    backgroundColor: COLORS.primary,
+    paddingVertical: Platform.OS === "ios" ? 60 : 50,
+    paddingHorizontal: 20,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
+    alignItems: "flex-start",
   },
-
+  headerTitle: {
+    color: "#FFFFFF",
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+  },
   searchbar: {
-    marginTop: 5,
-    height: "70%",
     flex: 1,
     marginRight: 10,
+    height: 50,
+    borderRadius: 10,
   },
   filterButton: {
-    marginTop: 5,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#4A47A3",
-    borderRadius: 5,
-    padding: 10,
+    borderRadius: 10,
+    padding: 12,
   },
   flatListContent: {
     paddingHorizontal: 10,

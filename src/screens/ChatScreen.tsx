@@ -14,7 +14,6 @@ import {
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "@/constants/theme";
-import axios from "axios"; // API'ye istek göndermek için axios
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 
@@ -25,35 +24,22 @@ const ChatScreen = () => {
 
   const [messages, setMessages] = useState([]);
 
-  const { name = "User", image = "https://placekitten.com/140/140" } =
+  const { name = "User", image = "https://images.pexels.com/photos/29958104/pexels-photo-29958104/free-photo-of-kahverengi-deri-ceketli-kizil-sacli-zarif-kadin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" } =
     route.params || {};
 
-  // Mesajları API'den çek
-  const fetchMessages = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/messages"); // Mesajları çekmek için API isteği
-      const messagesFromAPI = response.data;
-
-      // Mesajları GiftedChat formatına dönüştür
-      const formattedMessages = messagesFromAPI.map((msg) => ({
-        _id: msg.id,
-        text: msg.message,
-        createdAt: new Date(msg.created_at),
-        user: {
-          _id: msg.sender_id,
-          name: msg.sender_name,
-          avatar: "https://placekitten.com/140/140", // Fotoğraf URL'sini uygun şekilde ekleyebilirsiniz
-        },
-      }));
-
-      setMessages(formattedMessages); // Mesajları state'e aktar
-    } catch (error) {
-      console.error("Mesajları çekerken hata oluştu:", error);
-    }
-  };
-
+  // JSON formatında mesaj ekliyoruz
   useEffect(() => {
-    fetchMessages(); // Mesajları çek
+    const initialMessage = {
+      _id: 1,
+      text: 'Merhaba, nasılsın?',
+      createdAt: new Date(),
+      user: {
+        _id: 2,
+        name: 'Bot', // Bot ismi
+        avatar: image,
+      },
+    };
+    setMessages([initialMessage]);
   }, []);
 
   const onSend = (newMessages = []) => {

@@ -60,7 +60,8 @@ export default function Signup({ navigation }) {
       <Text style={styles.title}> {t("signup_title")}</Text>
       <TextInput
         style={styles.input}
-        placeholder={t("user_name")}
+        placeholder={t("user_name") }
+         placeholderTextColor="#D3D3D3"
         value={username}
         onChangeText={setUsername}
       />
@@ -86,7 +87,7 @@ export default function Signup({ navigation }) {
       <View style={styles.loginContainer}>
         <Text style={styles.signupText}>{t("already_have_account")}</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.signupLink}>{t("login_title")}</Text>
+          <Text style={styles.signupLink}> {t("login_title")}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
