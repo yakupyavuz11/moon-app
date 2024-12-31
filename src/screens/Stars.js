@@ -10,6 +10,7 @@ import {
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { useTranslation } from "react-i18next";
 import "../i18n";
+import { COLORS } from "@/constants/theme";
 
 export default function Stars() {
   const [selected, setSelected] = useState(0);
@@ -20,17 +21,17 @@ export default function Stars() {
     {
       price: "$99.99",
       label: t("price_lifetime_label"),
-      description: t("price_lifetime_description"),
+      //description: t("price_lifetime_description"),
     },
-    { 
-      price: "$24.99", 
-      label: t("price_yearly_label"), 
-      description: t("price_yearly_description") 
+    {
+      price: "$24.99",
+      label: t("price_yearly_label"),
+      //  description: t("price_yearly_description")
     },
-    { 
-      price: "$9.99", 
-      label: t("price_monthly_label"), 
-      description: t("price_monthly_description") 
+    {
+      price: "$9.99",
+      label: t("price_monthly_label"),
+      // description: t("price_monthly_description")
     },
   ];
 
@@ -69,7 +70,10 @@ export default function Stars() {
                       <Text style={styles.radioText}>{item.description}</Text>
                     </View>
                     <Text
-                      style={[styles.radioPrice, isActive && styles.radioPriceActive]}
+                      style={[
+                        styles.radioPrice,
+                        isActive && styles.radioPriceActive,
+                      ]}
                     >
                       {item.price}
                     </Text>
@@ -91,9 +95,7 @@ export default function Stars() {
             </View>
           </TouchableOpacity>
 
-          <Text style={styles.formFooterText}>
-            {t("form_footer_text")}
-          </Text>
+          <Text style={styles.formFooterText}>{t("form_footer_text")}</Text>
         </View>
       </View>
     </SafeAreaView>
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 20,
     fontWeight: "500",
-    color: "#6A5AE0",
+    color: COLORS.primary,
   },
   header: {
     paddingHorizontal: 24,
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
     marginBottom: 100,
     fontSize: 14,
     fontWeight: "500",
-    color: "#6A5BC2",
+    color: COLORS.primary,
     textAlign: "center",
   },
   radio: {
@@ -187,8 +189,8 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 24,
     borderWidth: 1,
-    backgroundColor: "#6A5AE0",
-    borderColor: "#6A5AE0",
+    backgroundColor:COLORS.primary,
+    borderColor: COLORS.primary,
   },
   btnText: {
     fontSize: 17,

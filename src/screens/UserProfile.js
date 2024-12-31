@@ -1,157 +1,107 @@
-import React, { useRef, useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   Image,
-  StyleSheet,
   TouchableOpacity,
+  StyleSheet,
+  StatusBar,
   ScrollView,
-  ActivityIndicator,
+  SafeAreaView,
+  Modal,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
-import axios from "axios";
+import { Ionicons } from "@expo/vector-icons";
+import { COLORS } from "@/constants/theme"; // Replace with your color constants
+import "../i18n";
+import { useTranslation } from "react-i18next";
 
-import { COLORS } from "@/constants/theme";
-
-const UserProfile = ({ route }) => {
+const UserProfile = () => {
   const navigation = useNavigation();
-  const bottomSheetRef = useRef(null);
-  const [userData, setUserData] = useState(null); // Kullanıcı verileri
-  const [loading, setLoading] = useState(true); // Yüklenme durumu
-  const { userId } = route.params; // Parametreyi al
+  const { t } = useTranslation();
+  
+  const [isMenuVisible, setMenuVisible] = useState(false);
 
-  // API'den kullanıcı bilgilerini çekme
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(`https://api.example.com/user/${userId}`); // API endpoint
-        setUserData(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        setLoading(false);
-      }
-    };
+  const imageUrl =
+    "https://images.pexels.com/photos/29958104/pexels-photo-29958104/free-photo-of-kahverengi-deri-ceketli-kizil-sacli-zarif-kadin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
-    fetchUserData();
-  }, [userId]);
-
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
-  }, []);
-
-  const snapPoints = ["25%", "50%", "100%"]; // BottomSheet boyutları
-
-  const handleGoBack = () => {
-    navigation.goBack();
+  const handleBlockUser = () => {
+    setMenuVisible(false);  // Close the menu
+    alert("User Blocked");
   };
 
-  const handleOpenBottomSheet = () => {
-    bottomSheetRef.current?.expand(); // BottomSheet'i aç
+  const handleReportUser = () => {
+    setMenuVisible(false);  // Close the menu
+    alert("User Reported");
   };
-
-  const renderBackdrop = useCallback(
-    (props) => (
-      <BottomSheetBackdrop
-        {...props}
-        disappearsOnIndex={-1}
-        appearsOnIndex={0}
-      />
-    ),
-    []
-  );
-
-  if (loading) {
-    // Yüklenme animasyonu
-    return (
-      <View style={styles.loaderContainer}>
-        <ActivityIndicator size="large" color={COLORS.primary} />
-      </View>
-    );
-  }
-
-  if (!userData) {
-    // Veri yoksa hata mesajı
-    return (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>Kullanıcı verileri yüklenemedi.</Text>
-      </View>
-    );
-  }
 
   return (
-    <View style={styles.container}>
-      {/* Back Button */}
-      <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
-        <Ionicons name="arrow-back" size={30} color="#fff" />
-      </TouchableOpacity>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        {/* Status Bar */}
+        <StatusBar barStyle="dark-content" backgroundColor={COLORS.primary} />
 
-      <ScrollView>
+        {/* Back Arrow Icon */}
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back" size={30} color={COLORS.black} />
+        </TouchableOpacity>
+
         {/* Profile Section */}
-        <View style={styles.profileContainer}>
-          <Image
-            source={{
-              uri: userData.profileImage || "https://via.placeholder.com/150", // API'den gelen resim URL'si
-            }}
-            style={styles.profileImage}
-          />
-          <View style={styles.profileInfoContainer}>
-            <Text style={styles.name}>{userData.username}</Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Chat")}
-              style={[styles.circleButton, { backgroundColor: COLORS.primary }]}
-            >
-              <Text style={styles.buttonText}>💬</Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.profileSection}>
+          {/* Profile Image */}
+          <Image source={{ uri: imageUrl }} style={styles.profileImage} />
+          <Text style={styles.profileName}>alfredosalis</Text>
         </View>
 
         {/* About Section */}
         <View style={styles.aboutSection}>
-          <Text style={styles.sectionTitle}>About</Text>
+          <Text style={styles.aboutTitle}>{t("about")}</Text>
           <Text style={styles.aboutText}>
-            {userData.bio || "No bio available."} {/* API'den gelen biyografi */}
+            A passionate Fashion Designer with a love for travel and technology.
+            Always seeking to explore new challenges and build innovative
+            designs that make a difference. Enjoys collaborating on creative
+            projects and staying ahead of tech trends.
           </Text>
         </View>
 
-        {/* BottomSheet Trigger */}
-        <TouchableOpacity
-          style={styles.moreButton}
-          onPress={handleOpenBottomSheet}
-          activeOpacity={0.7}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <Ionicons
-            style={styles.moreButtonText}
-            name="ellipsis-vertical"
-            size={30}
-            color="#fff"
-          />
-        </TouchableOpacity>
+        {/* Spacer to push button to the bottom */}
+        <View style={styles.bottomSpacer}></View>
       </ScrollView>
 
-      {/* BottomSheet */}
-      <BottomSheet
-        ref={bottomSheetRef}
-        onChange={handleSheetChanges}
-        snapPoints={snapPoints}
-        backdropComponent={renderBackdrop}
-        enablePanDownToClose={true} // Kapatmak için aşağı kaydırmayı etkinleştir
-        backgroundStyle={styles.bottomSheetBackground}
+      {/* Top-right Menu Button (Three Dots) */}
+      <TouchableOpacity
+        style={styles.menuButton}
+        onPress={() => setMenuVisible(true)}
       >
-        <View style={styles.bottomSheetContent}>
-          <Text style={styles.bottomSheetText}>Options:</Text>
-          <TouchableOpacity style={styles.optionButton}>
-            <Text style={styles.optionText}>Report</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.optionButton}>
-            <Text style={styles.optionText}>Block</Text>
-          </TouchableOpacity>
-        </View>
-      </BottomSheet>
-    </View>
+        <Ionicons name="ellipsis-vertical" size={30} color={COLORS.black} />
+      </TouchableOpacity>
+
+      {/* Menu Modal */}
+      <Modal
+        visible={isMenuVisible}
+        animationType="fade"
+        transparent={true}
+        onRequestClose={() => setMenuVisible(false)}
+      >
+        <TouchableWithoutFeedback onPress={() => setMenuVisible(false)}>
+          <View style={styles.modalOverlay}>
+            <View style={styles.menuContainer}>
+              <TouchableOpacity style={styles.menuItem} onPress={handleBlockUser}>
+                <Text style={styles.menuText}>🚫Block</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.menuItem} onPress={handleReportUser}>
+                <Text style={styles.menuText}>📛 Report</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+    </SafeAreaView>
   );
 };
 
@@ -160,111 +110,82 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
   },
-  loaderContainer: {
-    flex: 1,
-    justifyContent: "center",
+  scrollViewContent: {
     alignItems: "center",
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  errorText: {
-    color: COLORS.error,
-    fontSize: 18,
-    fontWeight: "bold",
+    paddingTop: 50,
+    paddingBottom: 100,
   },
   backButton: {
     position: "absolute",
     top: 40,
-    left: 20,
+    left: 20, 
     zIndex: 1,
   },
-  profileContainer: {
+  profileSection: {
     alignItems: "center",
-    marginTop: 30,
+    marginBottom: 20,
   },
   profileImage: {
-    width: 400,
-    height: 300,
-    borderWidth: 2,
-    borderColor: "#444",
-    alignSelf: "center",
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    borderWidth: 3,
+    borderColor: COLORS.primary,
   },
-  name: {
-    color: COLORS.black,
+  profileName: {
     fontSize: 24,
     fontWeight: "bold",
+    color: COLORS.blackD,
     marginTop: 10,
   },
   aboutSection: {
-    marginTop: 5,
+    width: "90%",
+    marginVertical: 30,
     paddingHorizontal: 20,
+    alignItems: "flex-start",
   },
-  sectionTitle: {
-    color: COLORS.black,
-    fontSize: 18,
+  aboutTitle: {
+    fontSize: 22,
     fontWeight: "bold",
+    color: COLORS.primary,
     marginBottom: 10,
   },
   aboutText: {
-    color: COLORS.black,
     fontSize: 16,
-    lineHeight: 22,
+    color: COLORS.black,
+    textAlign: "left",
+    lineHeight: 24,
   },
-  profileInfoContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 30,
-    paddingHorizontal: 20,
+  bottomSpacer: {
+    flex: 1,
   },
-  circleButton: {
-    width: 50,
-    height: 50,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: "auto",
-  },
-  buttonText: {
-    fontSize: 20,
-    color: "#fff",
-  },
-  moreButton: {
+  menuButton: {
     position: "absolute",
-    top: 40,
-    right: 20,
+    top: 40, // Keep at the top to align with back button
+    right: 20, // Right aligned for menu button
     zIndex: 1,
   },
-  moreButtonText: {
-    color: "#fff",
-    fontSize: 30,
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
-  bottomSheetBackground: {
-    backgroundColor: "#333", // BottomSheet rengi
+  menuContainer: {
+    backgroundColor: "white",
+    borderRadius: 8,
+    width: 200,
+    padding: 15,
+    elevation: 5,
   },
-  bottomSheetContent: {
-    padding: 20,
-    backgroundColor: "#333",
+  menuItem: {
+    paddingVertical: 10,
+    alignItems: "flex-start",
   },
-  bottomSheetText: {
-    color: "#fff",
-    fontSize: 18,
-    marginBottom: 20,
-  },
-  optionButton: {
-    padding: 10,
-    backgroundColor: "#444",
-    marginBottom: 10,
-    borderRadius: 5,
-  },
-  optionText: {
-    color: "#fff",
+  menuText: {
     fontSize: 16,
+    fontWeight: "bold",
+    color: COLORS.black,
   },
 });
 

@@ -10,6 +10,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  StatusBar, // Import StatusBar from react-native
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -24,18 +25,20 @@ const ChatScreen = () => {
 
   const [messages, setMessages] = useState([]);
 
-  const { name = "User", image = "https://images.pexels.com/photos/29958104/pexels-photo-29958104/free-photo-of-kahverengi-deri-ceketli-kizil-sacli-zarif-kadin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" } =
-    route.params || {};
+  const {
+    name = "User",
+    image = "https://images.pexels.com/photos/29958104/pexels-photo-29958104/free-photo-of-kahverengi-deri-ceketli-kizil-sacli-zarif-kadin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  } = route.params || {};
 
   // JSON formatında mesaj ekliyoruz
   useEffect(() => {
     const initialMessage = {
       _id: 1,
-      text: 'Merhaba, nasılsın?',
+      text: "Merhaba, nasılsın?",
       createdAt: new Date(),
       user: {
         _id: 2,
-        name: 'Bot', // Bot ismi
+        name: "Bot", // Bot ismi
         avatar: image,
       },
     };
@@ -53,7 +56,7 @@ const ChatScreen = () => {
       {...props}
       wrapperStyle={{
         left: {
-          backgroundColor: "#d1c4e9",
+          backgroundColor: "#6b53ff",
         },
         right: {
           backgroundColor: "#7e57c2",
@@ -61,7 +64,7 @@ const ChatScreen = () => {
       }}
       textStyle={{
         left: {
-          color: "#000",
+          color: "#fff",
         },
         right: {
           color: "#fff",
@@ -72,6 +75,9 @@ const ChatScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Set the StatusBar to purple */}
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.primary} />
+
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -124,7 +130,7 @@ const styles = StyleSheet.create({
   profileBar: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#6A5AE0",
+    backgroundColor: COLORS.primary,
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderBottomLeftRadius: 20,
@@ -132,11 +138,6 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginRight: 15,
-  },
-  backText: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "bold",
   },
   profileImage: {
     width: 50,
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
   },
   profileName: {
-    fontSize: 20,
+    fontSize: 18,
     color: "#fff",
     fontWeight: "bold",
   },

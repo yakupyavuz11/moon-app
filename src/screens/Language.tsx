@@ -22,14 +22,11 @@ const Language = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>{t('language')}</Text> {/* Dynamic title */}
+        <Text style={styles.headerTitle}>{t('language')}</Text> 
       </View>
 
       {/* Dil Seçimi Ekranı */}
       <View style={styles.container}>
-        <Text style={{ fontWeight: "bold" }}>{t('language')}</Text> {/* Dynamic text */}
-        <Text style={{ marginBottom: 10 }}>{t('select_language')}</Text> {/* Dynamic text */}
-        <Text style={{ marginBottom: 20 }}>{t('current_language')} {language}</Text>
         <View style={styles.buttonContainer}>
           <View style={styles.buttonWrapper}>
             <TouchableOpacity onPress={() => handleLanguageChange("tr")}>
@@ -105,10 +102,11 @@ export default Language;
 
 const styles = StyleSheet.create({
   header: {
+    marginTop:-5,
     flexDirection: "row",
     alignItems: "center",
     padding: 15,
-    backgroundColor: "#6A5AE0",
+    backgroundColor: COLORS.primary,
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
   },
@@ -137,7 +135,7 @@ const styles = StyleSheet.create({
   },
   flag: {
     width: 60,
-    height: 35,
+    height: 30,
     marginBottom: 5,
   },
 });

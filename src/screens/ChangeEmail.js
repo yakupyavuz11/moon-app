@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native"; // Navigation Hook'u ekleniyor.
 import { useTranslation } from "react-i18next"; // i18n Hook'u ekleniyor.
+import { Ionicons } from "@expo/vector-icons"; 
 
 export default function ChangeEmail() {
   const navigation = useNavigation(); // Navigation Hook'u kullanılıyor.
@@ -17,8 +18,8 @@ export default function ChangeEmail() {
     <View style={styles.container}>
       {/* Üst Başlık */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backText}>{"<"}</Text>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color={COLORS.white} />
         </TouchableOpacity>
         <Text style={styles.title}>{t("change_email_title")}</Text>
         <TouchableOpacity>
@@ -39,9 +40,6 @@ export default function ChangeEmail() {
           placeholderTextColor="#888"
           secureTextEntry={true}
         />
-        <Text style={styles.infoText}>
-          {t("change_email_info")} {/* Information text */}
-        </Text>
       </View>
     </View>
   );
@@ -53,13 +51,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   header: {
+    marginTop:40,
     backgroundColor: COLORS.primary,
     color: COLORS.white,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingTop: 40,
+    paddingTop: 20,
     paddingBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#222",
@@ -82,14 +81,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   input: {
-    backgroundColor: "#b4acf2",
-    color: COLORS.white,
+    backgroundColor: "#f0f0f0",
+    color: COLORS.black,
     borderRadius: 8,
     padding: 10,
     marginBottom: 15,
-  },
-  infoText: {
-    color: "#888",
-    fontSize: 14,
   },
 });

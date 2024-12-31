@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Alert,
   Dimensions,
+  StatusBar, // Import StatusBar
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/theme";
@@ -91,6 +92,12 @@ const Settings = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Status Bar Configuration */}
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={COLORS.primary}
+      />{" "}
+      {/* Set Status Bar */}
       <View style={styles.container}>
         <View style={styles.header}>
           <Ionicons
@@ -201,6 +208,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
+    marginTop: -5,
     backgroundColor: COLORS.primary,
     color: COLORS.white,
     flexDirection: "row",
@@ -244,7 +252,7 @@ const styles = StyleSheet.create({
   },
   logoutText: {
     color: COLORS.white,
-    fontSize: 14  ,
+    fontSize: 14,
   },
   version: {
     color: "#777",

@@ -20,13 +20,13 @@ const data = {
   contacts: [
     {
       id: "1",
-      name: "Phillip",
+      name: "philip_france",
       image:
         "https://images.pexels.com/photos/4506436/pexels-photo-4506436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       id: "2",
-      name: "Alfredo",
+      name: "alfredosaris",
       image:
         "https://images.pexels.com/photos/29958104/pexels-photo-29958104/free-photo-of-kahverengi-deri-ceketli-kizil-sacli-zarif-kadin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
@@ -52,7 +52,7 @@ const data = {
   messages: [
     {
       id: "1",
-      name: "Phillip Franci",
+      name: "philip_france",
       message: "Hey, it's been a while since we've...",
       time: "10:00 am",
       image:
@@ -60,7 +60,7 @@ const data = {
     },
     {
       id: "2",
-      name: "Alfredo Saris",
+      name: "alfredosaris",
       message: "Hello, Good Morning Bro!",
       time: "08:00 am",
       image:
@@ -117,11 +117,9 @@ const Messages = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={COLORS.primary}
-        translucent={true}
-      />
+            <StatusBar barStyle= "dark-content" backgroundColor={COLORS.primary} />
+    
+  
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.header}>
           <Text style={styles.headerText}>{t("messages")}</Text>

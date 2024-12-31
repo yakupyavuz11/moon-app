@@ -1,21 +1,22 @@
 const users = [
   {
     id: "1",
-    name: "Emily",
+    name: "alfredosaris",
     status: "Hello Captain!",
     image:
-      "https://images.pexels.com/photos/7421636/pexels-photo-7421636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/29958104/pexels-photo-29958104/free-photo-of-kahverengi-deri-ceketli-kizil-sacli-zarif-kadin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+
   },
   {
     id: "2",
-    name: "Sophia",
+    name: "sophia",
     status: "20 years old, Istanbul.",
     image:
       "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: "3",
-    name: "Isabella",
+    name: "isabella_watson",
     status: "I read books and drink coffee.",
     image:
       "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
