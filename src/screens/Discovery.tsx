@@ -36,6 +36,11 @@ const Discovery = () => {
   const screen_width = Dimensions.get("window").width;
   const column_width = screen_width / numColumns;
 
+  // Filtrelenmiş kullanıcılar
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   // Modal'ı açıp kapatma fonksiyonu
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -43,10 +48,8 @@ const Discovery = () => {
 
   return (
     <View style={styles.container}>
-      {/* Set the StatusBar with black background and white icons */}
       <StatusBar style="light" backgroundColor="black" />
       <SafeAreaView style={styles.safeArea}>
-        {/* Header */}
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>{t("discovery")}</Text>
           <View style={styles.searchContainer}>
@@ -63,43 +66,43 @@ const Discovery = () => {
           </View>
         </View>
 
-        {/* FlatList */}
-        <FlatList
-          data={users.filter((user) =>
-            user.name.toLowerCase().includes(searchQuery.toLowerCase())
-          )}
-          numColumns={numColumns}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("UserProfile", { userId: item.id })
-              }
-            >
-              <Product
-                image={item.image}
-                name={item.name}
-                price={item.status}
-                column_width={column_width}
-              />
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={styles.flatListContent}
-        />
+        {filteredUsers.length === 0 ? (
+          <View style={styles.noProfileContainer}>
+            <Text style={styles.noProfileText}>NO PROFILE</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={filteredUsers}
+            numColumns={numColumns}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("UserProfile", { userId: item.id })
+                }
+              >
+                <Product
+                  image={item.image}
+                  name={item.name}
+                  price={item.status}
+                  column_width={column_width}
+                />
+              </TouchableOpacity>
+            )}
+            keyExtractor={(item) => item.id.toString()}
+            contentContainerStyle={styles.flatListContent}
+          />
+        )}
       </SafeAreaView>
 
-      {/* Bottom Sheet Modal for Filters */}
       <Modal
         isVisible={isModalVisible}
         onBackdropPress={toggleModal}
         style={styles.modal}
-        swipeDirection="down"  // Modal'ın aşağıya kaymasına izin ver
-        backdropOpacity={0.5} // Modal dışı alanın opaklığını azalt
+        swipeDirection="down"
+        backdropOpacity={0.5}
       >
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>{t("filter")}</Text>
-
-          {/* Age Range Picker */}
           <Text style={styles.modalLabel}>{t("age")}</Text>
           <Picker
             selectedValue={selectedAgeRange}
@@ -112,7 +115,6 @@ const Discovery = () => {
             <Picker.Item label="46+" value="46+" />
           </Picker>
 
-          {/* Gender Picker */}
           <Text style={styles.modalLabel}>{t("gender")}</Text>
           <Picker
             selectedValue={selectedGender}
@@ -124,7 +126,6 @@ const Discovery = () => {
             <Picker.Item label={t("other")} value="Other" />
           </Picker>
 
-          {/* Apply Filter Button */}
           <TouchableOpacity style={styles.applyButton} onPress={toggleModal}>
             <Text style={styles.applyButtonText}>{t("save")}</Text>
           </TouchableOpacity>
@@ -181,7 +182,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modal: {
-    justifyContent: "flex-end", // Modal'ı ekranın alt kısmına yerleştir
+    justifyContent: "flex-end",
     margin: 0,
   },
   modalContainer: {
@@ -190,7 +191,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     width: "100%",
-    maxHeight: "70%", // Modal'ın yüksekliği %70 olacak
+    maxHeight: "70%",
   },
   modalTitle: {
     fontSize: 20,
@@ -217,13 +218,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 10,
     marginTop: 20,
-    alignSelf: "center", // Butonu ortala
+    alignSelf: "center",
   },
   applyButtonText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  noProfileContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  noProfileText: {
+    fontSize: 18,
+    color: "#aaa",
   },
 });
 

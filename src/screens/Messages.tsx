@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   StatusBar,
   Platform,
+  Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "@/constants/theme";
@@ -73,27 +74,57 @@ const Messages = () => {
   const navigation = useNavigation();
   const { t } = useTranslation();
 
+  const [messages, setMessages] = useState(data.messages);
+
   const activeContacts = data.contacts.filter((contact) =>
-    data.messages.some((message) => message.name.includes(contact.name))
+    messages.some((message) => message.name.includes(contact.name))
   );
+
+  const deleteMessage = (id) => {
+    Alert.alert(
+      "Delete Chat",
+      "Are you sure you want to delete this chat?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: () => {
+            setMessages((prevMessages) =>
+              prevMessages.filter((message) => message.id !== id)
+            );
+          },
+          style: "destructive",
+        },
+      ]
+    );
+  };
 
   const renderContacts = () => (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-      {activeContacts.map((contact) => (
-        <TouchableOpacity
-          key={contact.id}
-          style={styles.contactContainer}
-          onPress={() =>
-            navigation.navigate("UserProfile", {
-              name: contact.name,
-              image: contact.image,
-            })
-          }
-        >
-          <Image source={{ uri: contact.image }} style={styles.contactImage} />
-          <Text style={styles.contactName}>{contact.name}</Text>
-        </TouchableOpacity>
-      ))}
+      {activeContacts.length === 0 ? (
+        <View style={styles.noActiveUsersContainer}>
+          <Text style={styles.noActiveUsersText}>NO ACTIVE USERS</Text>
+        </View>
+      ) : (
+        activeContacts.map((contact) => (
+          <TouchableOpacity
+            key={contact.id}
+            style={styles.contactContainer}
+            onPress={() =>
+              navigation.navigate("UserProfile", {
+                name: contact.name,
+                image: contact.image,
+              })
+            }
+          >
+            <Image source={{ uri: contact.image }} style={styles.contactImage} />
+            <Text style={styles.contactName}>{contact.name}</Text>
+          </TouchableOpacity>
+        ))
+      )}
     </ScrollView>
   );
 
@@ -105,6 +136,7 @@ const Messages = () => {
           name: item.name,
         })
       }
+      onLongPress={() => deleteMessage(item.id)}
     >
       <Image source={{ uri: item.image }} style={styles.messageImage} />
       <View style={styles.messageContent}>
@@ -117,9 +149,7 @@ const Messages = () => {
 
   return (
     <View style={styles.container}>
-            <StatusBar barStyle= "dark-content" backgroundColor={COLORS.primary} />
-    
-  
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.primary} />
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.header}>
           <Text style={styles.headerText}>{t("messages")}</Text>
@@ -127,12 +157,18 @@ const Messages = () => {
           {renderContacts()}
         </View>
 
-        <FlatList
-          data={data.messages}
-          keyExtractor={(item) => item.id}
-          renderItem={renderMessages}
-          contentContainerStyle={styles.listContainer}
-        />
+        {messages.length === 0 ? (
+          <View style={styles.noMessagesContainer}>
+            <Text style={styles.noMessagesText}>NO MESSAGES</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={messages}
+            keyExtractor={(item) => item.id}
+            renderItem={renderMessages}
+            contentContainerStyle={styles.listContainer}
+          />
+        )}
       </SafeAreaView>
     </View>
   );
@@ -209,6 +245,24 @@ const styles = StyleSheet.create({
   messageTime: {
     color: "#aaa",
     fontSize: 12,
+  },
+  noMessagesContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  noMessagesText: {
+    fontSize: 18,
+    color: "#aaa",
+  },
+  noActiveUsersContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  noActiveUsersText: {
+    fontSize: 16,
+    color: "#aaa",
   },
 });
 

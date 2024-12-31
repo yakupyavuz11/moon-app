@@ -10,7 +10,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  StatusBar, // Import StatusBar from react-native
+  StatusBar, 
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -80,7 +80,8 @@ const ChatScreen = () => {
 
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 40 : 0}
       >
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.container}>
