@@ -10,31 +10,37 @@ import {
   SafeAreaView,
   Modal,
   TouchableWithoutFeedback,
-  Keyboard,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/theme"; // Replace with your color constants
-import "../i18n";
 import { useTranslation } from "react-i18next";
+
+// Import the new ChatScreen
+import ChatScreen from "./ChatScreen"; // Make sure to update the path accordingly
 
 const UserProfile = () => {
   const navigation = useNavigation();
   const { t } = useTranslation();
-  
+
   const [isMenuVisible, setMenuVisible] = useState(false);
 
   const imageUrl =
     "https://images.pexels.com/photos/29958104/pexels-photo-29958104/free-photo-of-kahverengi-deri-ceketli-kizil-sacli-zarif-kadin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
   const handleBlockUser = () => {
-    setMenuVisible(false);  // Close the menu
+    setMenuVisible(false); // Close the menu
     alert("User Blocked");
   };
 
   const handleReportUser = () => {
-    setMenuVisible(false);  // Close the menu
+    setMenuVisible(false); // Close the menu
     alert("User Reported");
+  };
+
+  const handleChatNavigation = () => {
+    setMenuVisible(false); // Close the menu
+    navigation.navigate("Chat"); // Navigate to the ChatScreen
   };
 
   return (
@@ -71,6 +77,14 @@ const UserProfile = () => {
 
         {/* Spacer to push button to the bottom */}
         <View style={styles.bottomSpacer}></View>
+
+        {/* Message Button */}
+        <TouchableOpacity
+          style={styles.messageButton}
+          onPress={handleChatNavigation}
+        >
+          <Text style={styles.messageButtonText}>💬 Send Message</Text>
+        </TouchableOpacity>
       </ScrollView>
 
       {/* Top-right Menu Button (Three Dots) */}
@@ -91,10 +105,16 @@ const UserProfile = () => {
         <TouchableWithoutFeedback onPress={() => setMenuVisible(false)}>
           <View style={styles.modalOverlay}>
             <View style={styles.menuContainer}>
-              <TouchableOpacity style={styles.menuItem} onPress={handleBlockUser}>
+              <TouchableOpacity
+                style={styles.menuItem}
+                onPress={handleBlockUser}
+              >
                 <Text style={styles.menuText}>🚫Block</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.menuItem} onPress={handleReportUser}>
+              <TouchableOpacity
+                style={styles.menuItem}
+                onPress={handleReportUser}
+              >
                 <Text style={styles.menuText}>📛 Report</Text>
               </TouchableOpacity>
             </View>
@@ -118,7 +138,7 @@ const styles = StyleSheet.create({
   backButton: {
     position: "absolute",
     top: 40,
-    left: 20, 
+    left: 20,
     zIndex: 1,
   },
   profileSection: {
@@ -186,6 +206,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: COLORS.black,
+  },
+  messageButton: {
+    backgroundColor: COLORS.primary,
+    padding: 12,
+    borderRadius: 25,
+    marginTop: 20,
+  },
+  messageButtonText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: COLORS.white,
   },
 });
 
