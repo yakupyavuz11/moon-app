@@ -15,26 +15,21 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { COLORS } from "../constants/theme";
-import { useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons"; 
+import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next"; 
 
-const EditProfile = () => {
-  const { t } = useTranslation(); 
-  const [profileImage, setProfileImage] = useState(null);
-  const [username, setUsername] = useState("");
-  const [about, setAbout] = useState("");
-
-  const navigation = useNavigation();
+const EditProfile = ({ route, navigation }) => {
+  const { profile, updateProfile } = route.params; // Profil ve güncelleme fonksiyonu
+  const { t } = useTranslation();
+  
+  const [profileImage, setProfileImage] = useState(profile.profileImage);
+  const [username, setUsername] = useState(profile.username);
+  const [about, setAbout] = useState(profile.about);
 
   const pickImage = async () => {
-    const permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permissionResult.granted === false) {
-      Alert.alert(
-        t("permission_denied_title"),
-        t("permission_denied_message")
-      );
+      Alert.alert(t("permission_denied_title"), t("permission_denied_message"));
       return;
     }
 
@@ -54,7 +49,9 @@ const EditProfile = () => {
     if (!username || !about) {
       Alert.alert(t("error_title"), t("error_message"));
     } else {
+      updateProfile({ username, about, profileImage });  // Güncellenmiş bilgiyi ana sayfaya gönderiyoruz
       Alert.alert(t("success_title"), t("success_message"));
+      navigation.goBack();  // Profil sayfasına geri dön
     }
   };
 
@@ -189,5 +186,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
 
 export default EditProfile;

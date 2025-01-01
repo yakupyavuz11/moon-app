@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,13 +10,27 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import theme, { COLORS } from "../constants/theme";
 import { StatusBar } from "expo-status-bar";
 import { useTranslation } from "react-i18next";
 import "../i18n";
-export default function Account() {
-  const navigation = useNavigation(); // Hook'u kullanıyoruz
-  const { t } = useTranslation(); 
+import { COLORS } from "@/constants/theme";
+
+export default function Profile() {
+  const navigation = useNavigation();
+  const { t } = useTranslation();
+
+  // Profil bilgilerini state'te tutuyoruz
+  const [profile, setProfile] = useState({
+    username: "mavigokyuzu221",
+    about: "Software, Technology, Entrepreneurship Enthusiast.",
+    profileImage: "https://images.pexels.com/photos/29748690/pexels-photo-29748690/free-photo-of-kendine-guvenen-gulumsemeyle-poz-veren-zarif-kadin.jpeg",
+  });
+
+  // Profil bilgilerini güncelleme fonksiyonu
+  const updateProfile = (updatedProfile: { username: string; about: string; profileImage: string }) => {
+    setProfile(updatedProfile);
+  };
+
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -33,15 +47,13 @@ export default function Account() {
         {/* Profile Section */}
         <View style={styles.profileContainer}>
           <Image
-            source={{
-              uri: "https://images.pexels.com/photos/29748690/pexels-photo-29748690/free-photo-of-kendine-guvenen-gulumsemeyle-poz-veren-zarif-kadin.jpeg",
-            }}
+            source={{ uri: profile.profileImage }}
             style={styles.profileImage}
           />
           <View style={styles.profileInfoContainer}>
-            <Text style={styles.name}>mavigokyuzu221</Text>
+            <Text style={styles.name}>{profile.username}</Text>
             <TouchableOpacity
-              onPress={() => navigation.navigate("EditProfile")}
+              onPress={() => navigation.navigate("EditProfile", { profile, updateProfile })}
               style={styles.editButton}
             >
               <Ionicons name="pencil" size={25} color="#fff" />
@@ -51,9 +63,7 @@ export default function Account() {
 
         <View style={styles.aboutSection}>
           <Text style={styles.sectionTitle}>{t('about')}</Text>
-          <Text style={styles.aboutText}>
-            Software, Technology, Entrepreneurship Enthusiast.
-          </Text>
+          <Text style={styles.aboutText}>{profile.about}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -117,7 +127,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   aboutText: {
-    color: COLORS.black,
+    color:COLORS.primary,
     fontSize: 16,
     lineHeight: 22,
   },
