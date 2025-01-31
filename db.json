@@ -1,0 +1,127 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "yakup123",
+      "password": "mypassword",
+      "name": "Yakup",
+      "email": "yakup@example.com",
+      "image": "https://example.com/avatar.jpg"
+    },
+    {
+      "id": "2",
+      "username": "muhammed456",
+      "password": "anotherpassword",
+      "name": "Muhammed",
+      "email": "muhammed@example.com",
+      "image": "https://example.com/avatar2.jpg"
+    },
+    {
+      "id": "9f63",
+      "username": "mehmet789",
+      "password": "securepass",
+      "name": "Mehmet",
+      "email": "mehmet@example.com",
+      "image": "https://example.com/avatar3.jpg"
+    },
+    {
+      "id": "0",
+      "username": "admin",
+      "password": "admin",
+      "name": "Mehmet",
+      "email": "admin@gmail.com",
+      "image": "https://example.com/avatar3.jpg"
+    },
+    {
+      "id": "750b",
+      "name": "Adds add",
+      "email": "Aasdasagma.",
+      "username": "Adds add",
+      "password": "asdasdsa",
+      "image": ""
+    },
+    {
+      "id": "f989",
+      "name": "test",
+      "email": "test@gmail.com",
+      "username": "test",
+      "password": "test123",
+      "image": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+    },
+    {
+      "id": "2f72",
+      "username": "Fsknfsjkdf",
+      "password": "defaultPassword123",
+      "name": "Fsknfsjkdf",
+      "email": "Fsknfsjkdf@example.com",
+      "image": "file:///Users/furkanturkyilmaz/Library/Developer/CoreSimulator/Devices/FB30475B-A33A-4E70-A1AB-6D00D8D9F718/data/Containers/Data/Application/15D95EBF-C507-4858-AE6D-A15C6BEF676B/Library/Caches/ExponentExperienceData/@anonymous/moon-chat-0e981028-2b61-4223-9eeb-c7bdd44e7664/ImagePicker/5231F745-E12E-44BF-9F00-07D33E2CFFA8.jpg"
+    },
+    {
+      "id": "d2bb",
+      "name": "test",
+      "email": "test@gmail.com",
+      "username": "test",
+      "password": "test123",
+      "image": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+    }
+  ],
+  "messages": [
+    {
+      "id": "1",
+      "sender_id": 1,
+      "receiver_id": 2,
+      "message": "Merhaba, nasılsınız?",
+      "timestamp": "2024-12-18T12:30:00Z"
+    },
+    {
+      "id": "2",
+      "sender_id": 2,
+      "receiver_id": 1,
+      "message": "İyiyim, teşekkür ederim. Siz nasılsınız?",
+      "timestamp": "2024-12-18T12:35:00Z"
+    },
+    {
+      "id": "9d84",
+      "sender_id": 1,
+      "receiver_id": 2,
+      "message": "Merhaba"
+    }
+  ],
+  "chats": [
+    {
+      "id": "1",
+      "user1_id": 1,
+      "user2_id": 2,
+      "last_message": "İyiyim, teşekkür ederim. Siz nasılsınız?"
+    }
+  ],
+  "anonymous_messages": [
+    {
+      "id": "1",
+      "sender_id": 1,
+      "message": "Bu bir anonim mesajdır.",
+      "timestamp": "2024-12-18T12:40:00Z"
+    },
+    {
+      "id": "27fb",
+      "sender_id": 1,
+      "message": "Bu bir anonim mesajd�r"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "1",
+      "user_id": 1,
+      "message": "Yeni bir mesajınız var!",
+      "is_read": false,
+      "timestamp": "2024-12-18T12:45:00Z"
+    },
+    {
+      "id": "2",
+      "user_id": 2,
+      "message": "Yeni bir sohbet başlatıldı!",
+      "is_read": false,
+      "timestamp": "2024-12-18T12:50:00Z"
+    }
+  ]
+}

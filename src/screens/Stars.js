@@ -1,82 +1,201 @@
-import React from "react";
-import { View, Text, Image, ScrollView, SafeAreaView } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  TouchableOpacity,
+  Text,
+  TouchableWithoutFeedback,
+} from "react-native";
+import FeatherIcon from "react-native-vector-icons/Feather";
+import { useTranslation } from "react-i18next";
+import "../i18n";
+import { COLORS } from "@/constants/theme";
 
-const Stars = () => {
-  const favoriteUsers = [
-    {
-      id: 1,
-      name: "John Doe",
-      avatar:
-        "https://images.pexels.com/photos/2567435/pexels-photo-2567435.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      avatar:
-        "https://images.pexels.com/photos/3458278/pexels-photo-3458278.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-  ];
+export default function Stars() {
+  const [selected, setSelected] = useState(0);
+  const { t } = useTranslation();
 
-  const starredUsers = [
+  // Initialize the prices array inside the component, after t is available
+  const prices = [
     {
-      id: 1,
-      name: "Michael Johnson",
-      avatar: "https://images.pexels.com/photos/4675724/pexels-photo-4675724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      price: "$99.99",
+      label: t("price_lifetime_label"),
+      //description: t("price_lifetime_description"),
     },
     {
-      id: 2,
-      name: "Emily Davis",
-      avatar:"https://images.pexels.com/photos/4673476/pexels-photo-4673476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      price: "$24.99",
+      label: t("price_yearly_label"),
+      //  description: t("price_yearly_description")
+    },
+    {
+      price: "$9.99",
+      label: t("price_monthly_label"),
+      // description: t("price_monthly_description")
     },
   ];
 
   return (
-    <ScrollView className="flex-1 bg-purple-50">
-      <SafeAreaView />
-      <View className="p-4">
-        <Text className="text-xl font-bold text-purple-800 mb-4">
-          Favori Kullanıcılar
-        </Text>
-        {favoriteUsers.map((user) => (
-          <View
-            key={user.id}
-            className="flex-row items-center bg-white p-3 mb-2 rounded-lg shadow-sm border border-purple-300"
-          >
-            <Image
-              source={{ uri: user.avatar }}
-              className="w-12 h-12 rounded-full mr-3"
-            />
-            <Text className="text-lg font-medium text-purple-700">
-              {user.name}
-            </Text>
-          </View>
-        ))}
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#F4EFF3" }}>
+      <View style={styles.header}>
+        <Text style={styles.title}>{t("premium_access_title")}</Text>
+        <Text style={styles.subtitle}>{t("premium_access_subtitle")}</Text>
       </View>
 
-      <View className="p-4">
-        <Text className="text-xl font-bold text-purple-800 mb-4">
-          Yıldızlı Kullanıcılar
-        </Text>
-        {starredUsers.map((user) => (
-          <View
-            key={user.id}
-            className="flex-row items-center bg-white p-3 mb-2 rounded-lg shadow-sm border border-purple-300"
+      <View style={styles.form}>
+        <View>
+          {prices.map((item, index) => {
+            const isActive = selected === index;
+            return (
+              <TouchableWithoutFeedback
+                key={index}
+                onPress={() => setSelected(index)}
+              >
+                <View
+                  style={[
+                    styles.radio,
+                    isActive
+                      ? { borderColor: "#6A5AE0", backgroundColor: "#f7f7f7" }
+                      : {},
+                  ]}
+                >
+                  <FeatherIcon
+                    color={isActive ? "#6A5AE0" : "#363636"}
+                    name={isActive ? "check-circle" : "circle"}
+                    size={24}
+                  />
+                  <View style={styles.radioBody}>
+                    <View>
+                      <Text style={styles.radioLabel}>{item.label}</Text>
+                      <Text style={styles.radioText}>{item.description}</Text>
+                    </View>
+                    <Text
+                      style={[
+                        styles.radioPrice,
+                        isActive && styles.radioPriceActive,
+                      ]}
+                    >
+                      {item.price}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableWithoutFeedback>
+            );
+          })}
+        </View>
+
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              // handle onPress
+            }}
           >
-            <Image
-              source={{ uri: user.avatar }}
-              className="w-12 h-12 rounded-full mr-3"
-            />
-            <Text className="text-lg font-medium text-purple-700">
-              {user.name}
-            </Text>
-            <Text className="ml-auto bg-yellow-400 px-2 py-1 rounded-lg text-white font-bold text-xs">
-              ⭐ Yıldızlı
-            </Text>
-          </View>
-        ))}
+            <View style={styles.btn}>
+              <Text style={styles.btnText}>{t("continue_button_text")}</Text>
+            </View>
+          </TouchableOpacity>
+
+          <Text style={styles.formFooterText}>{t("form_footer_text")}</Text>
+        </View>
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
-};
+}
 
-export default Stars;
+const styles = StyleSheet.create({
+  title: {
+    marginTop: 34,
+    fontSize: 34,
+    fontWeight: "bold",
+    color: "#181818",
+    marginBottom: 12,
+  },
+  subtitle: {
+    fontSize: 15,
+    lineHeight: 20,
+    fontWeight: "500",
+    color: COLORS.primary,
+  },
+  header: {
+    paddingHorizontal: 24,
+    marginBottom: 28,
+  },
+  form: {
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,
+    paddingBottom: 24,
+    justifyContent: "space-between",
+    paddingHorizontal: 24,
+  },
+  formFooterText: {
+    marginBottom: 100,
+    fontSize: 14,
+    fontWeight: "500",
+    color: COLORS.primary,
+    textAlign: "center",
+  },
+  radio: {
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    borderWidth: 2,
+    borderColor: "transparent",
+    borderStyle: "solid",
+    borderRadius: 24,
+    marginBottom: 16,
+    backgroundColor: "#fff",
+  },
+  radioBody: {
+    paddingLeft: 10,
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    marginBottom: 6,
+  },
+  radioLabel: {
+    fontSize: 19,
+    fontWeight: "700",
+    color: "#1d1d1d",
+  },
+  radioText: {
+    marginTop: 6,
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#889797",
+  },
+  radioPrice: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#1d1d1d",
+  },
+  radioPriceActive: {
+    transform: [
+      {
+        scale: 1.2,
+      },
+    ],
+  },
+  btn: {
+    marginBottom: 60,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderWidth: 1,
+    backgroundColor:COLORS.primary,
+    borderColor: COLORS.primary,
+  },
+  btnText: {
+    fontSize: 17,
+    lineHeight: 22,
+    fontWeight: "bold",
+    color: "#fff",
+  },
+});

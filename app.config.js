@@ -1,8 +1,8 @@
 import "dotenv/config";
 
 export default {
-  name: "Moon Chat",
-  slug: "moon-chat",
+  name: "purpy",
+  slug: "purpy",
   version: "1.0.0",
   orientation: "portrait",
   icon: "./src/assets/icon.png",
@@ -11,7 +11,7 @@ export default {
   splash: {
     image: "./src/assets/splash-icon.png",
     resizeMode: "contain",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#6b53ff",
   },
   ios: {
     supportsTablet: true,
@@ -25,7 +25,8 @@ export default {
   web: {
     favicon: "./src/assets/favicon.png",
   },
-  extra: {    apiKey: process.env.API_KEY,
+  extra: {
+    apiKey: process.env.API_KEY,
     authDomain: process.env.AUTH_DOMAIN,
     databaseURL: process.env.DATABASE_URL,
     projectId: process.env.PROJECT_ID,
@@ -33,5 +34,4 @@ export default {
     messagingSenderId: process.env.MESSAGING_SENDER_ID,
     appId: process.env.APP_ID,
   },
-  
 };

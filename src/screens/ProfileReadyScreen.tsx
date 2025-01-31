@@ -6,36 +6,32 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native"; // Navigasyonu ekliyoruz.
 import theme, { COLORS } from "../constants/theme";
-
+import { CommonActions, useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
+import "../i18n";
 const ProfileReadyScreen = () => {
-  const navigation = useNavigation(); // useNavigation hook'u ile navigasyon erişimi.
+  const navigation = useNavigation();
+  const { t } = useTranslation();
+
+  console.info(navigation.getState());
 
   const handleAccept = () => {
-    navigation.replace("BottomTabNavigator"); // Navigasyon işlemine yönlendirme.
+    navigation.replace("Login");
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sohbetten Önce</Text>
+      <Text style={styles.title}>Before the Chat</Text>
+      <Text style={styles.text}>{t("welcome_text")}</Text>
+      <Text style={styles.text}>{t("welcome_text_2")}</Text>
       <Text style={styles.text}>
-        Hoşgeldin! Her ne kadar anonim olsanda kullanıcılarımıza gönderdiğin
-        mesajlardan sorumlu olduğunu hatırlatmak isteriz.
-      </Text>
-      <Text style={styles.text}>
-        Burada ırk, milliyet, etnik köken, cinsiyet, cinsiyet kimliği veya
-        cinsel tercihi ne olursa olsun herkesle nezaket ve saygıyla sohbet
-        etmelisin.
-      </Text>
-      <Text style={styles.text}>
-        Anonim Chat uygulamasına kayıt olduğunda{" "}
-        <Text style={styles.link}>Kullanım Şartlarımızı</Text> ve{" "}
-        <Text style={styles.link}>Gizlilik Politikamızı</Text> kabul etmiş
-        olursun.
+        {t("welcome_text_3")}
+        <Text style={styles.link}>{t("terms_and_conditions")}</Text> and{" "}
+        <Text style={styles.link}>{t("privacy_policy")}</Text>.
       </Text>
       <TouchableOpacity style={styles.button} onPress={handleAccept}>
-        <Text style={styles.buttonText}>Kabul Et</Text>
+        <Text style={styles.buttonText}>{t("accept")}</Text>
       </TouchableOpacity>
     </View>
   );
